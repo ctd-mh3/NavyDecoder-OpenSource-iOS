@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1811" systemVersion="12C60" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Category" representedClassName="Category" syncable="YES">
+        <attribute name="categoryTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="categoryItems" toMany="YES" minCount="1" deletionRule="Cascade" destinationEntity="Item" inverseName="categorySource" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="Details" representedClassName="Details" syncable="YES">
+        <attribute name="codeSource" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="codeValue" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="itemKey" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="itemDetails" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" syncable="YES">
+        <attribute name="codeKey" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="categorySource" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="categoryItems" inverseEntity="Category" syncable="YES"/>
+        <relationship name="itemDetails" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="Details" inverseName="itemKey" inverseEntity="Details" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Category" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Details" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Item" positionX="160" positionY="192" width="128" height="90"/>
+    </elements>
+</model>

@@ -22,11 +22,10 @@
 
 #import "AppInfoTableViewController.h"
 #import <MessageUI/MessageUI.h>
-#import "NavyDecoderAppDelegate.h"
+#import "ViewConstants.h"
 
 @implementation AppInfoTableViewController 
 
-static NSString *const kiOS7AppStoreURLFormat = @"itms-apps://itunes.apple.com/app/id";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,23 +36,18 @@ static NSString *const kiOS7AppStoreURLFormat = @"itms-apps://itunes.apple.com/a
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
-    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
-    cell.textLabel.font = [UIFont preferredFontForTextStyle:textStyle];
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     cell.textLabel.adjustsFontForContentSizeCategory = YES;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        NSString *urlString = [kiOS7AppStoreURLFormat stringByAppendingString:MPCAppStoreId];
-        
         switch (indexPath.row) {
             case 0:
                 [self openEmail];
                 break;
             case 1:
-                // https://stackoverflow.com/questions/18905686/itunes-review-url-and-ios-7-ask-user-to-rate-our-app-appstore-show-a-blank-pag
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreURL] options:@{} completionHandler:nil];
             default:
                 break;
         }
@@ -92,29 +86,6 @@ static NSString *const kiOS7AppStoreURLFormat = @"itms-apps://itunes.apple.com/a
         
         [self presentViewController:alert animated:YES completion:nil];
     }
-}
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    switch (result) {
-        case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled: User cancelled the operation and no email message was queued.");
-            break;
-        case MFMailComposeResultSaved:
-            NSLog(@"Mail saved: User saved the email message in the drafts folder.");
-            break;
-        case MFMailComposeResultSent:
-            NSLog(@"Mail send: The email message is queued in the outbox. It is ready to send.");
-            break;
-        case MFMailComposeResultFailed:
-            NSLog(@"Mail failed: The email message was not saved or queued, possibly due to an error.");
-            break;
-        default:
-            NSLog(@"Mail not sent.");
-            break;
-    }
-    
-    // Remove the mail view
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

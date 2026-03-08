@@ -32,6 +32,9 @@ extern NSString * const kSegueShowRFAS;
 extern NSString * const kSegueShowDetails;
 extern NSString * const kSegueShowDetailsAccessoryButton;
 
+extern NSString * const kAppStoreId;
+extern NSString * const kAppStoreURL;
+
 @interface ViewConstants : NSObject
 
 @end

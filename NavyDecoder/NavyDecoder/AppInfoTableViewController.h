@@ -21,8 +21,7 @@
 //
 
 #import "NavyDecoderMasterViewController.h"
-#import <MessageUI/MessageUI.h>
 
-@interface AppInfoTableViewController : NavyDecoderMasterViewController  <MFMailComposeViewControllerDelegate>
+@interface AppInfoTableViewController : NavyDecoderMasterViewController
 
 @end

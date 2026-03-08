@@ -32,6 +32,9 @@ NSString * const kSegueShowRFAS                     = @"showRFAS";
 NSString * const kSegueShowDetails                  = @"showDetails";
 NSString * const kSegueShowDetailsAccessoryButton   = @"showDetailsAccessoryButton";
 
+NSString * const kAppStoreId  = @"588227679";
+NSString * const kAppStoreURL = @"https://apps.apple.com/app/id588227679";
+
 @implementation ViewConstants
 
 @end

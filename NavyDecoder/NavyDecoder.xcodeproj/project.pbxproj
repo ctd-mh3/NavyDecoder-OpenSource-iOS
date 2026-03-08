@@ -23,7 +23,6 @@
 		4C5C2D861642F2E600397A60 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D821642F2E600397A60 /* Item.m */; };
 		4C5C2D871642F2E600397A60 /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D841642F2E600397A60 /* ItemViewController.m */; };
 		4C5C2D8D1642F30200397A60 /* NavyDecoderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D8A1642F30200397A60 /* NavyDecoderAppDelegate.m */; };
-		4C5C2D8E1642F30200397A60 /* TopLeftAlignedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D8C1642F30200397A60 /* TopLeftAlignedLabel.m */; };
 		4C5C2D921642F35300397A60 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D8F1642F35300397A60 /* Default-568h@2x.png */; };
 		4C5C2D931642F35300397A60 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D901642F35300397A60 /* Default.png */; };
 		4C5C2D941642F35300397A60 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D911642F35300397A60 /* Default@2x.png */; };
@@ -95,8 +94,6 @@
 		4C5C2D841642F2E600397A60 /* ItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemViewController.m; path = NavyDecoder/ItemViewController.m; sourceTree = SOURCE_ROOT; };
 		4C5C2D891642F30200397A60 /* NavyDecoderAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavyDecoderAppDelegate.h; path = NavyDecoder/NavyDecoderAppDelegate.h; sourceTree = SOURCE_ROOT; };
 		4C5C2D8A1642F30200397A60 /* NavyDecoderAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavyDecoderAppDelegate.m; path = NavyDecoder/NavyDecoderAppDelegate.m; sourceTree = SOURCE_ROOT; };
-		4C5C2D8B1642F30200397A60 /* TopLeftAlignedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TopLeftAlignedLabel.h; path = NavyDecoder/TopLeftAlignedLabel.h; sourceTree = SOURCE_ROOT; };
-		4C5C2D8C1642F30200397A60 /* TopLeftAlignedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TopLeftAlignedLabel.m; path = NavyDecoder/TopLeftAlignedLabel.m; sourceTree = SOURCE_ROOT; };
 		4C5C2D8F1642F35300397A60 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "NavyDecoder/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
 		4C5C2D901642F35300397A60 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = NavyDecoder/Default.png; sourceTree = SOURCE_ROOT; };
 		4C5C2D911642F35300397A60 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "NavyDecoder/Default@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -364,8 +361,6 @@
 				4C5C2D9A1642F42B00397A60 /* MainStoryboard_iPhone.storyboard */,
 				4CEBC10B1997951D008CD611 /* NDCViewUtilities.h */,
 				4CEBC10C1997951D008CD611 /* NDCViewUtilities.m */,
-				4C5C2D8B1642F30200397A60 /* TopLeftAlignedLabel.h */,
-				4C5C2D8C1642F30200397A60 /* TopLeftAlignedLabel.m */,
 				4C69168619251A1800D41A53 /* ViewConstants.h */,
 				4C69168719251A1800D41A53 /* ViewConstants.m */,
 				4CEBC10D1997951D008CD611 /* UIImage+ProportionalFill.h */,
@@ -587,7 +582,6 @@
 				4C5C2D871642F2E600397A60 /* ItemViewController.m in Sources */,
 				4C5C2D8D1642F30200397A60 /* NavyDecoderAppDelegate.m in Sources */,
 				4CDEFD5F18AC5B320093E018 /* NavyDecoderMasterViewController.m in Sources */,
-				4C5C2D8E1642F30200397A60 /* TopLeftAlignedLabel.m in Sources */,
 				4CDEFD6218ACE1060093E018 /* AppInfoTableViewController.m in Sources */,
 				4CF85CDB165EDFB00058FF6E /* RfasViewController.m in Sources */,
 				4CEBC1101997951D008CD611 /* UIImage+ProportionalFill.m in Sources */,

@@ -23,16 +23,13 @@
 #import "NavyDecoderAppDelegate.h"
 
 #import "CategoryViewController.h"
+#import "NDCViewUtilities.h"
 
 @implementation NavyDecoderAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
-NSString *const MPCAppStoreId = @"588227679";
-
-NSString *settingsBackgroundImageKey = @"backgroundImageKey";
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -45,8 +42,11 @@ NSString *settingsBackgroundImageKey = @"backgroundImageKey";
                                  nil];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     
-    // Set background color to clear
-    [[UINavigationBar appearance] setBarTintColor:[UIColor clearColor]];
+    // Transparent navigation bar (modern API)
+    UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+    [appearance configureWithTransparentBackground];
+    [UINavigationBar appearance].standardAppearance = appearance;
+    [UINavigationBar appearance].scrollEdgeAppearance = appearance;
     
     return YES;
 }

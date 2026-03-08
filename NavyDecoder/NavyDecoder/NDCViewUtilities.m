@@ -24,6 +24,8 @@
 #import "NavyDecoderAppDelegate.h"
 #import "UIImage+ProportionalFill.h"
 
+NSString * const settingsBackgroundImageKey = @"backgroundImageKey";
+
 @interface NDCViewUtilities ()
 @property (nonatomic, strong) UIImage *cachedBackgroundImage;
 @property (nonatomic, assign) CGSize cachedSize;

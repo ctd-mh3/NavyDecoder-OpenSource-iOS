@@ -39,6 +39,7 @@
     self.view.backgroundColor = UIColor.systemBackgroundColor;
 
     UIImageView *bg = [[UIImageView alloc] init];
+    bg.isAccessibilityElement = NO;
     [self.view insertSubview:bg atIndex:0];
     self.backgroundImageView = bg;
 

@@ -25,13 +25,7 @@
 @implementation UIImage (MGProportionalFill)
 
 - (UIImage *)imageToFitSize:(CGSize)fitSize method:(MGImageResizingMethod)resizeMethod {
-	float imageScaleFactor = 1.0;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
-	
-    if ([self respondsToSelector:@selector(scale)]) {
-		imageScaleFactor = [self scale];
-	}
-#endif
+	float imageScaleFactor = self.scale;
 	
 	float sourceWidth = [self size].width * imageScaleFactor;
 	float sourceHeight = [self size].height * imageScaleFactor;
@@ -106,42 +100,14 @@
 	
 	// Create appropriately modified image.
 	UIImage *image = nil;
-	
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_4_0
-	CGImageRef sourceImg = nil;
-	
-    if ([UIScreen instancesRespondToSelector:@selector(scale)]) {
-		UIGraphicsBeginImageContextWithOptions(destRect.size, NO, 0.f); // 0.f for scale means "scale for device's main screen".
-		sourceImg = CGImageCreateWithImageInRect([self CGImage], sourceRect); // cropping happens here.
-		image = [UIImage imageWithCGImage:sourceImg scale:0.0 orientation:self.imageOrientation]; // create cropped UIImage.
-		
-	} else {
-		UIGraphicsBeginImageContext(destRect.size);
-		sourceImg = CGImageCreateWithImageInRect([self CGImage], sourceRect); // cropping happens here.
-		image = [UIImage imageWithCGImage:sourceImg]; // create cropped UIImage.
-	}
-	
+	CGImageRef sourceImg = CGImageCreateWithImageInRect([self CGImage], sourceRect);
+	UIGraphicsBeginImageContextWithOptions(destRect.size, NO, 0.f);
+	image = [UIImage imageWithCGImage:sourceImg scale:0.0 orientation:self.imageOrientation];
 	CGImageRelease(sourceImg);
-	[image drawInRect:destRect]; // the actual scaling happens here, and orientation is taken care of automatically.
+	[image drawInRect:destRect];
 	image = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
-#endif
-	
-	if (!image) {
-		// Try older method.
-		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-		CGContextRef context = CGBitmapContextCreate(NULL, scaledWidth, scaledHeight, 8, (scaledWidth * 4), 
-													 colorSpace, (CGBitmapInfo)kCGImageAlphaPremultipliedLast);
-		CGImageRef sourceImg = CGImageCreateWithImageInRect([self CGImage], sourceRect);
-		CGContextDrawImage(context, destRect, sourceImg);
-		CGImageRelease(sourceImg);
-		CGImageRef finalImage = CGBitmapContextCreateImage(context);	
-		CGContextRelease(context);
-		CGColorSpaceRelease(colorSpace);
-		image = [UIImage imageWithCGImage:finalImage];
-		CGImageRelease(finalImage);
-	}
-	
+
 	return image;
 }
 

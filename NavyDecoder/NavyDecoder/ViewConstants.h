@@ -24,6 +24,11 @@
 
 extern NSString * const kOpenSourceNotice;
 
+extern NSString * const kSegueShowItem;
+extern NSString * const kSegueShowRFAS;
+extern NSString * const kSegueShowDetails;
+extern NSString * const kSegueShowDetailsAccessoryButton;
+
 @interface ViewConstants : NSObject
 
 @end

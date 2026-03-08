@@ -25,6 +25,7 @@
 #import "DetailTableViewController.h"
 #import "Item.h"
 #import "Category.h"
+#import "ViewConstants.h"
 
 @interface ItemViewController () <UISearchResultsUpdating>
 
@@ -192,7 +193,7 @@ static NSInteger const kSearchBarHeightIPhone = 44;
 #pragma mark - Seque transition
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showDetails"]) {
+    if ([[segue identifier] isEqualToString:kSegueShowDetails]) {
 
         // Get the indexPath assuming the search table view is visible
         NSIndexPath *indexPath = [((UITableViewController *)self.searchController.searchResultsController).tableView indexPathForCell:(UITableViewCell *)sender];
@@ -205,7 +206,7 @@ static NSInteger const kSearchBarHeightIPhone = 44;
         Item *item = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
         [[segue destinationViewController] setItem:item];
-    } else if ([[segue identifier] isEqualToString:@"showDetailsAccessoryButton"]) {
+    } else if ([[segue identifier] isEqualToString:kSegueShowDetailsAccessoryButton]) {
        
         NSIndexPath *indexPath = (NSIndexPath *)sender;
         
@@ -219,7 +220,7 @@ static NSInteger const kSearchBarHeightIPhone = 44;
 // http://stackoverflow.com/questions/8087389/detail-disclosure-button-and-segues
 // http://stackoverflow.com/questions/9339302/indexpath-for-segue-from-accessorybutton
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"showDetailsAccessoryButton" sender:indexPath];
+    [self performSegueWithIdentifier:kSegueShowDetailsAccessoryButton sender:indexPath];
 }
 
 #pragma mark - Fetched results controller

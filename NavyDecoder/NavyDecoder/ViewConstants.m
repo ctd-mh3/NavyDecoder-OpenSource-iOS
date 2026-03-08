@@ -24,6 +24,11 @@
 
 NSString * const kOpenSourceNotice = @"This application is open source and fully relies on members of the Navy Reserve to pass updated (non-CUI) data and corrections to the app author (or the project on GitHub).";
 
+NSString * const kSegueShowItem                     = @"showItem";
+NSString * const kSegueShowRFAS                     = @"showRFAS";
+NSString * const kSegueShowDetails                  = @"showDetails";
+NSString * const kSegueShowDetailsAccessoryButton   = @"showDetailsAccessoryButton";
+
 @implementation ViewConstants
 
 @end

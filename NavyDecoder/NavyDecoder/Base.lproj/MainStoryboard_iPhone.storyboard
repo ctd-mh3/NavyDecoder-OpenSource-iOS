@@ -472,7 +472,6 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                         <outlet property="codeKeyLabel" destination="HCd-tM-UA1" id="CPK-IY-qvL"/>
                         <outlet property="codeSourceLabel" destination="Amf-zu-qR1" id="4eu-da-3VX"/>
                         <outlet property="codeValueLabel" destination="drU-Hl-GaR" id="9EU-If-2pF"/>
-                        <outlet property="codeValueTableViewCell" destination="e2p-Mu-ZX5" id="XRB-BJ-aOa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ncn-Ks-wRG" userLabel="First Responder" sceneMemberID="firstResponder"/>

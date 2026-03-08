@@ -146,13 +146,11 @@
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
-    aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
-    
+
 	NSError *error = nil;
-	
+
     if (![self.fetchedResultsController performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Data Retrieval Error"
                                                                        message:@"Please try again."
                                                                 preferredStyle:UIAlertControllerStyleAlert];
@@ -164,8 +162,8 @@
 }    
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"categoryTitle"] description];
+    Category *category = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = category.categoryTitle;
 
     UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
         ? UIFontTextStyleTitle3 : UIFontTextStyleBody;

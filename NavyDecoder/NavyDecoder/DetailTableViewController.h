@@ -28,7 +28,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *codeKeyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *codeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *codeSourceLabel;
-@property (weak, nonatomic) IBOutlet UITableViewCell *codeValueTableViewCell;
 @property (strong, nonatomic) id item;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;

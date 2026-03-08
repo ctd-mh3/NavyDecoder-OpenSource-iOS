@@ -21,7 +21,6 @@
 //
 
 #import "NavyDecoderMasterViewController.h"
-#import "NavyDecoderAppDelegate.h"
 #import "NDCViewUtilities.h"
 #import "ViewConstants.h"
 
@@ -68,13 +67,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    // Background color
-    // https://stackoverflow.com/questions/11825152/set-transparency-in-image-ios
-    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kBackgroundAlphaDark];
-    } else {
-        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kBackgroundAlphaLight];
-    }
+    view.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor *(UITraitCollection *tc) {
+        CGFloat alpha = (tc.userInterfaceStyle == UIUserInterfaceStyleDark)
+            ? kBackgroundAlphaDark : kBackgroundAlphaLight;
+        return [[UIColor blackColor] colorWithAlphaComponent:alpha];
+    }];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size

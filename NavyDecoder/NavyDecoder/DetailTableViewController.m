@@ -24,13 +24,11 @@
 #import "Category.h"
 #import "Item.h"
 #import "Details.h"
-#import "NavyDecoderAppDelegate.h"
 #import "UIViewController+ReviewRequest.h"
 #import "ViewConstants.h"
 
 @interface DetailTableViewController ()
 
-@property (strong, nonatomic) id codeKey;
 @property (strong, nonatomic) NSString *categoryTitle;
 @property (strong, nonatomic) NSString *codeKeyString;
 @property (strong, nonatomic) NSString *codeValueString;
@@ -48,17 +46,6 @@
     [self configureView];    
 }
 
-/*
-// The following four functions are used to reduce the size between the sections
-//   Per: http://stackoverflow.com/questions/2817308/reducing-the-space-between-sections-of-the-uitableview
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return kHeaderHeight;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return kFooterHeight;
-}
-*/
 - (void)configureView {
     Item *item = (Item *)self.item;
     if (!item) return;
@@ -111,17 +98,6 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    // Background color
-    // https://stackoverflow.com/questions/11825152/set-transparency-in-image-ios
-    
-    if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kBackgroundAlphaDark];
-    } else {
-        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kBackgroundAlphaLight];
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureView];
@@ -136,15 +112,6 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-    
-    
     NSString *urlString = kAppStoreURL;
 
     if (indexPath.section == 3) {
@@ -157,8 +124,8 @@
                 [self openCorrectionEmail];
                 break;
             case 2:
-                // https://stackoverflow.com/questions/18905686/itunes-review-url-and-ios-7-ask-user-to-rate-our-app-appstore-show-a-blank-pag
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
+                break;
             default:
                 break;
         }

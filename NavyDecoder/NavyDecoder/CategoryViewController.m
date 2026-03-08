@@ -37,7 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.itemViewController = (ItemViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];    
+    self.navigationItem.rightBarButtonItem.image = [UIImage systemImageNamed:@"info.circle.fill"];
+    self.itemViewController = (ItemViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
 - (void)didReceiveMemoryWarning {

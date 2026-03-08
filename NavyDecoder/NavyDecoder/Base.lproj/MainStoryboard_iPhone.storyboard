@@ -61,7 +61,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Categories" id="36">
-                        <barButtonItem key="rightBarButtonItem" image="724-info.png" id="8PN-eS-Lqm">
+                        <barButtonItem key="rightBarButtonItem" title=" " id="8PN-eS-Lqm">
                             <connections>
                                 <segue destination="E3k-jf-sfD" kind="push" id="zej-52-l08"/>
                             </connections>
@@ -545,7 +545,6 @@ A copy of the GNU General Public License is available at https://www.gnu.org/lic
         <segue reference="xU8-aa-h1N"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="724-info.png" width="28" height="28"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -49,3 +49,8 @@ The app uses a `UISplitViewController` (`OverallSplitViewController`) as the roo
 - **`ViewConstants`** / `NDPTextSize` — iPad-specific text size constant used across all view controllers.
 - **`UIImage+ProportionalFill`** — Category providing center-crop image scaling.
 - **`Rfas`** — Model class encapsulating all RFAS code lookup logic (first, second/third, and fourth character meanings, for both officer and enlisted variants).
+- **`ReviewManager`** (Swift, `@objc`) — Handles App Store review prompts. Triggered from `DetailTableViewController.viewDidAppear:` via `[ReviewManager requestReviewIfAppropriateIn:scene]`. Increments a `UserDefaults` counter on each detail-screen visit and calls `SKStoreReviewController.requestReview(in:)` after 5 visits, at most once per app build version.
+
+## Mixed-Language Notes
+
+The project uses Objective-C with a single Swift file (`ReviewManager.swift`). The build settings already have `SWIFT_VERSION = 5.0` and `SWIFT_OBJC_BRIDGING_HEADER` configured. To call Swift from ObjC, import the auto-generated header: `#import "NavyDecoder-Swift.h"`. The bridging header (`NavyDecoder-Bridging-Header.h`) is currently empty — add ObjC headers there only if a Swift file needs to reference ObjC types directly.

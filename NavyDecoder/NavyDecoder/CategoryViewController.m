@@ -25,6 +25,7 @@
 #import "ItemViewController.h"
 #import "RfasViewController.h"
 #import "Category.h"
+#import "ViewConstants.h"
 
 @interface CategoryViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -80,19 +81,19 @@
     NSString *categoryString = cell.textLabel.text;
         
     if ([categoryString rangeOfString:@"RFAS"].location == NSNotFound) {
-        [self performSegueWithIdentifier:@"showItem" sender:cell];
+        [self performSegueWithIdentifier:kSegueShowItem sender:cell];
     } else {
-        [self performSegueWithIdentifier:@"showRFAS" sender:cell];
+        [self performSegueWithIdentifier:kSegueShowRFAS sender:cell];
     }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"showItem"]) {
+    if ([[segue identifier] isEqualToString:kSegueShowItem]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         Category *category = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
         [[segue destinationViewController] setCategory:category];
-    } else if ([[segue identifier] isEqualToString:@"showRFAS"]) {
+    } else if ([[segue identifier] isEqualToString:kSegueShowRFAS]) {
 
         UITableViewCell *cell = (UITableViewCell *)sender;
         

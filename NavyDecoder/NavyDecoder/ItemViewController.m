@@ -37,9 +37,6 @@
 
 @implementation ItemViewController
 
-static NSInteger const kSearchBarHeightIPad = 50;
-static NSInteger const kSearchBarHeightIPhone = 44;
-
 #pragma mark - Initialization
 
 - (void)setCategory:(id)newCategory {
@@ -52,55 +49,21 @@ static NSInteger const kSearchBarHeightIPhone = 44;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.detailTableViewController = (DetailTableViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-    
-    // Followed Sample-UISearchController example from GitHub
-    // The following appeared to be needed to ensure that when the user has entered search criteria and then presses a row that it is
-    //   handled as a seque and not as a case of "when the search bar becomes the first responder or when the user makes changes inside
-    //   the search bar" which has been seen to cause updateSearchResultsForSearchController to be called (Observation #1)
-    UITableViewController *searchResultsController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
-    searchResultsController.tableView.dataSource = self;
-    searchResultsController.tableView.delegate = self;
-
-    // initWithSearchResultsController must be set to searchResultsController and not nil (or Observation #1 occurs)
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:searchResultsController];
-    
+    // nil results controller: search results appear inline in self.tableView (no overlay).
+    // The nav-bar placement of the search bar means tapping a cell does not affect the
+    // search bar's responder state, so the original "Observation #1" issue does not apply.
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     self.searchController.searchResultsUpdater = self;
+    self.searchController.searchBar.placeholder = @"Search for Code";
+    self.searchController.obscuresBackgroundDuringPresentation = NO;
 
-    NSInteger searchBarHeight;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        searchBarHeight = kSearchBarHeightIPad;
-    } else {
-        searchBarHeight = kSearchBarHeightIPhone;
-    }
+    // Attach to nav item (iOS 11+) so the search bar stays visible in the nav bar
+    // and the searchResultsController overlay does not cover the tableHeaderView.
+    self.navigationItem.searchController = self.searchController;
+    self.navigationItem.hidesSearchBarWhenScrolling = NO;
 
-    self.searchController.hidesNavigationBarDuringPresentation = false;
-
-    // Combine notice + search bar into a single tableHeaderView
-    UIView *noticeView = [self makeNoticeHeaderView];
-    noticeView.translatesAutoresizingMaskIntoConstraints = NO;
-    UISearchBar *searchBar = self.searchController.searchBar;
-    searchBar.translatesAutoresizingMaskIntoConstraints = NO;
-
-    UIView *headerContainer = [[UIView alloc] init];
-    [headerContainer addSubview:noticeView];
-    [headerContainer addSubview:searchBar];
-    [NSLayoutConstraint activateConstraints:@[
-        [noticeView.topAnchor constraintEqualToAnchor:headerContainer.topAnchor],
-        [noticeView.leadingAnchor constraintEqualToAnchor:headerContainer.leadingAnchor],
-        [noticeView.trailingAnchor constraintEqualToAnchor:headerContainer.trailingAnchor],
-        [searchBar.topAnchor constraintEqualToAnchor:noticeView.bottomAnchor],
-        [searchBar.leadingAnchor constraintEqualToAnchor:headerContainer.leadingAnchor],
-        [searchBar.trailingAnchor constraintEqualToAnchor:headerContainer.trailingAnchor],
-        [searchBar.heightAnchor constraintEqualToConstant:searchBarHeight],
-        [searchBar.bottomAnchor constraintEqualToAnchor:headerContainer.bottomAnchor],
-    ]];
-    self.tableView.tableHeaderView = headerContainer;
-    
+    self.tableView.tableHeaderView = [self makeNoticeHeaderView];
     self.definesPresentationContext = YES;
-
-    self.searchController.searchBar.placeholder  = @"Search for Code";
-    self.searchController.obscuresBackgroundDuringPresentation = false;
 }
 
 #pragma mark - UISearchResultsUpdating
@@ -109,9 +72,7 @@ static NSInteger const kSearchBarHeightIPhone = 44;
     NSString *searchString = [self.searchController.searchBar text];
 
     [self updateFilteredContentForEnteredSearch:searchString];
-
-    UITableView *searchTable = ((UITableViewController *)self.searchController.searchResultsController).tableView;
-    [searchTable reloadData];
+    [self.tableView reloadData];
 
     // Show empty state when a search yields no results
     BOOL hasResults = [[self.fetchedResultsController fetchedObjects] count] > 0;
@@ -123,9 +84,9 @@ static NSInteger const kSearchBarHeightIPhone = 44;
         label.textColor = [UIColor secondaryLabelColor];
         label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         label.numberOfLines = 0;
-        searchTable.backgroundView = label;
-    } else {
-        searchTable.backgroundView = nil;
+        self.tableView.backgroundView = label;
+    } else if ([self.tableView.backgroundView isKindOfClass:[UILabel class]]) {
+        [self setBackgroundForSize:self.tableView.bounds.size];
     }
 }
 
@@ -203,14 +164,7 @@ static NSInteger const kSearchBarHeightIPhone = 44;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:kSegueShowDetails]) {
 
-        // Get the indexPath assuming the search table view is visible
-        NSIndexPath *indexPath = [((UITableViewController *)self.searchController.searchResultsController).tableView indexPathForCell:(UITableViewCell *)sender];
-       
-        // if the above resulted in nil, then the full table is visible (self.tableView)
-        if (indexPath == nil) {
-            indexPath = [self.tableView indexPathForCell:(UITableViewCell *)sender];
-        }
-        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)sender];
         Item *item = [[self fetchedResultsController] objectAtIndexPath:indexPath];
         [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
         [[segue destinationViewController] setItem:item];

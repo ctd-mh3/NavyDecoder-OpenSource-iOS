@@ -156,7 +156,7 @@
 
     UIView *pickerBand = [self makeSectionBand:@"RFAS CODE"];
     UIView *resultBand = [self makeSectionBand:@"DECODED MEANING"];
-    UIView *shareBand  = [self makeSectionBand:@"SHARE DETAILS"];
+    UIView *shareBand  = [self makeSectionBand:@"SHARE"];
     [contentView addSubview:pickerBand];
     [contentView addSubview:resultBand];
     [contentView addSubview:shareBand];
@@ -186,6 +186,7 @@
     self.shareButton.translatesAutoresizingMaskIntoConstraints = NO;
 
     // Share button: left-align text
+    [self.shareButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     if (@available(iOS 15, *)) {
         UIButtonConfiguration *config = self.shareButton.configuration;
         if (config) {

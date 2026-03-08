@@ -31,6 +31,7 @@ extern NSString * const kSegueShowItem;
 extern NSString * const kSegueShowRFAS;
 extern NSString * const kSegueShowDetails;
 extern NSString * const kSegueShowDetailsAccessoryButton;
+extern NSString * const kSegueShowGlobalSearchDetail;
 
 extern NSString * const kAppStoreId;
 extern NSString * const kAppStoreURL;

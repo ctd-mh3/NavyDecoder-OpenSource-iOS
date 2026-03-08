@@ -70,6 +70,7 @@
                     <connections>
                         <segue destination="hc8-rl-tms" kind="push" identifier="showRFAS" id="KC3-OK-sKw"/>
                         <segue destination="8s5-WP-k6T" kind="push" identifier="showItem" id="r0X-UM-AiK"/>
+                        <segue destination="7BV-py-3Hx" kind="push" identifier="showGlobalSearchDetail" id="GSD-gb-sdt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17" sceneMemberID="firstResponder"/>

@@ -31,6 +31,7 @@ NSString * const kSegueShowItem                     = @"showItem";
 NSString * const kSegueShowRFAS                     = @"showRFAS";
 NSString * const kSegueShowDetails                  = @"showDetails";
 NSString * const kSegueShowDetailsAccessoryButton   = @"showDetailsAccessoryButton";
+NSString * const kSegueShowGlobalSearchDetail       = @"showGlobalSearchDetail";
 
 NSString * const kAppStoreId  = @"588227679";
 NSString * const kAppStoreURL = @"https://apps.apple.com/app/id588227679";

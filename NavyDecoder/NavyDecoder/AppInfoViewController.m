@@ -35,6 +35,10 @@ static double const kAIVHeaderAlphaLight = 0.2;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    // The storyboard view has clearColor, which would reveal the black window behind it.
+    // Use systemBackgroundColor so light mode has a white base behind the background image.
+    self.view.backgroundColor = UIColor.systemBackgroundColor;
+
     UIImageView *bg = [[UIImageView alloc] init];
     [self.view insertSubview:bg atIndex:0];
     self.backgroundImageView = bg;

@@ -34,6 +34,7 @@ NSString * const kSegueShowDetailsAccessoryButton   = @"showDetailsAccessoryButt
 
 NSString * const kAppStoreId  = @"588227679";
 NSString * const kAppStoreURL = @"https://apps.apple.com/app/id588227679";
+NSString * const kSupportEmail = @"support@crashtestdummylimited.com";
 
 @implementation ViewConstants
 

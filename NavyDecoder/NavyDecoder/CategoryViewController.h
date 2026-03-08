@@ -23,13 +23,9 @@
 #import <UIKit/UIKit.h>
 #import "NavyDecoderMasterViewController.h"
 
-@class ItemViewController;
-
 #import <CoreData/CoreData.h>
 
 @interface CategoryViewController : NavyDecoderMasterViewController
-
-@property (strong, nonatomic) ItemViewController *itemViewController;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

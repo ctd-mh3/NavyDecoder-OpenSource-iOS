@@ -37,10 +37,7 @@
     CategoryViewController *controller = (CategoryViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
 
-    NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithInt:1], settingsBackgroundImageKey,
-                                 nil];
-    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{settingsBackgroundImageKey: @1}];
     
     // Transparent navigation bar (modern API)
     UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];

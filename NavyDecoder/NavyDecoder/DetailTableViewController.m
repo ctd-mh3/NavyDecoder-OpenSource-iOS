@@ -81,7 +81,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAt:(NSIndexPath *)indexPath {
-    return 10.0;
+    return UITableViewAutomaticDimension;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -139,19 +139,10 @@
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
         mailer.mailComposeDelegate = self;
 
-        NSString *subjectString = @"iOS-Navy Decoder(v";
-        subjectString = [subjectString stringByAppendingString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-        subjectString = [subjectString stringByAppendingString:@") Correction/Comment"];
-        [mailer setSubject:subjectString];
-        
-        NSArray *toRecipients = [NSArray arrayWithObjects:@"support@crashtestdummylimited.com", nil];
-        [mailer setToRecipients:toRecipients];
-         NSString *emailBody = @"Feedback below for ";
-        emailBody = [emailBody stringByAppendingString:self.categoryTitle];
-        emailBody = [emailBody stringByAppendingString:@" code ("];
-        emailBody = [emailBody stringByAppendingString:self.codeKeyString];
-        emailBody = [emailBody stringByAppendingString:@"):"];
-        [mailer setMessageBody:emailBody isHTML:NO];
+        NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        [mailer setSubject:[NSString stringWithFormat:@"iOS-Navy Decoder(v%@) Correction/Comment", version]];
+        [mailer setToRecipients:@[kSupportEmail]];
+        [mailer setMessageBody:[NSString stringWithFormat:@"Feedback below for %@ code (%@):", self.categoryTitle, self.codeKeyString] isHTML:NO];
         [self presentViewController:mailer animated:YES completion:nil];
     } else {
         UIAlertController *alert = [UIAlertController

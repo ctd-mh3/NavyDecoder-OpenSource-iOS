@@ -62,13 +62,9 @@
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
         mailer.mailComposeDelegate = self;
 
-        NSString *subjectString = @"iOS-Navy Decoder(v";
-        subjectString = [subjectString stringByAppendingString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-        subjectString = [subjectString stringByAppendingString:@") Comment"];
-        [mailer setSubject:subjectString];
-
-        NSArray *toRecipients = [NSArray arrayWithObjects:@"support@crashtestdummylimited.com", nil];
-        [mailer setToRecipients:toRecipients];
+        NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        [mailer setSubject:[NSString stringWithFormat:@"iOS-Navy Decoder(v%@) Comment", version]];
+        [mailer setToRecipients:@[kSupportEmail]];
         [self presentViewController:mailer animated:YES completion:nil];
     } else {
         UIAlertController *alert = [UIAlertController

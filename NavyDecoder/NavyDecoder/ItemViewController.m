@@ -112,7 +112,6 @@ static NSInteger const kSearchBarHeightIPhone = 44;
 
     UITableView *searchTable = ((UITableViewController *)self.searchController.searchResultsController).tableView;
     [searchTable reloadData];
-    [self.tableView reloadData];
 
     // Show empty state when a search yields no results
     BOOL hasResults = [[self.fetchedResultsController fetchedObjects] count] > 0;

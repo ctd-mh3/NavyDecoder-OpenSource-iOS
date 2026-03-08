@@ -60,8 +60,8 @@
 		4CF01EAE171E2AA70089DB2C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF01EAD171E2AA70089DB2C /* CoreText.framework */; };
 		4CF85CDB165EDFB00058FF6E /* RfasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF85CDA165EDFB00058FF6E /* RfasViewController.m */; };
 		4CF85CDF165F86920058FF6E /* Rfas.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF85CDE165F86920058FF6E /* Rfas.m */; };
-		4CRA00022D760001009088C8 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CRA00012D760001009088C8 /* ReviewManager.swift */; };
-		4CRR00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CRR00002D760001009088C8 /* UIViewController+ReviewRequest.m */; };
+		4C1A00022D760001009088C8 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A00012D760001009088C8 /* ReviewManager.swift */; };
+		4C1B00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B00002D760001009088C8 /* UIViewController+ReviewRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,9 +157,9 @@
 		4CF85CDA165EDFB00058FF6E /* RfasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RfasViewController.m; sourceTree = "<group>"; };
 		4CF85CDD165F86920058FF6E /* Rfas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rfas.h; sourceTree = "<group>"; };
 		4CF85CDE165F86920058FF6E /* Rfas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rfas.m; sourceTree = "<group>"; };
-		4CRA00012D760001009088C8 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
-		4CRR00002D760001009088C8 /* UIViewController+ReviewRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ReviewRequest.m"; sourceTree = "<group>"; };
-		4CRR00FF2D760001009088C8 /* UIViewController+ReviewRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ReviewRequest.h"; sourceTree = "<group>"; };
+		4C1A00012D760001009088C8 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
+		4C1B00002D760001009088C8 /* UIViewController+ReviewRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ReviewRequest.m"; sourceTree = "<group>"; };
+		4C1B00FF2D760001009088C8 /* UIViewController+ReviewRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ReviewRequest.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,9 +413,9 @@
 				4CD84A9D1674CE2F0089D2E1 /* OverallSplitViewController.m */,
 				4CF85CD9165EDFB00058FF6E /* RfasViewController.h */,
 				4CF85CDA165EDFB00058FF6E /* RfasViewController.m */,
-				4CRA00012D760001009088C8 /* ReviewManager.swift */,
-				4CRR00FF2D760001009088C8 /* UIViewController+ReviewRequest.h */,
-				4CRR00002D760001009088C8 /* UIViewController+ReviewRequest.m */,
+				4C1A00012D760001009088C8 /* ReviewManager.swift */,
+				4C1B00FF2D760001009088C8 /* UIViewController+ReviewRequest.h */,
+				4C1B00002D760001009088C8 /* UIViewController+ReviewRequest.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -619,8 +619,8 @@
 				4CF85CDF165F86920058FF6E /* Rfas.m in Sources */,
 				4C8DE0702D749090009088C8 /* CustomTableViewCell.m in Sources */,
 				4CD84A9E1674CE2F0089D2E1 /* OverallSplitViewController.m in Sources */,
-				4CRA00022D760001009088C8 /* ReviewManager.swift in Sources */,
-				4CRR00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */,
+				4C1A00022D760001009088C8 /* ReviewManager.swift in Sources */,
+				4C1B00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

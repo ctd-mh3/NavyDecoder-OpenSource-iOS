@@ -41,7 +41,6 @@
 		4C61858F163C527E002997C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C61858D163C527E002997C6 /* InfoPlist.strings */; };
 		4C69168819251A1800D41A53 /* ViewConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C69168719251A1800D41A53 /* ViewConstants.m */; };
 		4C69169219257DEC00D41A53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C69169119257DEC00D41A53 /* Images.xcassets */; };
-		4C8DE0702D749090009088C8 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8DE06F2D749090009088C8 /* CustomTableViewCell.m */; };
 		4CBCF76417FC54E00049B6CE /* NavyDecoderLargeAppIcon1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CBCF76017FC54E00049B6CE /* NavyDecoderLargeAppIcon1024x1024.png */; };
 		4CC5EA4B2184A169007306CC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC5EA4A2184A168007306CC /* StoreKit.framework */; };
 		4CDEFD5F18AC5B320093E018 /* NavyDecoderMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDEFD5D18AC5B320093E018 /* NavyDecoderMasterViewController.m */; };
@@ -119,8 +118,6 @@
 		4C69168619251A1800D41A53 /* ViewConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewConstants.h; sourceTree = "<group>"; };
 		4C69168719251A1800D41A53 /* ViewConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewConstants.m; sourceTree = "<group>"; };
 		4C69169119257DEC00D41A53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4C8DE06E2D749090009088C8 /* CustomTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
-		4C8DE06F2D749090009088C8 /* CustomTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		4CBCF76017FC54E00049B6CE /* NavyDecoderLargeAppIcon1024x1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavyDecoderLargeAppIcon1024x1024.png; sourceTree = "<group>"; };
 		4CC5EA4A2184A168007306CC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4CD7CD9E22FBB03C00B0D47F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -363,8 +360,6 @@
 		4CFA12B9164336EA00FA770A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				4C8DE06E2D749090009088C8 /* CustomTableViewCell.h */,
-				4C8DE06F2D749090009088C8 /* CustomTableViewCell.m */,
 				4C115E392007AE800004614A /* MainStoryboard_LaunchScreen.storyboard */,
 				4C5C2D9A1642F42B00397A60 /* MainStoryboard_iPhone.storyboard */,
 				4CEBC10B1997951D008CD611 /* NDCViewUtilities.h */,
@@ -597,7 +592,6 @@
 				4CF85CDB165EDFB00058FF6E /* RfasViewController.m in Sources */,
 				4CEBC1101997951D008CD611 /* UIImage+ProportionalFill.m in Sources */,
 				4CF85CDF165F86920058FF6E /* Rfas.m in Sources */,
-				4C8DE0702D749090009088C8 /* CustomTableViewCell.m in Sources */,
 				4C1A00022D760001009088C8 /* ReviewManager.swift in Sources */,
 				4C1B00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */,
 				4C1C00012D760001009088C8 /* AppInfoViewController.m in Sources */,

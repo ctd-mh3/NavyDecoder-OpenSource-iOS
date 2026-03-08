@@ -33,8 +33,6 @@
 
 @implementation NavyDecoderMasterViewController
 
-static double const kMPCHeaderAlphaDark = 0.5;
-static double const kMPCHeaderAlphaLight = 0.2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,8 +50,8 @@ static double const kMPCHeaderAlphaLight = 0.2;
     NDCViewUtilities *viewUtilities = [NDCViewUtilities sharedInstance];
     UIImageView *backgroundView = [viewUtilities getBackgroundImageViewForSize:size];
     backgroundView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-        ? kMPCHeaderAlphaDark
-        : kMPCHeaderAlphaLight;
+        ? kBackgroundAlphaDark
+        : kBackgroundAlphaLight;
     [self.tableView setBackgroundView:backgroundView];
 }
 
@@ -78,9 +76,9 @@ static double const kMPCHeaderAlphaLight = 0.2;
     // Background color
     // https://stackoverflow.com/questions/11825152/set-transparency-in-image-ios
     if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kMPCHeaderAlphaDark];
+        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kBackgroundAlphaDark];
     } else {
-        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kMPCHeaderAlphaLight];
+        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kBackgroundAlphaLight];
     }
 }
 

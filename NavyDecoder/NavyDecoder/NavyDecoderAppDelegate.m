@@ -26,13 +26,14 @@
 
 @implementation NavyDecoderAppDelegate
 
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
 NSString *const MPCAppStoreId = @"588227679";
 
 NSString *settingsBackgroundImageKey = @"backgroundImageKey";
 
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize managedObjectModel = _managedObjectModel;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
@@ -94,92 +95,18 @@ NSString *settingsBackgroundImageKey = @"backgroundImageKey";
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
-    
-    // 20140101: Updated processing to now just have the NRPersistentStoreCoordinator point to the sqlite db in the
-    //           application's Bundle and not by copying that db to the app's Documents directory and then using
-    //           the db in the Documents directory.
-    //
-    //           Reasons:
-    //           1) The code provided in the tutorial does not appear to handle when the app is updated with a new
-    //              database.  It would just not copy the new database to the NRPersistentStoreCoordinator
-    //           2) Temp code was added to delete the database in the Documents directory if present and then copy
-    //              the db from the application bundle, but there appears to be no reason to add this complexity.
-    //              Since the user cannot change the database, we can just point to the application bundle's
-    //              db file and read it in as reaad-only.
-    
-    
-    
-    // From http://www.raywenderlich.com/12170/core-data-tutorial-how-to-preloadimport-existing-data-updated
-    // Original code provided by tutorial
-    //NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"DecoderData.sqlite"];
 
-    // If there is a not a database with this name in the Documents directory
-    //if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]]) {
-    //    NSURL *preloadURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"DecoderData" ofType:@"sqlite"]];
-    //    NSError* err = nil;
-    //    if (![[NSFileManager defaultManager] copyItemAtURL:preloadURL toURL:storeURL error:&err]) {
-    //        NSLog(@"Oops, could not copy preloaded data");                }
-    //}
-    
-    // Updated temp code to delete a db found in the Documents directory and then copy the file
-    //if (![[NSFileManager defaultManager] fileExistsAtPath:[storeURL path]]) {
-    //    NSURL *preloadURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"DecoderData" ofType:@"sqlite"]];
-    //    NSError* err = nil;
-    //    if (![[NSFileManager defaultManager] copyItemAtURL:preloadURL toURL:storeURL error:&err]) {
-    //        // If an error occurs, it's probably because a previous backup directory
-    //        // already exists.  Delete the old directory and try again.
-    //        if ([[NSFileManager defaultManager] removeItemAtURL:storeURL error:&err]) {
-    //            // If the operation failed again, abort for real.
-    //            if (![[NSFileManager defaultManager] copyItemAtURL:preloadURL toURL:storeURL error:&err]) {
-    //                NSLog(@"Oops, could not copy preloaded data");                }
-    //        }
-    //    }
-    //}
-    
-    // 20140101: Updated processing to now just have the NRPersistentStoreCoordinator point to the sqlite db in the
-    //           application's Bundle and not by copying that db to the app's Documents directory and then using
-    //           the db in the Documents directory.
-    NSURL *refactoredStoreURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"DecoderData" ofType:@"sqlite"]];
-
-    
+    // Open the bundled read-only SQLite database directly from the app bundle.
+    NSURL *storeURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"DecoderData" ofType:@"sqlite"]];
+    NSDictionary *readOnlyOptions = @{ NSReadOnlyPersistentStoreOption: @YES };
     NSError *error = nil;
-    
+
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:readOnlyOptions error:&error]) {
+        NSLog(@"Failed to open persistent store: %@, %@", error, [error userInfo]);
+        _persistentStoreCoordinator = nil;
+    }
 
-    // 20140101: Added to ensure the NSPersistentStoreCoordinator reads the Bundle's db file as read-only since
-    //           it is not appropriate to allow the app to modify anything in the Bundle
-    NSDictionary *readOnlyOptions = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSReadOnlyPersistentStoreOption, nil];
-
-    // 20140101: Use the URL that points to the Bundle's db file and used the ReadOnly options
-    //if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:refactoredStoreURL options:readOnlyOptions error:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-         
-         Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
-         Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }    
-    
     return _persistentStoreCoordinator;
 }
 

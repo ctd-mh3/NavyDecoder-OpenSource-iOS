@@ -48,15 +48,7 @@
 
 @implementation RfasViewController
 
-@synthesize rfasPickerView = _rfasPickerView;
-@synthesize firstCharacterMeaningWithoutTitle = _firstCharacterMeaningWithoutTitle;
-@synthesize secondAndThirdCharacterMeaningWithoutTitle = _secondAndThirdCharacterMeaningWithoutTitle;
-@synthesize fourthCharacterMeaningWithoutTitle = _fourthCharacterMeaningWithoutTitle;
-@synthesize rfas = _rfas;
-@synthesize isEnlisted = _isEnlisted;
 
-static double const kRFASHeaderAlphaDark = 0.5;
-static double const kRFASHeaderAlphaLight = 0.2;
 
 - (void)viewDidLoad {
     self.rfas = [[Rfas alloc] init];
@@ -118,8 +110,8 @@ static double const kRFASHeaderAlphaLight = 0.2;
 
 - (void)updateBackground {
     self.backgroundImageView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-        ? kRFASHeaderAlphaDark
-        : kRFASHeaderAlphaLight;
+        ? kBackgroundAlphaDark
+        : kBackgroundAlphaLight;
 }
 
 - (void)updateBackgroundForSize:(CGSize)size {
@@ -127,8 +119,8 @@ static double const kRFASHeaderAlphaLight = 0.2;
     UIImageView *bg = [viewUtilities getBackgroundImageViewForSize:size];
     self.backgroundImageView.image = bg.image;
     self.backgroundImageView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-        ? kRFASHeaderAlphaDark
-        : kRFASHeaderAlphaLight;
+        ? kBackgroundAlphaDark
+        : kBackgroundAlphaLight;
     self.backgroundImageView.frame = CGRectMake(0, 0, size.width, size.height);
 }
 
@@ -244,7 +236,7 @@ static double const kRFASHeaderAlphaLight = 0.2;
     band.translatesAutoresizingMaskIntoConstraints = NO;
     band.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor *(UITraitCollection *tc) {
         CGFloat alpha = (tc.userInterfaceStyle == UIUserInterfaceStyleDark)
-            ? kRFASHeaderAlphaDark : kRFASHeaderAlphaLight;
+            ? kBackgroundAlphaDark : kBackgroundAlphaLight;
         return [[UIColor blackColor] colorWithAlphaComponent:alpha];
     }];
 

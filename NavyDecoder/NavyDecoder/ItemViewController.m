@@ -144,9 +144,7 @@ static NSInteger const kSearchBarHeightIPhone = 44;
     NSError *error = nil;
     
     if (![[self fetchedResultsController] performFetch:&error]) {
-        // Handle error
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        exit(-1);  // Fail
     }
 }
 
@@ -267,29 +265,13 @@ static NSInteger const kSearchBarHeightIPhone = 44;
 	NSError *error = nil;
 	
     if (![self.fetchedResultsController performFetch:&error]) {
-	    
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Data Retrieval Error"
-                                    message:@"Please try again."
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okButton = [UIAlertAction
-                                   actionWithTitle:@"OK"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action) {
-                                       //No action except to close alert
-                                   }];
-        
-        [alert addAction:okButton];
-        
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Data Retrieval Error"
+                                                                       message:@"Please try again."
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
-        
-	    abort();
-	}
+    }
     
     return _fetchedResultsController;
 }    

@@ -22,6 +22,7 @@
 
 #import "AppInfoViewController.h"
 #import "NDCViewUtilities.h"
+#import "ViewConstants.h"
 
 @interface AppInfoViewController ()
 @property (nonatomic, strong) UIImageView *backgroundImageView;
@@ -29,8 +30,6 @@
 
 @implementation AppInfoViewController
 
-static double const kAIVHeaderAlphaDark = 0.5;
-static double const kAIVHeaderAlphaLight = 0.2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -75,8 +74,8 @@ static double const kAIVHeaderAlphaLight = 0.2;
 - (void)updateBackground {
     // Only the alpha needs to change when the color scheme toggles; image and frame are already set.
     self.backgroundImageView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-        ? kAIVHeaderAlphaDark
-        : kAIVHeaderAlphaLight;
+        ? kBackgroundAlphaDark
+        : kBackgroundAlphaLight;
 }
 
 - (void)updateBackgroundForSize:(CGSize)size {
@@ -84,8 +83,8 @@ static double const kAIVHeaderAlphaLight = 0.2;
     UIImageView *bg = [viewUtilities getBackgroundImageViewForSize:size];
     self.backgroundImageView.image = bg.image;
     self.backgroundImageView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-        ? kAIVHeaderAlphaDark
-        : kAIVHeaderAlphaLight;
+        ? kBackgroundAlphaDark
+        : kBackgroundAlphaLight;
     self.backgroundImageView.frame = CGRectMake(0, 0, size.width, size.height);
 }
 

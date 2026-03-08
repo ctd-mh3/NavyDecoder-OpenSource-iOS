@@ -24,6 +24,9 @@
 
 extern NSString * const kOpenSourceNotice;
 
+extern const double kBackgroundAlphaDark;
+extern const double kBackgroundAlphaLight;
+
 extern NSString * const kSegueShowItem;
 extern NSString * const kSegueShowRFAS;
 extern NSString * const kSegueShowDetails;

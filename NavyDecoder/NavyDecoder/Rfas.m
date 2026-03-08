@@ -34,11 +34,6 @@
 
 @implementation Rfas
 
-@synthesize officerFirstCharacterMatrix = _officerFirstCharacterMatrix;
-@synthesize officerSecondAndThirdCharactersMatrix = _officerSecondAndThirdCharactersMatrix;
-@synthesize fourthCharacterMatrix = _fourhCharacterMatrix;
-@synthesize enlistedFirstCharacterMatrix = _enlistedFirstCharacterMatrix;
-@synthesize enlistedSecondAndThirdCharactersMatrix = _enlistedSecondAndThirdCharactersMatrix;
 
 - (id)init {
     self = [super init];

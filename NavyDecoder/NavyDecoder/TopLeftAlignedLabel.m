@@ -46,8 +46,6 @@
 
 // Align text block according to vertical alignment settings
 - (CGRect)textRectForBounds:(CGRect)bounds limitedToNumberOfLines:(NSInteger)numberOfLines {
-    NSLog(@"numberOfLines: %ld", (long)numberOfLines);
-
     CGRect rect = [super textRectForBounds:bounds limitedToNumberOfLines:numberOfLines];
     CGRect result;
     

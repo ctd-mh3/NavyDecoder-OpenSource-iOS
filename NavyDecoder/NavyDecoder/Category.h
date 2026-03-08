@@ -27,8 +27,8 @@
 
 @interface Category : NSManagedObject
 
-@property (nonatomic, retain) NSString *categoryTitle;
-@property (nonatomic, retain) NSSet *categoryItems;
+@property (nonatomic, strong) NSString *categoryTitle;
+@property (nonatomic, strong) NSSet *categoryItems;
 
     @end
 

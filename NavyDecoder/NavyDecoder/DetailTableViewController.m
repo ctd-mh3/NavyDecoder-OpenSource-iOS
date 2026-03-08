@@ -26,6 +26,7 @@
 #import "Details.h"
 #import "NavyDecoderAppDelegate.h"
 #import "UIViewController+ReviewRequest.h"
+#import "ViewConstants.h"
 
 @interface DetailTableViewController ()
 
@@ -41,14 +42,7 @@
 
 static NSString *const kiOS7AppStoreURLBaseFormat = @"itms-apps://itunes.apple.com/app/id";
 
-static double const kMPCHeaderAlphaDark = 0.5;
-static double const kMPCHeaderAlphaLight = 0.2;
 
-@synthesize codeKey = _codeKey;
-@synthesize categoryTitle = _categoryTitle;
-@synthesize codeKeyString = _codeKeyString;
-@synthesize codeValueString = _codeValueString;
-@synthesize codeSourceString = _codeSourceString;
 
 - (void)setItem:(id)newItem {
     _item = newItem;
@@ -127,9 +121,9 @@ static double const kMPCHeaderAlphaLight = 0.2;
     // https://stackoverflow.com/questions/11825152/set-transparency-in-image-ios
     
     if (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
-        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kMPCHeaderAlphaDark];
+        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kBackgroundAlphaDark];
     } else {
-        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kMPCHeaderAlphaLight];
+        view.tintColor = [[UIColor blackColor] colorWithAlphaComponent:kBackgroundAlphaLight];
     }
 }
 

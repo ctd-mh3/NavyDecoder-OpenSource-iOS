@@ -27,8 +27,8 @@
 
 @interface Item : NSManagedObject
 
-@property (nonatomic, retain) NSString *codeKey;
-@property (nonatomic, retain) Details *itemDetails;
-@property (nonatomic, retain) Category *categorySource;
+@property (nonatomic, strong) NSString *codeKey;
+@property (nonatomic, strong) Details *itemDetails;
+@property (nonatomic, strong) Category *categorySource;
 
 @end

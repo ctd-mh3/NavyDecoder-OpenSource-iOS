@@ -103,9 +103,7 @@ static NSString *const kiOS7AppStoreURLBaseFormat = @"itms-apps://itunes.apple.c
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
     if (indexPath.section == 3) {
-        UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-            ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
-        UIFont *font = [UIFont preferredFontForTextStyle:textStyle];
+        UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         for (UIView *subview in cell.contentView.subviews) {
             if ([subview isKindOfClass:[UILabel class]]) {
                 UILabel *label = (UILabel *)subview;

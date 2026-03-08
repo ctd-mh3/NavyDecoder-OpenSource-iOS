@@ -25,7 +25,6 @@
 #import "ItemViewController.h"
 #import "RfasViewController.h"
 #import "Category.h"
-#import "ViewConstants.h"
 
 @interface CategoryViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -173,11 +172,11 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [[object valueForKey:@"categoryTitle"] description];
-   
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        
-        [cell.textLabel setFont:[UIFont systemFontOfSize:NDPTextSize]];
-    }
+
+    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:textStyle];
+    cell.textLabel.adjustsFontForContentSizeCategory = YES;
 }
 
 @end

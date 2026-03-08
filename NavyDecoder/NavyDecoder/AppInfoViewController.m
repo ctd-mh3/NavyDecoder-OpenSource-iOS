@@ -43,8 +43,15 @@ static double const kAIVHeaderAlphaLight = 0.2;
     [self.view insertSubview:bg atIndex:0];
     self.backgroundImageView = bg;
 
+    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
     for (UIView *subview in self.view.subviews) {
         subview.backgroundColor = UIColor.clearColor;
+        if ([subview isKindOfClass:[UILabel class]]) {
+            UILabel *label = (UILabel *)subview;
+            label.font = [UIFont preferredFontForTextStyle:textStyle];
+            label.adjustsFontForContentSizeCategory = YES;
+        }
     }
 
     [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]

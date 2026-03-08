@@ -24,6 +24,5 @@
 
 @interface ViewConstants : NSObject
 
-extern NSInteger NDPTextSize;
 
 @end

@@ -54,21 +54,6 @@ static double const kRFASHeaderAlphaLight = 0.2;
 
 static NSString *const STYLE_TAG_OPENING = @"<STYLE TYPE=\"text/css\">";
 static NSString *const STYLE_TAG_CLOSING = @"</STYLE>";
-static NSString *const STYLES_TO_INCLUDE =
-@"<!--"
-    "body {"
-        "background-color: transparent;"
-        "color: #1c1c1e;"
-        "font-size: 16px;"
-        "line-height: 1.5;"
-        "margin: 8px 16px;"
-    "}"
-    "@media (prefers-color-scheme: dark) {"
-        "body {"
-            "color: #f2f2f7;"
-        "}"
-    "}"
-"-->";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -90,6 +75,9 @@ static NSString *const STYLES_TO_INCLUDE =
     [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
                        withTarget:self
                            action:@selector(updateBackground)];
+    [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class]
+                       withTarget:self
+                           action:@selector(updatewebView)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -234,7 +222,9 @@ static NSString *const STYLES_TO_INCLUDE =
     UILabel *label = [[UILabel alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;
     label.text = title;
-    label.font = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
+    UIFont *baseFont = [UIFont systemFontOfSize:13 weight:UIFontWeightSemibold];
+    label.font = [[UIFontMetrics defaultMetrics] scaledFontForFont:baseFont];
+    label.adjustsFontForContentSizeCategory = YES;
     label.textColor = [UIColor secondaryLabelColor];
 
     [band addSubview:topLine];
@@ -325,9 +315,24 @@ static NSString *const STYLES_TO_INCLUDE =
 #pragma mark - Web View
 
 - (void)updatewebView {
+    CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleBody].pointSize;
+    NSString *stylesForCurrentSize = [NSString stringWithFormat:
+        @"<!--"
+        "body {"
+            "background-color: transparent;"
+            "color: #1c1c1e;"
+            "font-size: %.0fpx;"
+            "line-height: 1.5;"
+            "margin: 8px 16px;"
+        "}"
+        "@media (prefers-color-scheme: dark) {"
+            "body { color: #f2f2f7; }"
+        "}"
+        "-->", fontSize];
+
     NSString *htmlString = @"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"></head><body>";
     htmlString = [htmlString stringByAppendingString:STYLE_TAG_OPENING];
-    htmlString = [htmlString stringByAppendingString:STYLES_TO_INCLUDE];
+    htmlString = [htmlString stringByAppendingString:stylesForCurrentSize];
     htmlString = [htmlString stringByAppendingString:STYLE_TAG_CLOSING];
     htmlString = [htmlString stringByAppendingString:@"<b>1st:</b> "];
     htmlString = [htmlString stringByAppendingString:self.firstCharacterMeaningWithoutTitle];

@@ -25,7 +25,6 @@
 #import "Item.h"
 #import "Details.h"
 #import "NavyDecoderAppDelegate.h"
-#import "ViewConstants.h"
 #import "UIViewController+ReviewRequest.h"
 
 @interface DetailTableViewController ()
@@ -85,13 +84,16 @@ static double const kMPCHeaderAlphaLight = 0.2;
     self.codeSourceString = details.codeSource;
     self.codeSourceLabel.text = self.codeSourceString;
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        
-        [self.codeKeyLabel setFont:[UIFont systemFontOfSize:NDPTextSize]];
-        [self.codeValueLabel setFont:[UIFont systemFontOfSize:NDPTextSize]];
-        [self.codeSourceLabel setFont:[UIFont systemFontOfSize:NDPTextSize]];
-    }
-    
+    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+    UIFont *contentFont = [UIFont preferredFontForTextStyle:textStyle];
+    self.codeKeyLabel.font = contentFont;
+    self.codeKeyLabel.adjustsFontForContentSizeCategory = YES;
+    self.codeValueLabel.font = contentFont;
+    self.codeValueLabel.adjustsFontForContentSizeCategory = YES;
+    self.codeSourceLabel.font = contentFont;
+    self.codeSourceLabel.adjustsFontForContentSizeCategory = YES;
+
     NSLog(@"Meaning: %@", self.codeValueString);
 }
 
@@ -102,6 +104,22 @@ static double const kMPCHeaderAlphaLight = 0.2;
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAt:(NSIndexPath *)indexPath {
     return 10.0;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    if (indexPath.section == 3) {
+        UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+            ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+        UIFont *font = [UIFont preferredFontForTextStyle:textStyle];
+        for (UIView *subview in cell.contentView.subviews) {
+            if ([subview isKindOfClass:[UILabel class]]) {
+                UILabel *label = (UILabel *)subview;
+                label.font = font;
+                label.adjustsFontForContentSizeCategory = YES;
+            }
+        }
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {

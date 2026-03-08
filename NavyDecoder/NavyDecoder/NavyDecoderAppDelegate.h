@@ -22,11 +22,7 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *const MPCAppStoreId;
-
 @interface NavyDecoderAppDelegate : UIResponder <UIApplicationDelegate>
-
-extern NSString *settingsBackgroundImageKey;
 
 @property (strong, nonatomic) UIWindow *window;
 

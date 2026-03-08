@@ -22,10 +22,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import <MessageUI/MessageUI.h>
 #import "NavyDecoderMasterViewController.h"
 
-@interface DetailTableViewController : NavyDecoderMasterViewController <NSFetchedResultsControllerDelegate, MFMailComposeViewControllerDelegate>
+@interface DetailTableViewController : NavyDecoderMasterViewController <NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *codeKeyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *codeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *codeSourceLabel;

@@ -29,7 +29,6 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
 
-@property (nonatomic) BOOL enlisted;
 @property (strong, nonatomic) Rfas *rfas;
 
 @property (strong, nonatomic) NSString *firstCharacterMeaningWithoutTitle;
@@ -51,10 +50,10 @@
 
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
     self.rfas = [[Rfas alloc] init];
     self.title = self.isEnlisted ? @"RFAS-Enlisted" : @"RFAS-Officer";
     [self.rfasPickerView reloadAllComponents];
-    [super viewDidLoad];
 
     [self setupBackground];
     [self setupLayout];
@@ -83,9 +82,9 @@
 
     [self.rfasPickerView reloadAllComponents];
 
-    [self doSomethingWithRow:0 inComponent:0];
-    [self doSomethingWithRow:0 inComponent:1];
-    [self doSomethingWithRow:0 inComponent:2];
+    [self updateMeaningForRow:0 inComponent:0];
+    [self updateMeaningForRow:0 inComponent:1];
+    [self updateMeaningForRow:0 inComponent:2];
 
     [self updateResultLabels];
 }
@@ -100,6 +99,7 @@
 
 - (void)setupBackground {
     UIImageView *bg = [[UIImageView alloc] init];
+    bg.isAccessibilityElement = NO;
     [self.view insertSubview:bg atIndex:0];
     self.backgroundImageView = bg;
 
@@ -129,6 +129,21 @@
 - (void)setupLayout {
     [NSLayoutConstraint deactivateConstraints:self.view.constraints];
 
+    // Scroll view so content is accessible on small screens
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    scrollView.backgroundColor = UIColor.clearColor;
+    [self.view addSubview:scrollView];
+
+    UIView *contentView = [[UIView alloc] init];
+    contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    contentView.backgroundColor = UIColor.clearColor;
+    [scrollView addSubview:contentView];
+
+    // Move storyboard IBOutlets into contentView
+    [contentView addSubview:self.rfasPickerView];
+    [contentView addSubview:self.shareButton];
+
     UILabel *noticeLabel = [[UILabel alloc] init];
     noticeLabel.translatesAutoresizingMaskIntoConstraints = NO;
     noticeLabel.numberOfLines = 0;
@@ -137,14 +152,14 @@
     noticeLabel.textColor = [UIColor secondaryLabelColor];
     noticeLabel.textAlignment = NSTextAlignmentCenter;
     noticeLabel.backgroundColor = UIColor.clearColor;
-    [self.view addSubview:noticeLabel];
+    [contentView addSubview:noticeLabel];
 
     UIView *pickerBand = [self makeSectionBand:@"RFAS CODE"];
     UIView *resultBand = [self makeSectionBand:@"DECODED MEANING"];
     UIView *shareBand  = [self makeSectionBand:@"SHARE DETAILS"];
-    [self.view addSubview:pickerBand];
-    [self.view addSubview:resultBand];
-    [self.view addSubview:shareBand];
+    [contentView addSubview:pickerBand];
+    [contentView addSubview:resultBand];
+    [contentView addSubview:shareBand];
 
     self.prefix1Label = [self makePrefixLabel:@"1st Element:"];
     self.prefix2Label = [self makePrefixLabel:@"2nd Element:"];
@@ -161,9 +176,8 @@
     resultStack.axis = UILayoutConstraintAxisVertical;
     resultStack.spacing = 8;
     resultStack.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:resultStack];
+    [contentView addSubview:resultStack];
 
-    // Prefix column: fixed 40% of the stack width, equal across all rows
     [self.prefix1Label.widthAnchor constraintEqualToAnchor:resultStack.widthAnchor multiplier:0.30].active = YES;
     [self.prefix2Label.widthAnchor constraintEqualToAnchor:self.prefix1Label.widthAnchor].active = YES;
     [self.prefix3Label.widthAnchor constraintEqualToAnchor:self.prefix1Label.widthAnchor].active = YES;
@@ -182,52 +196,65 @@
     }
     [self.shareButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 
-    // Share button: match body font size used elsewhere
     UIFontTextStyle shareTextStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
         ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
     self.shareButton.titleLabel.font = [UIFont preferredFontForTextStyle:shareTextStyle];
     self.shareButton.titleLabel.adjustsFontForContentSizeCategory = YES;
 
     UILayoutGuide *safe = self.view.safeAreaLayoutGuide;
-    UILayoutGuide *readable = self.view.readableContentGuide;
+    UILayoutGuide *readable = scrollView.readableContentGuide;
     CGFloat margin = 16.0;
 
     [NSLayoutConstraint activateConstraints:@[
+        // Scroll view fills safe area
+        [scrollView.topAnchor constraintEqualToAnchor:safe.topAnchor],
+        [scrollView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [scrollView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [scrollView.bottomAnchor constraintEqualToAnchor:safe.bottomAnchor],
+
+        // Content view: same width as scroll view, height by content
+        [contentView.topAnchor constraintEqualToAnchor:scrollView.topAnchor],
+        [contentView.leadingAnchor constraintEqualToAnchor:scrollView.leadingAnchor],
+        [contentView.trailingAnchor constraintEqualToAnchor:scrollView.trailingAnchor],
+        [contentView.bottomAnchor constraintEqualToAnchor:scrollView.bottomAnchor],
+        [contentView.widthAnchor constraintEqualToAnchor:scrollView.widthAnchor],
+
         // Notice label
-        [noticeLabel.topAnchor constraintEqualToAnchor:safe.topAnchor constant:8],
-        [noticeLabel.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:16],
-        [noticeLabel.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-16],
+        [noticeLabel.topAnchor constraintEqualToAnchor:contentView.topAnchor constant:8],
+        [noticeLabel.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor constant:margin],
+        [noticeLabel.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor constant:-margin],
 
         // Picker band
         [pickerBand.topAnchor constraintEqualToAnchor:noticeLabel.bottomAnchor constant:8],
-        [pickerBand.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
-        [pickerBand.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [pickerBand.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor],
+        [pickerBand.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor],
 
         // Picker — centered via readable content guide
         [self.rfasPickerView.topAnchor constraintEqualToAnchor:pickerBand.bottomAnchor constant:4],
-        [self.rfasPickerView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.rfasPickerView.centerXAnchor constraintEqualToAnchor:contentView.centerXAnchor],
         [self.rfasPickerView.leadingAnchor constraintGreaterThanOrEqualToAnchor:readable.leadingAnchor],
         [self.rfasPickerView.trailingAnchor constraintLessThanOrEqualToAnchor:readable.trailingAnchor],
 
         // Decoded meaning band
         [resultBand.topAnchor constraintEqualToAnchor:self.rfasPickerView.bottomAnchor constant:8],
-        [resultBand.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
-        [resultBand.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [resultBand.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor],
+        [resultBand.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor],
 
         // Result labels stack view
         [resultStack.topAnchor constraintEqualToAnchor:resultBand.bottomAnchor constant:12],
-        [resultStack.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:margin],
-        [resultStack.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-margin],
+        [resultStack.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor constant:margin],
+        [resultStack.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor constant:-margin],
 
         // Share band
         [shareBand.topAnchor constraintEqualToAnchor:resultStack.bottomAnchor constant:12],
-        [shareBand.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
-        [shareBand.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [shareBand.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor],
+        [shareBand.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor],
 
         // Share button
         [self.shareButton.topAnchor constraintEqualToAnchor:shareBand.bottomAnchor constant:12],
-        [self.shareButton.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:margin],
-        [self.shareButton.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-margin],
+        [self.shareButton.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor constant:margin],
+        [self.shareButton.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor constant:-margin],
+        [self.shareButton.bottomAnchor constraintEqualToAnchor:contentView.bottomAnchor constant:-16],
     ]];
 }
 
@@ -361,11 +388,21 @@
     return title;
 }
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    [self doSomethingWithRow:row inComponent:component];
+- (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+    CGFloat total = pickerView.bounds.size.width;
+    switch (component) {
+        case 0: return total * 0.25;  // 1st char (single letter)
+        case 1: return total * 0.55;  // 2nd+3rd chars (two letters)
+        case 2: return total * 0.20;  // 4th char (single letter)
+        default: return total / 3.0;
+    }
 }
 
-- (void)doSomethingWithRow:(NSInteger)row inComponent:(NSInteger)component {
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    [self updateMeaningForRow:row inComponent:component];
+}
+
+- (void)updateMeaningForRow:(NSInteger)row inComponent:(NSInteger)component {
     switch (component) {
         case 0:
             self.firstCharacterMeaningWithoutTitle = [self.rfas getFirstCharacterValueForRow:row

@@ -109,14 +109,27 @@ static NSInteger const kSearchBarHeightIPhone = 44;
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     NSString *searchString = [self.searchController.searchBar text];
-    
+
     [self updateFilteredContentForEnteredSearch:searchString];
-    
-    // Due to change above to address Observation #1, this code is needed to update the table view shown when the user has entered search results
-    [((UITableViewController *)self.searchController.searchResultsController).tableView reloadData];
-    
-    // Needed for after a cancel operation to restore full list
+
+    UITableView *searchTable = ((UITableViewController *)self.searchController.searchResultsController).tableView;
+    [searchTable reloadData];
     [self.tableView reloadData];
+
+    // Show empty state when a search yields no results
+    BOOL hasResults = [[self.fetchedResultsController fetchedObjects] count] > 0;
+    BOOL isSearching = searchString.length > 0;
+    if (isSearching && !hasResults) {
+        UILabel *label = [[UILabel alloc] init];
+        label.text = [NSString stringWithFormat:@"No results for \"%@\"", searchString];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor secondaryLabelColor];
+        label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        label.numberOfLines = 0;
+        searchTable.backgroundView = label;
+    } else {
+        searchTable.backgroundView = nil;
+    }
 }
 
 #pragma mark - Content Filtering

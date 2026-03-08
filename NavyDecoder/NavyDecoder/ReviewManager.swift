@@ -42,7 +42,7 @@ import UIKit
         defaults.set(count, forKey: detailViewCountKey)
 
         guard
-            let currentVersion = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String,
+            let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String,
             count >= minimumDetailViews,
             defaults.string(forKey: lastVersionReviewedKey) != currentVersion,
             let scene = windowScene

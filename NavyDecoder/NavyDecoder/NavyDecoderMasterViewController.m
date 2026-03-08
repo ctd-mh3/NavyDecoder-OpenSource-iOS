@@ -25,12 +25,6 @@
 #import "NDCViewUtilities.h"
 #import "ViewConstants.h"
 
-@interface NavyDecoderMasterViewController () {
-    NSMutableArray *_objects;
-}
-
-@end
-
 @implementation NavyDecoderMasterViewController
 
 
@@ -49,6 +43,7 @@
 - (void)setBackgroundForSize:(CGSize)size {
     NDCViewUtilities *viewUtilities = [NDCViewUtilities sharedInstance];
     UIImageView *backgroundView = [viewUtilities getBackgroundImageViewForSize:size];
+    backgroundView.isAccessibilityElement = NO;
     backgroundView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
         ? kBackgroundAlphaDark
         : kBackgroundAlphaLight;
@@ -86,6 +81,12 @@
        withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self setBackgroundForSize:size];
+}
+
+#pragma mark - Mail Compose Delegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Notice Header

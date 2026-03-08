@@ -40,7 +40,6 @@
 
 @implementation DetailTableViewController
 
-static NSString *const kiOS7AppStoreURLBaseFormat = @"itms-apps://itunes.apple.com/app/id";
 
 
 
@@ -61,23 +60,23 @@ static NSString *const kiOS7AppStoreURLBaseFormat = @"itms-apps://itunes.apple.c
 }
 */
 - (void)configureView {
-        
-    self.codeKeyLabel.text = self.codeKeyString;
-    
     Item *item = (Item *)self.item;
+    if (!item) return;
+
     self.codeKeyString = item.codeKey;
-    self.title = [NSString stringWithFormat:@"Decoded %@", self.categoryTitle];
- 
+
     Category *category = item.categorySource;
     self.categoryTitle = category.categoryTitle;
-    
+
     Details *details = item.itemDetails;
     self.codeValueString = details.codeValue;
-    self.codeValueLabel.text = self.codeValueString;
-
     self.codeSourceString = details.codeSource;
+
+    self.title = [NSString stringWithFormat:@"Decoded %@", self.categoryTitle];
+    self.codeKeyLabel.text = self.codeKeyString;
+    self.codeValueLabel.text = self.codeValueString;
     self.codeSourceLabel.text = self.codeSourceString;
-    
+
     UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
         ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
     UIFont *contentFont = [UIFont preferredFontForTextStyle:textStyle];
@@ -87,8 +86,6 @@ static NSString *const kiOS7AppStoreURLBaseFormat = @"itms-apps://itunes.apple.c
     self.codeValueLabel.adjustsFontForContentSizeCategory = YES;
     self.codeSourceLabel.font = contentFont;
     self.codeSourceLabel.adjustsFontForContentSizeCategory = YES;
-
-    NSLog(@"Meaning: %@", self.codeValueString);
 }
 
 // https://schiffr.de/2016/12/auto-growing-uitableviewcells-with-static-cells/
@@ -131,10 +128,6 @@ static NSString *const kiOS7AppStoreURLBaseFormat = @"itms-apps://itunes.apple.c
     self.tableView.tableHeaderView = [self makeNoticeHeaderView];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self requestReviewIfAppropriate];
@@ -152,7 +145,7 @@ static NSString *const kiOS7AppStoreURLBaseFormat = @"itms-apps://itunes.apple.c
      */
     
     
-    NSString *urlString = [kiOS7AppStoreURLBaseFormat stringByAppendingString:MPCAppStoreId];
+    NSString *urlString = kAppStoreURL;
 
     if (indexPath.section == 3) {
 
@@ -226,28 +219,6 @@ static NSString *const kiOS7AppStoreURLBaseFormat = @"itms-apps://itunes.apple.c
     activityVC.popoverPresentationController.sourceRect = cell.bounds;
 
     [self presentViewController:activityVC animated:YES completion:nil];
-}
-
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    switch (result) {
-        case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled: User cancelled the operation and no email message was queued.");
-            break;
-        case MFMailComposeResultSaved:
-            NSLog(@"Mail saved: User saved the email message in the drafts folder.");
-            break;
-        case MFMailComposeResultSent:
-            NSLog(@"Mail send: The email message is queued in the outbox. It is ready to send.");
-            break;
-        case MFMailComposeResultFailed:
-            NSLog(@"Mail failed: The email message was not saved or queued, possibly due to an error.");
-            break;
-        default:
-            NSLog(@"Mail not sent.");
-            break;
-    }
-    // Remove the mail view
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

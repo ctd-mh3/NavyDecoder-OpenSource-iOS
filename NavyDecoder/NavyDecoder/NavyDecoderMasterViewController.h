@@ -21,8 +21,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface NavyDecoderMasterViewController : UITableViewController
+@interface NavyDecoderMasterViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 
 - (UIView *)makeNoticeHeaderView;
 

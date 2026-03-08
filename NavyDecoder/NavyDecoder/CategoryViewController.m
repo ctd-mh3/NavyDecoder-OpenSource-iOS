@@ -64,7 +64,9 @@
         label.textColor = [UIColor secondaryLabelColor];
         label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
         self.tableView.backgroundView = label;
-    } else {
+    } else if ([self.tableView.backgroundView isKindOfClass:[UILabel class]]) {
+        // Only clear backgroundView if it's the empty-state label;
+        // leave the background image alone when categories are present.
         self.tableView.backgroundView = nil;
     }
     return count;

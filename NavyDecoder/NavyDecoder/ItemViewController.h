@@ -23,13 +23,10 @@
 #import <UIKit/UIKit.h>
 #import "NavyDecoderMasterViewController.h"
 
-@class DetailTableViewController;
-
 #import <CoreData/CoreData.h>
 
 @interface ItemViewController : NavyDecoderMasterViewController
 
-@property (strong, nonatomic) DetailTableViewController *detailTableViewController;
 @property (strong, nonatomic) NSString *categoryTitle;
 @property (strong, nonatomic) id category;
 

@@ -26,5 +26,6 @@
 @interface NavyDecoderMasterViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 
 - (UIView *)makeNoticeHeaderView;
+- (void)setBackgroundForSize:(CGSize)size;
 
 @end

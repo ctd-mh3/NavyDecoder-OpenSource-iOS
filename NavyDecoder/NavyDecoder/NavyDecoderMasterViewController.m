@@ -45,16 +45,28 @@ static double const kMPCHeaderAlphaLight = 0.2;
 
 - (void)setBackgroundForSize:(CGSize)size {
     NDCViewUtilities *viewUtilities = [NDCViewUtilities sharedInstance];
-    
-    [self.tableView setBackgroundView:[viewUtilities getBackgroundImageViewForSize:size]];
+    UIImageView *backgroundView = [viewUtilities getBackgroundImageViewForSize:size];
+    backgroundView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
+        ? kMPCHeaderAlphaDark
+        : kMPCHeaderAlphaLight;
+    [self.tableView setBackgroundView:backgroundView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     // Must get background on first view of the app as viewWillTransitionToSize is not called on this point
-    CGRect screenRect = [UIScreen mainScreen].bounds;
+    UIScreen *screen = self.view.window.windowScene.screen;
+    CGRect screenRect = screen ? screen.bounds : self.view.bounds;
     [self setBackgroundForSize:screenRect.size];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
+        [self setBackgroundForSize:self.tableView.bounds.size];
+        [self.tableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

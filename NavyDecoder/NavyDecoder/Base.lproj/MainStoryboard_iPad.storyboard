@@ -226,7 +226,7 @@
         <!--About/Legal-->
         <scene sceneID="sGp-cU-FPd">
             <objects>
-                <viewController id="doS-gd-gtQ" sceneMemberID="viewController">
+                <viewController id="doS-gd-gtQ" customClass="AppInfoViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8m4-tq-bv3"/>
                         <viewControllerLayoutGuide type="bottom" id="3NZ-y0-Oah"/>

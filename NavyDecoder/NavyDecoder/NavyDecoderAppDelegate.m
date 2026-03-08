@@ -56,8 +56,9 @@ NSString *settingsBackgroundImageKey = @"backgroundImageKey";
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *currentBackgroundImageNumber = [defaults objectForKey:settingsBackgroundImageKey];
+    [defaults setObject:[NSNumber numberWithInt:[currentBackgroundImageNumber intValue] + 1] forKey:settingsBackgroundImageKey];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -68,33 +69,6 @@ NSString *settingsBackgroundImageKey = @"backgroundImageKey";
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Grab the default/saved values which be used in calculations
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
-    NSNumber *currentBackgroundImageNumber = [defaults objectForKey:settingsBackgroundImageKey];
-    
-    [defaults setObject:[NSNumber numberWithInt:[currentBackgroundImageNumber intValue] + 1] forKey:settingsBackgroundImageKey];
-    
-    [defaults synchronize];
-
-    // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
-}
-
-- (void)saveContext {
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        } 
-    }
-}
 
 #pragma mark - Core Data stack
 
@@ -223,11 +197,5 @@ NSString *settingsBackgroundImageKey = @"backgroundImageKey";
     return _persistentStoreCoordinator;
 }
 
-#pragma mark - Application's Documents directory
-
-// Returns the URL to the application's Documents directory.
-- (NSURL *)applicationDocumentsDirectory {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
 
 @end

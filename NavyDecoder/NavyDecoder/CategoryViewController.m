@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = @"Select a Category";
+    self.title = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     self.navigationItem.backButtonTitle = @"Categories";
     self.navigationItem.rightBarButtonItem.image = [UIImage systemImageNamed:@"info.circle.fill"];
     self.itemViewController = (ItemViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
@@ -46,6 +46,15 @@
 }
 
 #pragma mark - Table View
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return @"Select a Category";
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+    [super tableView:tableView willDisplayHeaderView:view forSection:section];
+    ((UITableViewHeaderFooterView *)view).textLabel.textColor = UIColor.labelColor;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[self.fetchedResultsController sections] count];

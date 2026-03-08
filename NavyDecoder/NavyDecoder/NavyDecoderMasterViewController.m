@@ -36,10 +36,6 @@
 static double const kMPCHeaderAlphaDark = 0.5;
 static double const kMPCHeaderAlphaLight = 0.2;
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
@@ -70,11 +66,6 @@ static double const kMPCHeaderAlphaLight = 0.2;
     [self setBackgroundForSize:screenRect.size];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Updating Table View Backgrounds (Cells and Headers)
 

@@ -68,10 +68,7 @@ static double const kMPCHeaderAlphaLight = 0.2;
 }
 */
 - (void)configureView {
-    // TODO- Get text to be top-left justified
-    // http://stackoverflow.com/questions/1054558/vertically-align-text-within-a-uilabel
-    // http://stackoverflow.com/questions/7192088/how-to-set-top-left-alignment-for-uilabel-for-ios-application
-    
+        
     self.codeKeyLabel.text = self.codeKeyString;
     
     Item *item = (Item *)self.item;

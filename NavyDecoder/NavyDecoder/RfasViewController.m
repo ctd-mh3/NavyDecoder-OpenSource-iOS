@@ -43,7 +43,6 @@
 @synthesize secondAndThirdCharacterMeaningWithoutTitle = _secondAndThirdCharacterMeaningWithoutTitle;
 @synthesize fourthCharacterMeaningWithoutTitle = _fourthCharacterMeaningWithoutTitle;
 @synthesize webView = _webView;
-@synthesize emailOtherButton = _emailOtherButton;
 @synthesize rfas = _rfas;
 @synthesize isEnlisted = _isEnlisted;
 
@@ -222,104 +221,47 @@ static NSString *const STYLES_TO_INCLUDE =
     [self updatewebView];
 }
 
-- (IBAction)openOtherEmail:(id)sender {
-    if ([MFMailComposeViewController canSendMail]) {
-        MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-        mailer.mailComposeDelegate = self;
+- (IBAction)shareDetails:(id)sender {
+    NSString *shareText = [self buildShareText];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[shareText] applicationActivities:nil];
 
-        NSString *subjectString = @"iOS-Navy Decoder(v";
-        subjectString = [subjectString stringByAppendingString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-        subjectString = [subjectString stringByAppendingString:@") RFAS Details"];
-        [mailer setSubject:subjectString];
+    // iPad requires a source for the popover
+    activityVC.popoverPresentationController.sourceView = sender;
+    activityVC.popoverPresentationController.sourceRect = ((UIView *)sender).bounds;
 
-        NSInteger row;
-        NSString *firstCharacterToDecode;
-        NSString *secondAndThirdCharacterToDecode;
-        NSString *fourthCharacterToDecode;
-        
-        row = [self.rfasPickerView selectedRowInComponent:0];
-        firstCharacterToDecode = [self.rfas getFirstCharacterKeyForRow:row
-                                                            isEnlisted:self.isEnlisted];
-        row = [self.rfasPickerView selectedRowInComponent:1];
-        secondAndThirdCharacterToDecode = [self.rfas getSecondAndThirdCharactersKeyForRow:row
-                                                                               isEnlisted:self.isEnlisted];
-        row = [self.rfasPickerView selectedRowInComponent:2];
-        fourthCharacterToDecode = [self.rfas getFourthCharacterKeyForRow:row
-                                                              isEnlisted:self.isEnlisted];
-        
-        
-        NSString *emailBody = @"Details for ";
-        
-        if (self.isEnlisted) {
-            emailBody = [emailBody stringByAppendingString:@"Enlisted RFAS ("];
-            
-        } else {
-            emailBody = [emailBody stringByAppendingString:@"Officer RFAS: ("];
-        }
-        emailBody = [emailBody stringByAppendingString:firstCharacterToDecode];
-        emailBody = [emailBody stringByAppendingString:secondAndThirdCharacterToDecode];
-        emailBody = [emailBody stringByAppendingString:fourthCharacterToDecode];
-        emailBody = [emailBody stringByAppendingString:@"):\n"];
-        
-        
-        
-        emailBody = [emailBody stringByAppendingString:firstCharacterToDecode];
-        emailBody = [emailBody stringByAppendingString:@"="];
-        emailBody = [emailBody stringByAppendingString:self.firstCharacterMeaningWithoutTitle];
-        emailBody = [emailBody stringByAppendingString:@"\n"];
-        
-        emailBody = [emailBody stringByAppendingString:secondAndThirdCharacterToDecode];
-        emailBody = [emailBody stringByAppendingString:@"="];
-        emailBody = [emailBody stringByAppendingString:self.secondAndThirdCharacterMeaningWithoutTitle];
-        emailBody = [emailBody stringByAppendingString:@"\n"];
-        
-        emailBody = [emailBody stringByAppendingString:fourthCharacterToDecode];
-        emailBody = [emailBody stringByAppendingString:@"="];
-        emailBody = [emailBody stringByAppendingString:self.fourthCharacterMeaningWithoutTitle];
-        emailBody = [emailBody stringByAppendingString:@"\n"];
-
-        [mailer setMessageBody:emailBody isHTML:NO];
-        [self presentViewController:mailer animated:YES completion:nil];
-    } else {
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Error"
-                                    message:@"Your device appears not to support email."
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okButton = [UIAlertAction
-                                   actionWithTitle:@"OK"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action) {
-                                       //No action except to close alert
-                                   }];
-        
-        [alert addAction:okButton];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    }
+    [self presentViewController:activityVC animated:YES completion:nil];
 }
 
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    switch (result) {
-        case MFMailComposeResultCancelled:
-            NSLog(@"Mail cancelled: User cancelled the operation and no email message was queued.");
-            break;
-        case MFMailComposeResultSaved:
-            NSLog(@"Mail saved: User saved the email message in the drafts folder.");
-            break;
-        case MFMailComposeResultSent:
-            NSLog(@"Mail send: The email message is queued in the outbox. It is ready to send.");
-            break;
-        case MFMailComposeResultFailed:
-            NSLog(@"Mail failed: The email message was not saved or queued, possibly due to an error.");
-            break;
-        default:
-            NSLog(@"Mail not sent.");
-            break;
+- (NSString *)buildShareText {
+    NSInteger row;
+    NSString *firstCharacterToDecode;
+    NSString *secondAndThirdCharacterToDecode;
+    NSString *fourthCharacterToDecode;
+
+    row = [self.rfasPickerView selectedRowInComponent:0];
+    firstCharacterToDecode = [self.rfas getFirstCharacterKeyForRow:row isEnlisted:self.isEnlisted];
+    row = [self.rfasPickerView selectedRowInComponent:1];
+    secondAndThirdCharacterToDecode = [self.rfas getSecondAndThirdCharactersKeyForRow:row isEnlisted:self.isEnlisted];
+    row = [self.rfasPickerView selectedRowInComponent:2];
+    fourthCharacterToDecode = [self.rfas getFourthCharacterKeyForRow:row isEnlisted:self.isEnlisted];
+
+    NSMutableString *text = [NSMutableString string];
+
+    if (self.isEnlisted) {
+        [text appendString:@"Enlisted RFAS ("];
+    } else {
+        [text appendString:@"Officer RFAS ("];
     }
-    
-    // Remove the mail view
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [text appendString:firstCharacterToDecode];
+    [text appendString:secondAndThirdCharacterToDecode];
+    [text appendString:fourthCharacterToDecode];
+    [text appendString:@"):\n"];
+
+    [text appendFormat:@"%@ = %@\n", firstCharacterToDecode, self.firstCharacterMeaningWithoutTitle];
+    [text appendFormat:@"%@ = %@\n", secondAndThirdCharacterToDecode, self.secondAndThirdCharacterMeaningWithoutTitle];
+    [text appendFormat:@"%@ = %@\n", fourthCharacterToDecode, self.fourthCharacterMeaningWithoutTitle];
+
+    return text;
 }
 
 @end

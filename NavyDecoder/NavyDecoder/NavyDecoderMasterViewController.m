@@ -41,6 +41,14 @@ static double const kMPCHeaderAlphaLight = 0.2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
+                       withTarget:self
+                           action:@selector(traitDidChange)];
+}
+
+- (void)traitDidChange {
+    [self setBackgroundForSize:self.tableView.bounds.size];
+    [self.tableView reloadData];
 }
 
 - (void)setBackgroundForSize:(CGSize)size {
@@ -61,13 +69,6 @@ static double const kMPCHeaderAlphaLight = 0.2;
     [self setBackgroundForSize:screenRect.size];
 }
 
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-        [self setBackgroundForSize:self.tableView.bounds.size];
-        [self.tableView reloadData];
-    }
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

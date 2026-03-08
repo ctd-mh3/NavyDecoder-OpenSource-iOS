@@ -40,7 +40,7 @@ static NSString *const kiOS7AppStoreURLFormat = @"itms-apps://itunes.apple.com/a
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    self.tableView.tableHeaderView = [self makeNoticeHeaderView];
 }
 
 - (void)didReceiveMemoryWarning {

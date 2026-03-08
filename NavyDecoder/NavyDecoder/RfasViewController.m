@@ -23,6 +23,7 @@
 #import "RfasViewController.h"
 #import "Rfas.h"
 #import "NDCViewUtilities.h"
+#import "ViewConstants.h"
 
 @interface RfasViewController ()
 
@@ -148,6 +149,16 @@ static double const kRFASHeaderAlphaLight = 0.2;
 - (void)setupLayout {
     [NSLayoutConstraint deactivateConstraints:self.view.constraints];
 
+    UILabel *noticeLabel = [[UILabel alloc] init];
+    noticeLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    noticeLabel.numberOfLines = 0;
+    noticeLabel.text = kOpenSourceNotice;
+    noticeLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    noticeLabel.textColor = [UIColor secondaryLabelColor];
+    noticeLabel.textAlignment = NSTextAlignmentCenter;
+    noticeLabel.backgroundColor = UIColor.clearColor;
+    [self.view addSubview:noticeLabel];
+
     UIView *pickerBand = [self makeSectionBand:@"RFAS CODE"];
     UIView *resultBand = [self makeSectionBand:@"DECODED MEANING"];
     UIView *shareBand  = [self makeSectionBand:@"SHARE DETAILS"];
@@ -202,8 +213,13 @@ static double const kRFASHeaderAlphaLight = 0.2;
     CGFloat margin = 16.0;
 
     [NSLayoutConstraint activateConstraints:@[
+        // Notice label
+        [noticeLabel.topAnchor constraintEqualToAnchor:safe.topAnchor constant:8],
+        [noticeLabel.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:16],
+        [noticeLabel.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-16],
+
         // Picker band
-        [pickerBand.topAnchor constraintEqualToAnchor:safe.topAnchor],
+        [pickerBand.topAnchor constraintEqualToAnchor:noticeLabel.bottomAnchor constant:8],
         [pickerBand.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
         [pickerBand.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
 

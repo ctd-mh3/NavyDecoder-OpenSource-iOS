@@ -24,4 +24,6 @@
 
 @interface NavyDecoderMasterViewController : UITableViewController
 
+- (UIView *)makeNoticeHeaderView;
+
 @end

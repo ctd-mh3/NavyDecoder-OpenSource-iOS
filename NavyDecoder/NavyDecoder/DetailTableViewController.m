@@ -72,7 +72,7 @@ static double const kMPCHeaderAlphaLight = 0.2;
     
     Item *item = (Item *)self.item;
     self.codeKeyString = item.codeKey;
-    self.title = self.codeKeyString;
+    self.title = [NSString stringWithFormat:@"Decoded %@", self.categoryTitle];
  
     Category *category = item.categorySource;
     self.categoryTitle = category.categoryTitle;
@@ -146,6 +146,7 @@ static double const kMPCHeaderAlphaLight = 0.2;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureView];
+    self.tableView.tableHeaderView = [self makeNoticeHeaderView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

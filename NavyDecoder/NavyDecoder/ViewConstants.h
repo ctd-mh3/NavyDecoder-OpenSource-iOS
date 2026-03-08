@@ -22,7 +22,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewConstants : NSObject
+extern NSString * const kOpenSourceNotice;
 
+@interface ViewConstants : NSObject
 
 @end

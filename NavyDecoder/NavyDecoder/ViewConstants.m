@@ -22,7 +22,8 @@
 
 #import "ViewConstants.h"
 
-@implementation ViewConstants
+NSString * const kOpenSourceNotice = @"This application is open source and fully relies on members of the Navy Reserve to pass updated (non-CUI) data and corrections to the app author (or the project on GitHub).";
 
+@implementation ViewConstants
 
 @end

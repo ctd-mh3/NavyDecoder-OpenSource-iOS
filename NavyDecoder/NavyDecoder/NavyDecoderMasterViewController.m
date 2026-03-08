@@ -23,7 +23,6 @@
 #import "NavyDecoderMasterViewController.h"
 #import "NavyDecoderAppDelegate.h"
 #import "NDCViewUtilities.h"
-#import <StoreKit/StoreKit.h>
 
 @interface NavyDecoderMasterViewController () {
     NSMutableArray *_objects;
@@ -36,17 +35,12 @@
 static double const kMPCHeaderAlphaDark = 0.5;
 static double const kMPCHeaderAlphaLight = 0.2;
 
-static NSString *settingsReviewCountKey         = @"reviewCount";
-static NSString *settingsReviewBundleVersionKey = @"bundleVersion";
-
 - (void)awakeFromNib {
     [super awakeFromNib];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    [self DisplayReviewController];
 }
 
 - (void)setBackgroundForSize:(CGSize)size {
@@ -89,33 +83,6 @@ static NSString *settingsReviewBundleVersionKey = @"bundleVersion";
        withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self setBackgroundForSize:size];
-}
-
-- (void)DisplayReviewController {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    // Get the count of controller views, increment, and store new value
-    NSNumber *count = [defaults objectForKey:settingsReviewCountKey];
-    [defaults setObject:[NSNumber numberWithInt:[count intValue] + 1] forKey:settingsReviewCountKey];
-    [defaults synchronize];
-    
-    // Get the current bundle version for the app
-    NSString *currentBuildVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
-    
-    NSString *lastVersionPromptedForReview = [defaults objectForKey:settingsReviewBundleVersionKey];
-
-    // Has the controller been viewd 4 times and the user has not already been prompted for this version?
-    if ([count intValue] >= 4 && currentBuildVersion != lastVersionPromptedForReview) {
-        
-        if (@available(iOS 14.0, *)) {
-            [SKStoreReviewController requestReviewInScene:self.view.window.windowScene];
-        } else if (@available(iOS 10.3, *)) {
-            [SKStoreReviewController requestReview];
-        }
-
-        [defaults setObject:currentBuildVersion forKey:settingsReviewBundleVersionKey];
-        [defaults synchronize];
-    }
 }
 
 @end

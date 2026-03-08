@@ -26,6 +26,7 @@
 #import "Details.h"
 #import "NavyDecoderAppDelegate.h"
 #import "ViewConstants.h"
+#import "UIViewController+ReviewRequest.h"
 
 @interface DetailTableViewController ()
 
@@ -134,6 +135,11 @@ static double const kMPCHeaderAlphaLight = 0.2;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self requestReviewIfAppropriate];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -48,6 +48,7 @@
                 break;
             case 1:
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreURL] options:@{} completionHandler:nil];
+                break;
             default:
                 break;
         }

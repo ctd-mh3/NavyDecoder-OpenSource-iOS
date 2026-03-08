@@ -98,11 +98,9 @@ static NSInteger const kSearchBarHeightIPhone = 44;
     self.tableView.tableHeaderView = headerContainer;
     
     self.definesPresentationContext = YES;
-    
+
     self.searchController.searchBar.placeholder  = @"Search for Code";
     self.searchController.obscuresBackgroundDuringPresentation = false;
-    
-    self.definesPresentationContext = true;
 }
 
 #pragma mark - UISearchResultsUpdating
@@ -157,7 +155,7 @@ static NSInteger const kSearchBarHeightIPhone = 44;
     NSError *error = nil;
     
     if (![[self fetchedResultsController] performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        // Fetch failure is non-fatal for a read-only store; list will show empty.
     }
 }
 
@@ -185,7 +183,7 @@ static NSInteger const kSearchBarHeightIPhone = 44;
     //      http://stackoverflow.com/questions/12737860/assertion-failure-in-dequeuereusablecellwithidentifierforindexpath
 
     static NSString *cellIdentifier = @"ItemToDecodeCell";
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
@@ -272,13 +270,11 @@ static NSInteger const kSearchBarHeightIPhone = 44;
           sectionNameKeyPath:nil
                    cacheName:self.categoryTitle];
     
-    aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
-    
+
 	NSError *error = nil;
-	
+
     if (![self.fetchedResultsController performFetch:&error]) {
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Data Retrieval Error"
                                                                        message:@"Please try again."
                                                                 preferredStyle:UIAlertControllerStyleAlert];
@@ -290,8 +286,8 @@ static NSInteger const kSearchBarHeightIPhone = 44;
 }    
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"codeKey"] description];
+    Item *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = item.codeKey;
 
     UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
         ? UIFontTextStyleTitle3 : UIFontTextStyleBody;

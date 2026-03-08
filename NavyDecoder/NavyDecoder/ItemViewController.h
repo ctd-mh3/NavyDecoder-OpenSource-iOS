@@ -27,9 +27,7 @@
 
 #import <CoreData/CoreData.h>
 
-@interface ItemViewController : NavyDecoderMasterViewController <NSFetchedResultsControllerDelegate> {
-
-}
+@interface ItemViewController : NavyDecoderMasterViewController
 
 @property (strong, nonatomic) DetailTableViewController *detailTableViewController;
 @property (strong, nonatomic) NSString *categoryTitle;

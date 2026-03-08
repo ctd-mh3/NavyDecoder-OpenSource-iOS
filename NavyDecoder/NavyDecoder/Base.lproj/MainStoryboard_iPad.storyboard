@@ -235,8 +235,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="728" translatesAutoresizingMaskIntoConstraints="NO" id="PR6-5Z-pE9">
-                                <rect key="frame" x="20" y="94" width="728" height="90"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PR6-5Z-pE9">
+                                <rect key="frame" x="40" y="467" width="688" height="90"/>
+                                <color key="backgroundColor" red="0" green="0" blue="0" alpha="0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <string key="text">This application is not produced or endorsed by the U.S. Navy.
 
 Includes MGImageUtilites code by Matt Legend Gemmell. </string>
@@ -245,12 +246,11 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0" green="0" blue="0" alpha="0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="PR6-5Z-pE9" firstAttribute="leading" secondItem="FKu-jl-Vbu" secondAttribute="leading" constant="20" id="FA3-qh-ouL"/>
-                            <constraint firstItem="PR6-5Z-pE9" firstAttribute="top" secondItem="FKu-jl-Vbu" secondAttribute="top" constant="94" id="nlC-zm-aL6"/>
-                            <constraint firstAttribute="trailing" secondItem="PR6-5Z-pE9" secondAttribute="trailing" constant="20" id="rSH-5u-5Jb"/>
-                            <constraint firstItem="PR6-5Z-pE9" firstAttribute="centerX" secondItem="FKu-jl-Vbu" secondAttribute="centerX" id="seJ-Jg-K2x"/>
+                            <constraint firstItem="PR6-5Z-pE9" firstAttribute="top" secondItem="8m4-tq-bv3" secondAttribute="bottom" constant="20" id="4C2A00072D760001009088C8"/>
+                            <constraint firstItem="PR6-5Z-pE9" firstAttribute="leading" secondItem="FKu-jl-Vbu" secondAttribute="leading" constant="40" id="FA3-qh-ouL"/>
+                            <constraint firstAttribute="trailing" secondItem="PR6-5Z-pE9" secondAttribute="trailing" constant="40" id="rSH-5u-5Jb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About/Legal" id="Pdj-2e-Xb3"/>

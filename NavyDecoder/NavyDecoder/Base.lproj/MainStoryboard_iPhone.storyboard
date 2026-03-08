@@ -257,12 +257,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="2dw-aX-fui">
-                                <rect key="frame" x="24" y="82" width="252" height="91.666666666666686"/>
-                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="252" id="f4R-TZ-weL"/>
-                                </constraints>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dw-aX-fui">
+                                <rect key="frame" x="20" y="308" width="374" height="120"/>
+                                <color key="backgroundColor" red="0" green="0" blue="0" alpha="0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <string key="text">This application is not produced or endorsed by the U.S. Navy.
 
 Includes MGImageUtilites code by Matt Legend Gemmell. </string>
@@ -271,12 +268,11 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0" green="0" blue="0" alpha="0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2dw-aX-fui" firstAttribute="centerX" secondItem="SxT-y1-k7y" secondAttribute="centerX" id="4d4-EJ-i0U"/>
-                            <constraint firstItem="2dw-aX-fui" firstAttribute="top" secondItem="IwF-Ko-0sX" secondAttribute="bottom" constant="8" symbolic="YES" id="I7h-Bl-Z23"/>
-                            <constraint firstItem="2dw-aX-fui" firstAttribute="leading" secondItem="SxT-y1-k7y" secondAttribute="leadingMargin" constant="4" id="PEb-Ii-kNe"/>
-                            <constraint firstItem="mLa-hj-4f0" firstAttribute="top" secondItem="2dw-aX-fui" secondAttribute="bottom" constant="562.33333333333326" id="ziA-UP-PR9"/>
+                            <constraint firstItem="2dw-aX-fui" firstAttribute="top" secondItem="IwF-Ko-0sX" secondAttribute="bottom" constant="20" id="4C2A00012D760001009088C8"/>
+                            <constraint firstItem="2dw-aX-fui" firstAttribute="leading" secondItem="SxT-y1-k7y" secondAttribute="leading" constant="20" id="4C2A00022D760001009088C8"/>
+                            <constraint firstItem="SxT-y1-k7y" firstAttribute="trailing" secondItem="2dw-aX-fui" secondAttribute="trailing" constant="20" id="4C2A00032D760001009088C8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About/Legal" id="qVc-av-bMd"/>
@@ -518,9 +514,9 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Txv-aJ-zX4">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Txv-aJ-zX4">
+                                <rect key="frame" x="20" y="84" width="374" height="280"/>
+                                <color key="backgroundColor" red="0" green="0" blue="0" alpha="0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <string key="text">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
@@ -533,10 +529,9 @@ A copy of the GNU General Public License is available at https://www.gnu.org/lic
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Txv-aJ-zX4" firstAttribute="centerX" secondItem="T2t-rG-NxL" secondAttribute="centerX" id="LPr-YA-80g"/>
-                            <constraint firstAttribute="bottom" secondItem="Txv-aJ-zX4" secondAttribute="bottom" id="PAf-MI-EVw"/>
-                            <constraint firstItem="Txv-aJ-zX4" firstAttribute="leading" secondItem="T2t-rG-NxL" secondAttribute="leadingMargin" constant="-20.066002490616938" id="RYF-U1-Kba"/>
-                            <constraint firstItem="Txv-aJ-zX4" firstAttribute="centerY" secondItem="T2t-rG-NxL" secondAttribute="centerY" id="idm-wW-3gX"/>
+                            <constraint firstItem="Txv-aJ-zX4" firstAttribute="top" secondItem="MOO-DM-F2l" secondAttribute="bottom" constant="20" id="4C2A00042D760001009088C8"/>
+                            <constraint firstItem="Txv-aJ-zX4" firstAttribute="leading" secondItem="T2t-rG-NxL" secondAttribute="leading" constant="20" id="4C2A00052D760001009088C8"/>
+                            <constraint firstItem="T2t-rG-NxL" firstAttribute="trailing" secondItem="Txv-aJ-zX4" secondAttribute="trailing" constant="20" id="4C2A00062D760001009088C8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Open Source" id="72f-QC-elA"/>

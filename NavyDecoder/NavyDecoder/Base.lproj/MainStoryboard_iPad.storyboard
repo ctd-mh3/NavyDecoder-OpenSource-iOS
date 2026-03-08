@@ -57,7 +57,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Categories" id="EJL-d9-WOz">
-                        <barButtonItem key="rightBarButtonItem" image="724-info.png" id="Bvp-fr-GMT">
+                        <barButtonItem key="rightBarButtonItem" title=" " id="Bvp-fr-GMT">
                             <connections>
                                 <segue destination="TY7-GM-e04" kind="push" id="b1i-nz-0p0"/>
                             </connections>
@@ -506,7 +506,6 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
         <segue reference="xDX-FY-jnp"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="724-info.png" width="28" height="28"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

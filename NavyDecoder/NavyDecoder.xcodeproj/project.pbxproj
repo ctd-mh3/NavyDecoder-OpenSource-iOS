@@ -11,8 +11,6 @@
 		4C045BCC1C1FA05600AE511C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C045BCB1C1FA05600AE511C /* libz.tbd */; };
 		4C045BCE1C1FA06300AE511C /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C045BCD1C1FA06300AE511C /* libc++.tbd */; };
 		4C115E3B2007AE800004614A /* MainStoryboard_LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C115E392007AE800004614A /* MainStoryboard_LaunchScreen.storyboard */; };
-		4C1382B018B008180007B24E /* 724-info.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C1382AE18B008180007B24E /* 724-info.png */; };
-		4C1382B118B008180007B24E /* 724-info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C1382AF18B008180007B24E /* 724-info@2x.png */; };
 		4C50CDD716593B6600480CFC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C50CDD616593B6600480CFC /* MessageUI.framework */; };
 		4C5C2D751642F2BF00397A60 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D711642F2BF00397A60 /* Category.m */; };
 		4C5C2D761642F2BF00397A60 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D731642F2BF00397A60 /* CategoryViewController.m */; };
@@ -79,8 +77,6 @@
 		4C045BC71C1FA03600AE511C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4C045BCB1C1FA05600AE511C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		4C045BCD1C1FA06300AE511C /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		4C1382AE18B008180007B24E /* 724-info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "724-info.png"; sourceTree = "<group>"; };
-		4C1382AF18B008180007B24E /* 724-info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "724-info@2x.png"; sourceTree = "<group>"; };
 		4C50CDD616593B6600480CFC /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		4C5C2D701642F2A400397A60 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = NavyDecoder/Category.h; sourceTree = SOURCE_ROOT; };
 		4C5C2D711642F2BF00397A60 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = NavyDecoder/Category.m; sourceTree = SOURCE_ROOT; };
@@ -211,15 +207,6 @@
 				4CBCF76017FC54E00049B6CE /* NavyDecoderLargeAppIcon1024x1024.png */,
 			);
 			name = "App Icons";
-			sourceTree = "<group>";
-		};
-		4C1382AD18B007D00007B24E /* Button Bar Icons */ = {
-			isa = PBXGroup;
-			children = (
-				4C1382AE18B008180007B24E /* 724-info.png */,
-				4C1382AF18B008180007B24E /* 724-info@2x.png */,
-			);
-			name = "Button Bar Icons";
 			sourceTree = "<group>";
 		};
 		4C618545163C5279002997C6 = {
@@ -358,7 +345,6 @@
 				4C0092CD19C458F100325A1D /* App Screenshots */,
 				4C1382AC18B007BD0007B24E /* App Icons */,
 				4CDEFD2C18AC5AE80093E018 /* Background */,
-				4C1382AD18B007D00007B24E /* Button Bar Icons */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -518,12 +504,10 @@
 				4CEBC109199794D0008CD611 /* 7_2048x2048_background.png in Resources */,
 				4C5C2D921642F35300397A60 /* Default-568h@2x.png in Resources */,
 				4C5C2D931642F35300397A60 /* Default.png in Resources */,
-				4C1382B118B008180007B24E /* 724-info@2x.png in Resources */,
-				4CEBC0DF19978F90008CD611 /* 1_2048x2048_background.png in Resources */,
+					4CEBC0DF19978F90008CD611 /* 1_2048x2048_background.png in Resources */,
 				4CEBC107199794D0008CD611 /* 6_2048x2048_background.png in Resources */,
 				4C5C2D941642F35300397A60 /* Default@2x.png in Resources */,
-				4C1382B018B008180007B24E /* 724-info.png in Resources */,
-				4C5C2D9C1642F42B00397A60 /* MainStoryboard_iPad.storyboard in Resources */,
+					4C5C2D9C1642F42B00397A60 /* MainStoryboard_iPad.storyboard in Resources */,
 				4C5C2D9D1642F42B00397A60 /* MainStoryboard_iPhone.storyboard in Resources */,
 				4CEBC105199794D0008CD611 /* 5_2048x2048_background.png in Resources */,
 				4CEBC0DB19978F90008CD611 /* 0_2048x2048_background.png in Resources */,

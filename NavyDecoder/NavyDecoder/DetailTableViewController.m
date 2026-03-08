@@ -133,16 +133,6 @@ static double const kMPCHeaderAlphaLight = 0.2;
     }
 }
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-   
-    if (self) {
-        // Custom initialization
-    }
-    
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureView];
@@ -156,11 +146,6 @@ static double const kMPCHeaderAlphaLight = 0.2;
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self requestReviewIfAppropriate];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view delegate

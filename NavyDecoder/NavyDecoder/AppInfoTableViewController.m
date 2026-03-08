@@ -28,24 +28,9 @@
 
 static NSString *const kiOS7AppStoreURLFormat = @"itms-apps://itunes.apple.com/app/id";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (self) {
-        // Custom initialization
-    }
-    
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.tableHeaderView = [self makeNoticeHeaderView];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - App Specific Controller Functionality

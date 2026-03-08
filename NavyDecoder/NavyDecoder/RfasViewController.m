@@ -58,14 +58,6 @@
 static double const kRFASHeaderAlphaDark = 0.5;
 static double const kRFASHeaderAlphaLight = 0.2;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     self.rfas = [[Rfas alloc] init];
     self.title = self.isEnlisted ? @"RFAS-Enlisted" : @"RFAS-Officer";
@@ -110,10 +102,6 @@ static double const kRFASHeaderAlphaLight = 0.2;
        withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self updateBackgroundForSize:size];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Background

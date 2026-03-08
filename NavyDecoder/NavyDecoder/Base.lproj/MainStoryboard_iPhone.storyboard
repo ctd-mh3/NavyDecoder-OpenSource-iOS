@@ -196,7 +196,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="OPEN SOURCE INFORMATION" id="hax-w4-5gk">
+                            <tableViewSection headerTitle="APP SUPPORT INFORMATION" id="hax-w4-5gk">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="C0T-yM-BuX" style="IBUITableViewCellStyleDefault" id="DIg-OO-NXU">
                                         <rect key="frame" x="0.0" y="216" width="414" height="44"/>
@@ -259,8 +259,8 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dw-aX-fui">
-                                <rect key="frame" x="20" y="308" width="374" height="120"/>
-                                <color key="backgroundColor" red="0" green="0" blue="0" alpha="0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="20" y="94" width="374" height="101.66666666666669"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <string key="text">This application is not produced or endorsed by the U.S. Navy.
 
 Includes MGImageUtilites code by Matt Legend Gemmell. </string>
@@ -269,11 +269,11 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0" green="0" blue="0" alpha="0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2dw-aX-fui" firstAttribute="top" secondItem="IwF-Ko-0sX" secondAttribute="bottom" constant="20" id="4C2A00012D760001009088C8"/>
                             <constraint firstItem="2dw-aX-fui" firstAttribute="leading" secondItem="SxT-y1-k7y" secondAttribute="leading" constant="20" id="4C2A00022D760001009088C8"/>
-                            <constraint firstItem="SxT-y1-k7y" firstAttribute="trailing" secondItem="2dw-aX-fui" secondAttribute="trailing" constant="20" id="4C2A00032D760001009088C8"/>
+                            <constraint firstAttribute="trailing" secondItem="2dw-aX-fui" secondAttribute="trailing" constant="20" id="4C2A00032D760001009088C8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="About/Legal" id="qVc-av-bMd"/>
@@ -516,8 +516,8 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Txv-aJ-zX4">
-                                <rect key="frame" x="20" y="84" width="374" height="280"/>
-                                <color key="backgroundColor" red="0" green="0" blue="0" alpha="0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="20" y="94.000000000000028" width="374" height="324.66666666666674"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <string key="text">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
@@ -532,7 +532,7 @@ A copy of the GNU General Public License is available at https://www.gnu.org/lic
                         <constraints>
                             <constraint firstItem="Txv-aJ-zX4" firstAttribute="top" secondItem="MOO-DM-F2l" secondAttribute="bottom" constant="20" id="4C2A00042D760001009088C8"/>
                             <constraint firstItem="Txv-aJ-zX4" firstAttribute="leading" secondItem="T2t-rG-NxL" secondAttribute="leading" constant="20" id="4C2A00052D760001009088C8"/>
-                            <constraint firstItem="T2t-rG-NxL" firstAttribute="trailing" secondItem="Txv-aJ-zX4" secondAttribute="trailing" constant="20" id="4C2A00062D760001009088C8"/>
+                            <constraint firstAttribute="trailing" secondItem="Txv-aJ-zX4" secondAttribute="trailing" constant="20" id="4C2A00062D760001009088C8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Open Source" id="72f-QC-elA"/>

@@ -62,7 +62,10 @@ static double const kAIVHeaderAlphaLight = 0.2;
 }
 
 - (void)updateBackground {
-    [self updateBackgroundForSize:self.view.bounds.size];
+    // Only the alpha needs to change when the color scheme toggles; image and frame are already set.
+    self.backgroundImageView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
+        ? kAIVHeaderAlphaDark
+        : kAIVHeaderAlphaLight;
 }
 
 - (void)updateBackgroundForSize:(CGSize)size {

@@ -159,10 +159,10 @@ static double const kMPCHeaderAlphaLight = 0.2;
     NSString *urlString = [kiOS7AppStoreURLBaseFormat stringByAppendingString:MPCAppStoreId];
 
     if (indexPath.section == 3) {
-        
+
         switch (indexPath.row) {
             case 0:
-                [self openOtherEmail];
+                [self shareDecodeDetailsFromCell:[tableView cellForRowAtIndexPath:indexPath]];
                 break;
             case 1:
                 [self openCorrectionEmail];
@@ -216,51 +216,20 @@ static double const kMPCHeaderAlphaLight = 0.2;
     }
 }
 
-- (IBAction)openOtherEmail {
-    if ([MFMailComposeViewController canSendMail]) {
-        MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-        mailer.mailComposeDelegate = self;
+- (void)shareDecodeDetailsFromCell:(UITableViewCell *)cell {
+    NSMutableString *text = [NSMutableString string];
+    [text appendFormat:@"Details for %@ code:\n", self.categoryTitle];
+    [text appendFormat:@"\tCode: %@\n", self.codeKeyString];
+    [text appendFormat:@"\tMeaning: %@\n", self.codeValueString];
+    [text appendFormat:@"\tSource: %@\n", self.codeSourceString];
 
-        NSString *subjectString = @"iOS-Navy Decoder(v";
-        subjectString = [subjectString stringByAppendingString:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-        subjectString = [subjectString stringByAppendingString:@") Item Details"];
-        [mailer setSubject:subjectString];
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[text] applicationActivities:nil];
 
-        NSString *emailBody = @"Details for ";
-        emailBody = [emailBody stringByAppendingString:self.categoryTitle];
-        emailBody = [emailBody stringByAppendingString:@" code:\n"];
-        
-        emailBody = [emailBody stringByAppendingString:@"\tCode: "];
-        emailBody = [emailBody stringByAppendingString:self.codeKeyString];
-        emailBody = [emailBody stringByAppendingString:@"\n"];
+    // iPad requires a source for the popover
+    activityVC.popoverPresentationController.sourceView = cell;
+    activityVC.popoverPresentationController.sourceRect = cell.bounds;
 
-        emailBody = [emailBody stringByAppendingString:@"\tMeaning: "];
-        emailBody = [emailBody stringByAppendingString:self.codeValueString];
-        emailBody = [emailBody stringByAppendingString:@"\n"];
-
-        emailBody = [emailBody stringByAppendingString:@"\tSource: "];
-        emailBody = [emailBody stringByAppendingString:self.codeSourceString];
-        emailBody = [emailBody stringByAppendingString:@"\n"];       
-        
-        [mailer setMessageBody:emailBody isHTML:NO];
-        [self presentViewController:mailer animated:YES completion:nil];
-    } else {
-        UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Error"
-                                    message:@"Your device appears not to support email."
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okButton = [UIAlertAction
-                                   actionWithTitle:@"OK"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action) {
-                                       //No action except to close alert
-                                   }];
-        
-        [alert addAction:okButton];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    }
+    [self presentViewController:activityVC animated:YES completion:nil];
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {

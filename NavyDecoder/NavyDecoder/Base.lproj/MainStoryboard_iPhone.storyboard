@@ -110,11 +110,11 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHK-OL-sYO">
                                 <rect key="frame" x="132" y="528" width="150" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Email Details">
+                                <state key="normal" title="Share Details">
                                     <color key="titleColor" systemColor="systemBlueColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="openOtherEmail:" destination="hc8-rl-tms" eventType="touchUpInside" id="YAe-3o-RW1"/>
+                                    <action selector="shareDetails:" destination="hc8-rl-tms" eventType="touchUpInside" id="YAe-3o-RW1"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -436,7 +436,7 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Email Decode Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ud-Y4-Msj">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Share Decode Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ud-Y4-Msj">
                                                     <rect key="frame" x="20" y="10" width="210" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>

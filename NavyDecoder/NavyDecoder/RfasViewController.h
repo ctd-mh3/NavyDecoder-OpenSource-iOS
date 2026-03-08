@@ -22,14 +22,12 @@
 
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
-#import <MessageUI/MessageUI.h>
 
-@interface RfasViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, MFMailComposeViewControllerDelegate, WKUIDelegate>
+@interface RfasViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, WKUIDelegate>
 
 @property (nonatomic) BOOL isEnlisted;
 
 @property (strong, nonatomic) IBOutlet UIPickerView *rfasPickerView;
 @property (strong, nonatomic) IBOutlet WKWebView *webView;
-@property (weak, nonatomic) IBOutlet UIButton *emailOtherButton;
 
 @end

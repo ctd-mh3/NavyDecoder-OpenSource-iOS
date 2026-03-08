@@ -24,6 +24,5 @@
 
 @implementation ViewConstants
 
-NSInteger  NDPTextSize  = 25;
 
 @end

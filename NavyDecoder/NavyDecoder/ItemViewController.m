@@ -25,7 +25,6 @@
 #import "DetailTableViewController.h"
 #import "Item.h"
 #import "Category.h"
-#import "ViewConstants.h"
 
 @interface ItemViewController () <UISearchResultsUpdating>
 
@@ -70,12 +69,6 @@ static NSInteger const kSearchBarHeightIPhone = 44;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         searchBarHeight = kSearchBarHeightIPad;
-        
-        // Update the searchBar's font size to match the table view cells
-        UIFont *systemFont =  [UIFont systemFontOfSize:12.0];
-        [[UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setDefaultTextAttributes:@{
-            NSFontAttributeName: [UIFont fontWithName:systemFont.fontName size:NDPTextSize],
-                                                                                                     }];
     } else {
         searchBarHeight = kSearchBarHeightIPhone;
     }
@@ -292,11 +285,11 @@ static NSInteger const kSearchBarHeightIPhone = 44;
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [[object valueForKey:@"codeKey"] description];
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        
-        [cell.textLabel setFont:[UIFont systemFontOfSize:NDPTextSize]];
-    }
+
+    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:textStyle];
+    cell.textLabel.adjustsFontForContentSizeCategory = YES;
 }
 
 @end

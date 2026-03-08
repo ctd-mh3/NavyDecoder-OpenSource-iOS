@@ -50,6 +50,14 @@ static NSString *const kiOS7AppStoreURLFormat = @"itms-apps://itunes.apple.com/a
 
 #pragma mark - App Specific Controller Functionality
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
+    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:textStyle];
+    cell.textLabel.adjustsFontForContentSizeCategory = YES;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         NSString *urlString = [kiOS7AppStoreURLFormat stringByAppendingString:MPCAppStoreId];

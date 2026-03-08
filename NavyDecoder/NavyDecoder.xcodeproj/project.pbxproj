@@ -62,6 +62,7 @@
 		4CF85CDF165F86920058FF6E /* Rfas.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF85CDE165F86920058FF6E /* Rfas.m */; };
 		4C1A00022D760001009088C8 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1A00012D760001009088C8 /* ReviewManager.swift */; };
 		4C1B00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B00002D760001009088C8 /* UIViewController+ReviewRequest.m */; };
+		4C1C00012D760001009088C8 /* AppInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C00002D760001009088C8 /* AppInfoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +161,8 @@
 		4C1A00012D760001009088C8 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		4C1B00002D760001009088C8 /* UIViewController+ReviewRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ReviewRequest.m"; sourceTree = "<group>"; };
 		4C1B00FF2D760001009088C8 /* UIViewController+ReviewRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ReviewRequest.h"; sourceTree = "<group>"; };
+		4C1C00002D760001009088C8 /* AppInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppInfoViewController.m; sourceTree = "<group>"; };
+		4C1C00FF2D760001009088C8 /* AppInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppInfoViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -416,6 +419,8 @@
 				4C1A00012D760001009088C8 /* ReviewManager.swift */,
 				4C1B00FF2D760001009088C8 /* UIViewController+ReviewRequest.h */,
 				4C1B00002D760001009088C8 /* UIViewController+ReviewRequest.m */,
+				4C1C00FF2D760001009088C8 /* AppInfoViewController.h */,
+				4C1C00002D760001009088C8 /* AppInfoViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -621,6 +626,7 @@
 				4CD84A9E1674CE2F0089D2E1 /* OverallSplitViewController.m in Sources */,
 				4C1A00022D760001009088C8 /* ReviewManager.swift in Sources */,
 				4C1B00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */,
+				4C1C00012D760001009088C8 /* AppInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

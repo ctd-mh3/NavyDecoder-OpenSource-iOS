@@ -135,6 +135,7 @@
                     <navigationItem key="navigationItem" title="RFAS" id="mKO-Qu-NYt"/>
                     <connections>
                         <outlet property="rfasPickerView" destination="O9W-bh-TQC" id="F1F-8i-1Mt"/>
+                        <outlet property="shareButton" destination="nHK-OL-sYO" id="4C3A00012D760001009088C8"/>
                         <outlet property="webView" destination="adf-6A-ol8" id="urv-D3-D4p"/>
                     </connections>
                 </viewController>

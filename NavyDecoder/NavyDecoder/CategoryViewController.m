@@ -36,8 +36,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.title = @"Select a Category";
+    self.navigationItem.backButtonTitle = @"Categories";
     self.navigationItem.rightBarButtonItem.image = [UIImage systemImageNamed:@"info.circle.fill"];
     self.itemViewController = (ItemViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+
+    self.tableView.tableHeaderView = [self makeNoticeHeaderView];
 }
 
 - (void)didReceiveMemoryWarning {

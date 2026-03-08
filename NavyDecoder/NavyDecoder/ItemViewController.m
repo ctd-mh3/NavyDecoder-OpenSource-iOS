@@ -44,7 +44,8 @@ static NSInteger const kSearchBarHeightIPhone = 44;
 - (void)setCategory:(id)newCategory {
     Category *category = (Category *)newCategory;
     self.categoryTitle = category.categoryTitle;
-    self.title = self.categoryTitle;
+    self.title = [NSString stringWithFormat:@"Select %@", self.categoryTitle];
+    self.navigationItem.backButtonTitle = self.categoryTitle;
 }
 
 - (void)viewDidLoad {
@@ -66,18 +67,34 @@ static NSInteger const kSearchBarHeightIPhone = 44;
     self.searchController.searchResultsUpdater = self;
 
     NSInteger searchBarHeight;
-    
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         searchBarHeight = kSearchBarHeightIPad;
     } else {
         searchBarHeight = kSearchBarHeightIPhone;
     }
 
-    self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, searchBarHeight);
-
     self.searchController.hidesNavigationBarDuringPresentation = false;
-    
-    self.tableView.tableHeaderView = self.searchController.searchBar;
+
+    // Combine notice + search bar into a single tableHeaderView
+    UIView *noticeView = [self makeNoticeHeaderView];
+    noticeView.translatesAutoresizingMaskIntoConstraints = NO;
+    UISearchBar *searchBar = self.searchController.searchBar;
+    searchBar.translatesAutoresizingMaskIntoConstraints = NO;
+
+    UIView *headerContainer = [[UIView alloc] init];
+    [headerContainer addSubview:noticeView];
+    [headerContainer addSubview:searchBar];
+    [NSLayoutConstraint activateConstraints:@[
+        [noticeView.topAnchor constraintEqualToAnchor:headerContainer.topAnchor],
+        [noticeView.leadingAnchor constraintEqualToAnchor:headerContainer.leadingAnchor],
+        [noticeView.trailingAnchor constraintEqualToAnchor:headerContainer.trailingAnchor],
+        [searchBar.topAnchor constraintEqualToAnchor:noticeView.bottomAnchor],
+        [searchBar.leadingAnchor constraintEqualToAnchor:headerContainer.leadingAnchor],
+        [searchBar.trailingAnchor constraintEqualToAnchor:headerContainer.trailingAnchor],
+        [searchBar.heightAnchor constraintEqualToConstant:searchBarHeight],
+        [searchBar.bottomAnchor constraintEqualToAnchor:headerContainer.bottomAnchor],
+    ]];
+    self.tableView.tableHeaderView = headerContainer;
     
     self.definesPresentationContext = YES;
     

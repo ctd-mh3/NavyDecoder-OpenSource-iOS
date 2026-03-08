@@ -23,6 +23,7 @@
 #import "NavyDecoderMasterViewController.h"
 #import "NavyDecoderAppDelegate.h"
 #import "NDCViewUtilities.h"
+#import "ViewConstants.h"
 
 @interface NavyDecoderMasterViewController () {
     NSMutableArray *_objects;
@@ -96,6 +97,43 @@ static double const kMPCHeaderAlphaLight = 0.2;
        withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self setBackgroundForSize:size];
+}
+
+#pragma mark - Notice Header
+
+- (UIView *)makeNoticeHeaderView {
+    UIView *container = [[UIView alloc] init];
+    UILabel *label = [[UILabel alloc] init];
+    label.translatesAutoresizingMaskIntoConstraints = NO;
+    label.numberOfLines = 0;
+    label.text = kOpenSourceNotice;
+    label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
+    label.textColor = [UIColor secondaryLabelColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.backgroundColor = UIColor.clearColor;
+    [container addSubview:label];
+    [NSLayoutConstraint activateConstraints:@[
+        [label.topAnchor constraintEqualToAnchor:container.topAnchor constant:8],
+        [label.leadingAnchor constraintEqualToAnchor:container.leadingAnchor constant:16],
+        [label.trailingAnchor constraintEqualToAnchor:container.trailingAnchor constant:-16],
+        [label.bottomAnchor constraintEqualToAnchor:container.bottomAnchor constant:-8],
+    ]];
+    return container;
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    UIView *header = self.tableView.tableHeaderView;
+    if (!header) return;
+    CGFloat width = self.tableView.bounds.size.width;
+    if (width == 0) return;
+    CGFloat height = [header systemLayoutSizeFittingSize:CGSizeMake(width, UILayoutFittingCompressedSize.height)
+                          withHorizontalFittingPriority:UILayoutPriorityRequired
+                                verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
+    if (ABS(header.frame.size.height - height) > 0.5) {
+        header.frame = CGRectMake(0, 0, width, height);
+        self.tableView.tableHeaderView = header;
+    }
 }
 
 @end

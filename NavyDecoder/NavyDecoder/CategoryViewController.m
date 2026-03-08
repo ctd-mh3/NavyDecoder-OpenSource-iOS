@@ -40,7 +40,6 @@
     self.title = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     self.navigationItem.backButtonTitle = @"Categories";
     self.navigationItem.rightBarButtonItem.image = [UIImage systemImageNamed:@"info.circle.fill"];
-    self.itemViewController = (ItemViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 
     self.tableView.tableHeaderView = [self makeNoticeHeaderView];
 }
@@ -57,7 +56,18 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self.fetchedResultsController sections] count];
+    NSInteger count = [[self.fetchedResultsController sections] count];
+    if (count == 0) {
+        UILabel *label = [[UILabel alloc] init];
+        label.text = @"No categories available.";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor secondaryLabelColor];
+        label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        self.tableView.backgroundView = label;
+    } else {
+        self.tableView.backgroundView = nil;
+    }
+    return count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

@@ -194,7 +194,6 @@
             self.shareButton.configuration = config;
         }
     }
-    [self.shareButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 
     UIFontTextStyle shareTextStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
         ? UIFontTextStyleTitle3 : UIFontTextStyleBody;

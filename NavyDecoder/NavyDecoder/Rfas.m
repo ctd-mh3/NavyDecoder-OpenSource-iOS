@@ -40,7 +40,6 @@
    
     if (self) {
          self.officerFirstCharacterMatrix = [NSArray arrayWithObjects:
-//                [NSArray arrayWithObjects:@"1", @"Exact Paygrade Match Only (see Officer Paygrade Code)", nil],
                 [NSArray arrayWithObjects:@"S", @"O6-W1 (Exact paygrade match only)", nil],
                 [NSArray arrayWithObjects:@"M", @"O6-O3 (Medical designators only)", nil],
                 [NSArray arrayWithObjects:@"I", @"O4-O1", nil],
@@ -187,17 +186,11 @@
     NSArray *tempArray = [self getArrayForCharacterGroup:1
                                               isEnlisted:isEnlisted];
     
-    NSMutableArray *keyArray = [[NSMutableArray alloc] init];;
-    
+    NSMutableArray *keyArray = [[NSMutableArray alloc] init];
+
     for (id subArray in tempArray) {
-//        NSString *tempString = [subArray description];
-//        NSString *tempString2 = [subArray objectAtIndex:0];
-//        NSString *tempString3 = [subArray objectAtIndex:1];
-        
         [keyArray addObject:[subArray objectAtIndex:0]];
-//        [keyArray addObject:tempString2];
-    }    
-//    NSArray *temp2Array = [tempArray objectsAtIndexes:[NSIndexSet indexSetWithIndex:0]];
+    }
     return keyArray;
 }
 
@@ -205,7 +198,7 @@
     NSArray *tempArray = [self getArrayForCharacterGroup:2
                                               isEnlisted:isEnlisted];
    
-    NSMutableArray *keyArray = [[NSMutableArray alloc] init];;
+    NSMutableArray *keyArray = [[NSMutableArray alloc] init];
     
     for (id subArray in tempArray) {
         [keyArray addObject:[subArray objectAtIndex:0]];
@@ -218,7 +211,7 @@
     NSArray *tempArray = [self getArrayForCharacterGroup:3
                                               isEnlisted:isEnlisted];
     
-    NSMutableArray *keyArray = [[NSMutableArray alloc] init];;
+    NSMutableArray *keyArray = [[NSMutableArray alloc] init];
     
     for (id subArray in tempArray) {
         [keyArray addObject:[subArray objectAtIndex:0]];

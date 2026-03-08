@@ -42,8 +42,6 @@
 		4C69168819251A1800D41A53 /* ViewConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C69168719251A1800D41A53 /* ViewConstants.m */; };
 		4C69169219257DEC00D41A53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C69169119257DEC00D41A53 /* Images.xcassets */; };
 		4C8DE0702D749090009088C8 /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C8DE06F2D749090009088C8 /* CustomTableViewCell.m */; };
-		4CRA00022D760001009088C8 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CRA00012D760001009088C8 /* ReviewManager.swift */; };
-		4CRR00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CRR00002D760001009088C8 /* UIViewController+ReviewRequest.m */; };
 		4CBCF76417FC54E00049B6CE /* NavyDecoderLargeAppIcon1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CBCF76017FC54E00049B6CE /* NavyDecoderLargeAppIcon1024x1024.png */; };
 		4CC5EA4B2184A169007306CC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC5EA4A2184A168007306CC /* StoreKit.framework */; };
 		4CD84A9E1674CE2F0089D2E1 /* OverallSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CD84A9D1674CE2F0089D2E1 /* OverallSplitViewController.m */; };
@@ -62,6 +60,8 @@
 		4CF01EAE171E2AA70089DB2C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF01EAD171E2AA70089DB2C /* CoreText.framework */; };
 		4CF85CDB165EDFB00058FF6E /* RfasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF85CDA165EDFB00058FF6E /* RfasViewController.m */; };
 		4CF85CDF165F86920058FF6E /* Rfas.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF85CDE165F86920058FF6E /* Rfas.m */; };
+		4CRA00022D760001009088C8 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CRA00012D760001009088C8 /* ReviewManager.swift */; };
+		4CRR00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CRR00002D760001009088C8 /* UIViewController+ReviewRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -471,7 +471,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = NavyDecoder;
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 1640;
+				LastUpgradeCheck = 2630;
 				ORGANIZATIONNAME = "Crash Test Dummy Limited";
 				TargetAttributes = {
 					4C61854F163C5279002997C6 = {
@@ -736,6 +736,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "0A761EDF-F145-407A-A2AF-FD6579EAAA5F";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -783,6 +784,8 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "0A761EDF-F145-407A-A2AF-FD6579EAAA5F";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

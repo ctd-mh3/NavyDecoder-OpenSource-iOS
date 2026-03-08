@@ -21,14 +21,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <WebKit/WebKit.h>
 
-@interface RfasViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate, WKUIDelegate>
+@interface RfasViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic) BOOL isEnlisted;
 
 @property (strong, nonatomic) IBOutlet UIPickerView *rfasPickerView;
-@property (strong, nonatomic) IBOutlet WKWebView *webView;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 @end

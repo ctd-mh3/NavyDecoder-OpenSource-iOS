@@ -42,7 +42,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="383.66666666666669" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" id="phq-AM-6qj">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="phq-AM-6qj">
                                             <rect key="frame" x="20" y="0.0" width="355.66666666666669" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" textStyle="UIFontTextStyleHeadline"/>
@@ -95,19 +95,7 @@
                                     <outlet property="delegate" destination="hc8-rl-tms" id="WDa-H5-o8C"/>
                                 </connections>
                             </pickerView>
-                            <wkWebView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="adf-6A-ol8">
-                                <rect key="frame" x="0.0" y="272" width="414" height="228"/>
-                                <color key="backgroundColor" red="0.36078431372549019" green="0.38823529411764707" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="228" id="5os-ju-otZ"/>
-                                </constraints>
-                                <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO" allowsPictureInPictureMediaPlayback="NO">
-                                    <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
-                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                    <wkPreferences key="preferences" javaScriptEnabled="NO"/>
-                                </wkWebViewConfiguration>
-                            </wkWebView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" adjustsFontForContentSizeCategory="YES" id="nHK-OL-sYO">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHK-OL-sYO">
                                 <rect key="frame" x="132" y="528" width="150" height="33"/>
                                 <fontDescription key="fontDescription" textStyle="UIFontTextStyleBody"/>
                                 <state key="normal" title="Share Details">
@@ -119,24 +107,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="nHK-OL-sYO" firstAttribute="top" secondItem="adf-6A-ol8" secondAttribute="bottom" constant="18" id="B7X-3H-prq"/>
-                            <constraint firstItem="nHK-OL-sYO" firstAttribute="centerX" secondItem="O9W-bh-TQC" secondAttribute="centerX" id="PCd-uW-A2b"/>
-                            <constraint firstItem="adf-6A-ol8" firstAttribute="top" secondItem="ke8-8a-5Ra" secondAttribute="top" constant="234" id="S18-lS-w1K"/>
-                            <constraint firstItem="adf-6A-ol8" firstAttribute="top" secondItem="O9W-bh-TQC" secondAttribute="top" constant="170" id="Z7a-fU-elg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="nHK-OL-sYO" secondAttribute="trailing" constant="112" id="cQC-Ee-WCi"/>
-                            <constraint firstItem="nHK-OL-sYO" firstAttribute="leading" secondItem="ke8-8a-5Ra" secondAttribute="leadingMargin" constant="112" id="g3b-U1-sce"/>
-                            <constraint firstItem="nHK-OL-sYO" firstAttribute="centerX" secondItem="adf-6A-ol8" secondAttribute="centerX" id="p0O-46-6lG"/>
-                            <constraint firstItem="adf-6A-ol8" firstAttribute="centerX" secondItem="O9W-bh-TQC" secondAttribute="centerX" id="p15-Uv-TzI"/>
-                            <constraint firstItem="adf-6A-ol8" firstAttribute="leading" secondItem="ke8-8a-5Ra" secondAttribute="leading" id="sbP-Lu-WQA"/>
-                            <constraint firstAttribute="trailing" secondItem="adf-6A-ol8" secondAttribute="trailing" id="xw8-th-oT3"/>
-                        </constraints>
+                        <constraints/>
                     </view>
                     <navigationItem key="navigationItem" title="RFAS" id="mKO-Qu-NYt"/>
                     <connections>
                         <outlet property="rfasPickerView" destination="O9W-bh-TQC" id="F1F-8i-1Mt"/>
                         <outlet property="shareButton" destination="nHK-OL-sYO" id="4C3A00012D760001009088C8"/>
-                        <outlet property="webView" destination="adf-6A-ol8" id="urv-D3-D4p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hes-VL-DbB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -161,7 +137,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="383.66666666666669" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="About/Legal Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" id="Nts-d1-Aug">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="About/Legal Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nts-d1-Aug">
                                                     <rect key="frame" x="20" y="0.0" width="355.66666666666669" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" textStyle="UIFontTextStyleBody"/>
@@ -181,7 +157,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="383.66666666666669" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Open Source Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" id="Pd1-re-wpk">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Open Source Information" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pd1-re-wpk">
                                                     <rect key="frame" x="20" y="0.0" width="355.66666666666669" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" textStyle="UIFontTextStyleBody"/>
@@ -205,7 +181,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="383.66666666666669" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Contact Developer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" id="C0T-yM-BuX">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Contact Developer" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C0T-yM-BuX">
                                                     <rect key="frame" x="20" y="0.0" width="355.66666666666669" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" textStyle="UIFontTextStyleBody"/>
@@ -222,7 +198,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="383.66666666666669" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Rate This App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" id="dtR-as-ZdF">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Rate This App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dtR-as-ZdF">
                                                     <rect key="frame" x="20" y="0.0" width="355.66666666666669" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" textStyle="UIFontTextStyleBody"/>
@@ -258,7 +234,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2dw-aX-fui">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2dw-aX-fui">
                                 <rect key="frame" x="20" y="94" width="374" height="101.66666666666669"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <string key="text">This application is not produced or endorsed by the U.S. Navy.
@@ -340,7 +316,7 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="25"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Navy Value to Decode" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HCd-tM-UA1" customClass="TopLeftAlignedLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Navy Value to Decode" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCd-tM-UA1" customClass="TopLeftAlignedLabel">
                                                     <rect key="frame" x="20" y="3" width="374" height="17"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
@@ -372,7 +348,7 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Value Meaning" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="drU-Hl-GaR" customClass="TopLeftAlignedLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Value Meaning" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drU-Hl-GaR" customClass="TopLeftAlignedLabel">
                                                     <rect key="frame" x="20" y="3" width="374" height="42"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
@@ -405,7 +381,7 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="51"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Reference Source" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Amf-zu-qR1" customClass="TopLeftAlignedLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="TopLeft" text="Reference Source" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Amf-zu-qR1" customClass="TopLeftAlignedLabel">
                                                     <rect key="frame" x="20" y="3" width="374" height="43"/>
                                                     <accessibility key="accessibilityConfiguration">
                                                         <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
@@ -437,7 +413,7 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Share Decode Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ud-Y4-Msj">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Share Decode Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ud-Y4-Msj">
                                                     <rect key="frame" x="20" y="10" width="210" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" textStyle="UIFontTextStyleBody"/>
@@ -454,7 +430,7 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Email Developer Feedback " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rXr-kU-BIw">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Email Developer Feedback " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rXr-kU-BIw">
                                                     <rect key="frame" x="20" y="10" width="210" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" textStyle="UIFontTextStyleBody"/>
@@ -471,7 +447,7 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Rate This App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="07M-l7-HbN">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Rate This App" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07M-l7-HbN">
                                                     <rect key="frame" x="20" y="10" width="210" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" textStyle="UIFontTextStyleBody"/>
@@ -515,7 +491,7 @@ Includes MGImageUtilites code by Matt Legend Gemmell. </string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Txv-aJ-zX4">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Txv-aJ-zX4">
                                 <rect key="frame" x="20" y="94.000000000000028" width="374" height="324.66666666666674"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <string key="text">This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.

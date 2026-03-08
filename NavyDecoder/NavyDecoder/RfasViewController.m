@@ -36,6 +36,12 @@
 @property (strong, nonatomic) NSString *fourthCharacterMeaningWithoutTitle;
 
 @property (nonatomic, strong) UIImageView *backgroundImageView;
+@property (nonatomic, strong) UILabel *prefix1Label;
+@property (nonatomic, strong) UILabel *prefix2Label;
+@property (nonatomic, strong) UILabel *prefix3Label;
+@property (nonatomic, strong) UILabel *meaning1Label;
+@property (nonatomic, strong) UILabel *meaning2Label;
+@property (nonatomic, strong) UILabel *meaning3Label;
 
 @end
 
@@ -45,15 +51,11 @@
 @synthesize firstCharacterMeaningWithoutTitle = _firstCharacterMeaningWithoutTitle;
 @synthesize secondAndThirdCharacterMeaningWithoutTitle = _secondAndThirdCharacterMeaningWithoutTitle;
 @synthesize fourthCharacterMeaningWithoutTitle = _fourthCharacterMeaningWithoutTitle;
-@synthesize webView = _webView;
 @synthesize rfas = _rfas;
 @synthesize isEnlisted = _isEnlisted;
 
 static double const kRFASHeaderAlphaDark = 0.5;
 static double const kRFASHeaderAlphaLight = 0.2;
-
-static NSString *const STYLE_TAG_OPENING = @"<STYLE TYPE=\"text/css\">";
-static NSString *const STYLE_TAG_CLOSING = @"</STYLE>";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -77,7 +79,7 @@ static NSString *const STYLE_TAG_CLOSING = @"</STYLE>";
                            action:@selector(updateBackground)];
     [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class]
                        withTarget:self
-                           action:@selector(updatewebView)];
+                           action:@selector(updateResultLabels)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,18 +96,13 @@ static NSString *const STYLE_TAG_CLOSING = @"</STYLE>";
     self.secondAndThirdCharacterMeaningWithoutTitle = @"";
     self.fourthCharacterMeaningWithoutTitle = @"";
 
-    // This should cause didSelectRow() to be called for default selections but it is not for
-    //   some reason
     [self.rfasPickerView reloadAllComponents];
 
-    // Manually ensure that element decode values are set for the default values
     [self doSomethingWithRow:0 inComponent:0];
     [self doSomethingWithRow:0 inComponent:1];
     [self doSomethingWithRow:0 inComponent:2];
 
-    [[self.webView scrollView] setBounces:NO];
-
-    [self updatewebView];
+    [self updateResultLabels];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size
@@ -125,18 +122,12 @@ static NSString *const STYLE_TAG_CLOSING = @"</STYLE>";
     [self.view insertSubview:bg atIndex:0];
     self.backgroundImageView = bg;
 
-    // Clear subview backgrounds so the background image shows through.
-    // Do NOT change self.view.backgroundColor — leave it as systemBackgroundColor
-    // so the nav controller's background does not bleed through.
     for (UIView *subview in self.view.subviews) {
         subview.backgroundColor = UIColor.clearColor;
     }
-    self.webView.opaque = NO;
-    self.webView.scrollView.backgroundColor = UIColor.clearColor;
 }
 
 - (void)updateBackground {
-    // Only the alpha needs to change when the color scheme toggles; image and frame are already set.
     self.backgroundImageView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
         ? kRFASHeaderAlphaDark
         : kRFASHeaderAlphaLight;
@@ -155,47 +146,85 @@ static NSString *const STYLE_TAG_CLOSING = @"</STYLE>";
 #pragma mark - Layout
 
 - (void)setupLayout {
-    // Deactivate storyboard-generated constraints so we can build a clean layout.
-    // The storyboard had conflicting webView.top constraints and no picker position constraints.
     [NSLayoutConstraint deactivateConstraints:self.view.constraints];
-    [NSLayoutConstraint deactivateConstraints:self.webView.constraints];
 
-    UIView *pickerBand  = [self makeSectionBand:@"RFAS CODE"];
-    UIView *resultBand  = [self makeSectionBand:@"DECODED MEANING"];
-    UIView *shareBand   = [self makeSectionBand:@"SHARE DETAILS"];
+    UIView *pickerBand = [self makeSectionBand:@"RFAS CODE"];
+    UIView *resultBand = [self makeSectionBand:@"DECODED MEANING"];
+    UIView *shareBand  = [self makeSectionBand:@"SHARE DETAILS"];
     [self.view addSubview:pickerBand];
     [self.view addSubview:resultBand];
     [self.view addSubview:shareBand];
 
+    self.prefix1Label = [self makePrefixLabel:@"1st Element:"];
+    self.prefix2Label = [self makePrefixLabel:@"2nd Element:"];
+    self.prefix3Label = [self makePrefixLabel:@"3rd Element:"];
+    self.meaning1Label = [self makeResultLabel];
+    self.meaning2Label = [self makeResultLabel];
+    self.meaning3Label = [self makeResultLabel];
+
+    UIStackView *resultStack = [[UIStackView alloc] initWithArrangedSubviews:@[
+        [self makeResultRow:self.prefix1Label meaning:self.meaning1Label],
+        [self makeResultRow:self.prefix2Label meaning:self.meaning2Label],
+        [self makeResultRow:self.prefix3Label meaning:self.meaning3Label],
+    ]];
+    resultStack.axis = UILayoutConstraintAxisVertical;
+    resultStack.spacing = 8;
+    resultStack.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:resultStack];
+
+    // Prefix column: fixed 40% of the stack width, equal across all rows
+    [self.prefix1Label.widthAnchor constraintEqualToAnchor:resultStack.widthAnchor multiplier:0.30].active = YES;
+    [self.prefix2Label.widthAnchor constraintEqualToAnchor:self.prefix1Label.widthAnchor].active = YES;
+    [self.prefix3Label.widthAnchor constraintEqualToAnchor:self.prefix1Label.widthAnchor].active = YES;
+
+    self.rfasPickerView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.shareButton.translatesAutoresizingMaskIntoConstraints = NO;
+
+    // Share button: left-align text
+    if (@available(iOS 15, *)) {
+        UIButtonConfiguration *config = self.shareButton.configuration;
+        if (config) {
+            config.titleAlignment = UIButtonConfigurationTitleAlignmentLeading;
+            config.contentInsets = NSDirectionalEdgeInsetsMake(0, 0, 0, 0);
+            self.shareButton.configuration = config;
+        }
+    }
     [self.shareButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
 
+    // Share button: match body font size used elsewhere
+    UIFontTextStyle shareTextStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+    self.shareButton.titleLabel.font = [UIFont preferredFontForTextStyle:shareTextStyle];
+    self.shareButton.titleLabel.adjustsFontForContentSizeCategory = YES;
+
     UILayoutGuide *safe = self.view.safeAreaLayoutGuide;
+    UILayoutGuide *readable = self.view.readableContentGuide;
     CGFloat margin = 16.0;
 
     [NSLayoutConstraint activateConstraints:@[
-        // Picker band (edge-to-edge)
+        // Picker band
         [pickerBand.topAnchor constraintEqualToAnchor:safe.topAnchor],
         [pickerBand.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
         [pickerBand.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
 
-        // Picker
+        // Picker — centered via readable content guide
         [self.rfasPickerView.topAnchor constraintEqualToAnchor:pickerBand.bottomAnchor constant:4],
-        [self.rfasPickerView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:margin],
-        [self.rfasPickerView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-margin],
+        [self.rfasPickerView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+        [self.rfasPickerView.leadingAnchor constraintGreaterThanOrEqualToAnchor:readable.leadingAnchor],
+        [self.rfasPickerView.trailingAnchor constraintLessThanOrEqualToAnchor:readable.trailingAnchor],
 
-        // Decoded meaning band (edge-to-edge)
+        // Decoded meaning band
         [resultBand.topAnchor constraintEqualToAnchor:self.rfasPickerView.bottomAnchor constant:8],
         [resultBand.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
         [resultBand.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
 
-        // WebView
-        [self.webView.topAnchor constraintEqualToAnchor:resultBand.bottomAnchor],
-        [self.webView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
-        [self.webView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
-        [self.webView.heightAnchor constraintEqualToConstant:200],
+        // Result labels stack view
+        [resultStack.topAnchor constraintEqualToAnchor:resultBand.bottomAnchor constant:12],
+        [resultStack.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:margin],
+        [resultStack.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-margin],
 
-        // Share band (edge-to-edge)
-        [shareBand.topAnchor constraintEqualToAnchor:self.webView.bottomAnchor constant:8],
+        // Share band
+        [shareBand.topAnchor constraintEqualToAnchor:resultStack.bottomAnchor constant:12],
         [shareBand.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
         [shareBand.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
 
@@ -209,9 +238,12 @@ static NSString *const STYLE_TAG_CLOSING = @"</STYLE>";
 - (UIView *)makeSectionBand:(NSString *)title {
     UIView *band = [[UIView alloc] init];
     band.translatesAutoresizingMaskIntoConstraints = NO;
-    band.backgroundColor = [UIColor secondarySystemBackgroundColor];
+    band.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor *(UITraitCollection *tc) {
+        CGFloat alpha = (tc.userInterfaceStyle == UIUserInterfaceStyleDark)
+            ? kRFASHeaderAlphaDark : kRFASHeaderAlphaLight;
+        return [[UIColor blackColor] colorWithAlphaComponent:alpha];
+    }];
 
-    // Top and bottom hairline separators
     UIView *topLine = [[UIView alloc] init];
     topLine.translatesAutoresizingMaskIntoConstraints = NO;
     topLine.backgroundColor = [UIColor separatorColor];
@@ -249,6 +281,49 @@ static NSString *const STYLE_TAG_CLOSING = @"</STYLE>";
     ]];
 
     return band;
+}
+
+- (UILabel *)makePrefixLabel:(NSString *)text {
+    UILabel *label = [[UILabel alloc] init];
+    label.translatesAutoresizingMaskIntoConstraints = NO;
+    label.text = text;
+    label.numberOfLines = 0;
+    label.backgroundColor = UIColor.clearColor;
+    return label;
+}
+
+- (UIStackView *)makeResultRow:(UILabel *)prefix meaning:(UILabel *)meaning {
+    UIStackView *row = [[UIStackView alloc] initWithArrangedSubviews:@[prefix, meaning]];
+    row.axis = UILayoutConstraintAxisHorizontal;
+    row.spacing = 8;
+    row.alignment = UIStackViewAlignmentTop;
+    return row;
+}
+
+- (UILabel *)makeResultLabel {
+    UILabel *label = [[UILabel alloc] init];
+    label.translatesAutoresizingMaskIntoConstraints = NO;
+    label.numberOfLines = 0;
+    label.backgroundColor = UIColor.clearColor;
+    return label;
+}
+
+#pragma mark - Result Labels
+
+- (void)updateResultLabels {
+    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+    UIFont *bodyFont = [UIFont preferredFontForTextStyle:textStyle];
+
+    for (UILabel *label in @[self.prefix1Label, self.prefix2Label, self.prefix3Label,
+                              self.meaning1Label, self.meaning2Label, self.meaning3Label]) {
+        label.font = bodyFont;
+        label.adjustsFontForContentSizeCategory = YES;
+    }
+
+    self.meaning1Label.text = self.firstCharacterMeaningWithoutTitle ?: @"";
+    self.meaning2Label.text = self.secondAndThirdCharacterMeaningWithoutTitle ?: @"";
+    self.meaning3Label.text = self.fourthCharacterMeaningWithoutTitle ?: @"";
 }
 
 #pragma mark - Picker View Data Source / Delegate
@@ -309,42 +384,7 @@ static NSString *const STYLE_TAG_CLOSING = @"</STYLE>";
                                                                                     isEnlisted:self.isEnlisted];
             break;
     }
-    [self updatewebView];
-}
-
-#pragma mark - Web View
-
-- (void)updatewebView {
-    CGFloat fontSize = [UIFont preferredFontForTextStyle:UIFontTextStyleBody].pointSize;
-    NSString *stylesForCurrentSize = [NSString stringWithFormat:
-        @"<!--"
-        "body {"
-            "background-color: transparent;"
-            "color: #1c1c1e;"
-            "font-size: %.0fpx;"
-            "line-height: 1.5;"
-            "margin: 8px 16px;"
-        "}"
-        "@media (prefers-color-scheme: dark) {"
-            "body { color: #f2f2f7; }"
-        "}"
-        "-->", fontSize];
-
-    NSString *htmlString = @"<html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"></head><body>";
-    htmlString = [htmlString stringByAppendingString:STYLE_TAG_OPENING];
-    htmlString = [htmlString stringByAppendingString:stylesForCurrentSize];
-    htmlString = [htmlString stringByAppendingString:STYLE_TAG_CLOSING];
-    htmlString = [htmlString stringByAppendingString:@"<b>1st:</b> "];
-    htmlString = [htmlString stringByAppendingString:self.firstCharacterMeaningWithoutTitle];
-    htmlString = [htmlString stringByAppendingString:@"</br></br>"];
-    htmlString = [htmlString stringByAppendingString:@"<b>2nd:</b> "];
-    htmlString = [htmlString stringByAppendingString:self.secondAndThirdCharacterMeaningWithoutTitle];
-    htmlString = [htmlString stringByAppendingString:@"</br></br>"];
-    htmlString = [htmlString stringByAppendingString:@"<b>3rd:</b> "];
-    htmlString = [htmlString stringByAppendingString:self.fourthCharacterMeaningWithoutTitle];
-    htmlString = [htmlString stringByAppendingString:@"</br>"];
-    htmlString = [htmlString stringByAppendingString:@"</body></html>"];
-    [self.webView loadHTMLString:htmlString baseURL:nil];
+    [self updateResultLabels];
 }
 
 #pragma mark - Share
@@ -353,7 +393,6 @@ static NSString *const STYLE_TAG_CLOSING = @"</STYLE>";
     NSString *shareText = [self buildShareText];
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[shareText] applicationActivities:nil];
 
-    // iPad requires a source for the popover
     activityVC.popoverPresentationController.sourceView = sender;
     activityVC.popoverPresentationController.sourceRect = ((UIView *)sender).bounds;
 

@@ -1,5 +1,5 @@
 //
-// NavyDecoderAppDelegate.h
+// SceneDelegate.h
 // NavyDecoder-iOS
 //
 // This file is part of Navy Decoder-iOS.
@@ -22,6 +22,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NavyDecoderAppDelegate : UIResponder <UIApplicationDelegate>
+@interface SceneDelegate : UIResponder <UIWindowSceneDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
 
 @end

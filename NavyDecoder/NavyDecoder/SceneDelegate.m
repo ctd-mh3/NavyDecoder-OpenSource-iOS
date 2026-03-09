@@ -1,5 +1,5 @@
 //
-// NavyDecoderAppDelegate.h
+// SceneDelegate.m
 // NavyDecoder-iOS
 //
 // This file is part of Navy Decoder-iOS.
@@ -20,8 +20,21 @@
 // Copyright (c) 2014-2025 Crash Test Dummy Limited, LLC
 //
 
-#import <UIKit/UIKit.h>
+#import "SceneDelegate.h"
 
-@interface NavyDecoderAppDelegate : UIResponder <UIApplicationDelegate>
+#import "NDCViewUtilities.h"
+
+@implementation SceneDelegate
+
+- (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session
+      options:(UISceneConnectionOptions *)connectionOptions {
+    // The storyboard and scene configuration handle window + root VC creation automatically.
+}
+
+- (void)sceneDidEnterBackground:(UIScene *)scene {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *current = [defaults objectForKey:settingsBackgroundImageKey];
+    [defaults setObject:@([current intValue] + 1) forKey:settingsBackgroundImageKey];
+}
 
 @end

@@ -97,6 +97,10 @@
     return [self isSearchActive] ? nil : @"Select a Category";
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return [self isSearchActive] ? 0 : 36;
+}
+
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
     [super tableView:tableView willDisplayHeaderView:view forSection:section];
     ((UITableViewHeaderFooterView *)view).textLabel.textColor = UIColor.labelColor;

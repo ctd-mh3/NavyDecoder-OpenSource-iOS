@@ -67,11 +67,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    view.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor *(UITraitCollection *tc) {
+    if (![view isKindOfClass:[UITableViewHeaderFooterView class]]) return;
+    UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
+    UIBackgroundConfiguration *config = [UIBackgroundConfiguration clearConfiguration];
+    config.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor *(UITraitCollection *tc) {
         CGFloat alpha = (tc.userInterfaceStyle == UIUserInterfaceStyleDark)
             ? kBackgroundAlphaDark : kBackgroundAlphaLight;
         return [[UIColor blackColor] colorWithAlphaComponent:alpha];
     }];
+    headerView.backgroundConfiguration = config;
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size
@@ -99,11 +103,13 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = UIColor.clearColor;
     [container addSubview:label];
+    NSLayoutConstraint *bottom = [label.bottomAnchor constraintEqualToAnchor:container.bottomAnchor constant:-8];
+    bottom.priority = UILayoutPriorityDefaultHigh;
     [NSLayoutConstraint activateConstraints:@[
         [label.topAnchor constraintEqualToAnchor:container.topAnchor constant:8],
         [label.leadingAnchor constraintEqualToAnchor:container.leadingAnchor constant:16],
         [label.trailingAnchor constraintEqualToAnchor:container.trailingAnchor constant:-16],
-        [label.bottomAnchor constraintEqualToAnchor:container.bottomAnchor constant:-8],
+        bottom,
     ]];
     return container;
 }

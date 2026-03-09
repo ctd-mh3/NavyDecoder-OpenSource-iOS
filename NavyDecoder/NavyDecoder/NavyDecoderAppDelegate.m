@@ -45,10 +45,13 @@
     return YES;
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *currentBackgroundImageNumber = [defaults objectForKey:settingsBackgroundImageKey];
-    [defaults setObject:[NSNumber numberWithInt:[currentBackgroundImageNumber intValue] + 1] forKey:settingsBackgroundImageKey];
+- (UISceneConfiguration *)application:(UIApplication *)application
+configurationForConnectingSceneSession:(UISceneSession *)session
+                               options:(UISceneConnectionOptions *)options {
+    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:session.role];
+}
+
+- (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
 }
 
 @end

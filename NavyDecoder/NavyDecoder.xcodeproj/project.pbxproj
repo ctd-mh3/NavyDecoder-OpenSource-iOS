@@ -26,6 +26,7 @@
 		4CDD01022D800000009088C8 /* NDDecoderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01012D800000009088C8 /* NDDecoderItem.m */; };
 		4CDD01052D800000009088C8 /* NDDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01042D800000009088C8 /* NDDataStore.m */; };
 		4CDD01072D800000009088C8 /* DecoderData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4CDD01062D800000009088C8 /* DecoderData.json */; };
+		4CEE01022D800001009088C8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE01012D800001009088C8 /* SceneDelegate.m */; };
 		4C618555163C527A002997C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C618554163C5279002997C6 /* UIKit.framework */; };
 		4C618557163C527A002997C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C618556163C527A002997C6 /* Foundation.framework */; };
 		4C618559163C527A002997C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C618558163C527A002997C6 /* CoreGraphics.framework */; };
@@ -87,6 +88,8 @@
 		4CDD01032D800000009088C8 /* NDDataStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NDDataStore.h; sourceTree = "<group>"; };
 		4CDD01042D800000009088C8 /* NDDataStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDDataStore.m; sourceTree = "<group>"; };
 		4CDD01062D800000009088C8 /* DecoderData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DecoderData.json; sourceTree = "<group>"; };
+		4CEE01002D800001009088C8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		4CEE01012D800001009088C8 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		4C5C2D891642F30200397A60 /* NavyDecoderAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavyDecoderAppDelegate.h; path = NavyDecoder/NavyDecoderAppDelegate.h; sourceTree = SOURCE_ROOT; };
 		4C5C2D8A1642F30200397A60 /* NavyDecoderAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavyDecoderAppDelegate.m; path = NavyDecoder/NavyDecoderAppDelegate.m; sourceTree = SOURCE_ROOT; };
 		4C5C2D8F1642F35300397A60 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "NavyDecoder/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -380,6 +383,8 @@
 				4C1B00002D760001009088C8 /* UIViewController+ReviewRequest.m */,
 				4C1C00FF2D760001009088C8 /* AppInfoViewController.h */,
 				4C1C00002D760001009088C8 /* AppInfoViewController.m */,
+				4CEE01002D800001009088C8 /* SceneDelegate.h */,
+				4CEE01012D800001009088C8 /* SceneDelegate.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -578,6 +583,7 @@
 				4C1A00022D760001009088C8 /* ReviewManager.swift in Sources */,
 				4C1B00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */,
 				4C1C00012D760001009088C8 /* AppInfoViewController.m in Sources */,
+				4CEE01022D800001009088C8 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

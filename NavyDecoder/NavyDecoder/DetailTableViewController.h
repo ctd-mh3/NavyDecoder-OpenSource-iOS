@@ -21,16 +21,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
 #import "NavyDecoderMasterViewController.h"
+#import "NDDecoderItem.h"
 
-@interface DetailTableViewController : NavyDecoderMasterViewController <NSFetchedResultsControllerDelegate>
+@interface DetailTableViewController : NavyDecoderMasterViewController
+
 @property (weak, nonatomic) IBOutlet UILabel *codeKeyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *codeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *codeSourceLabel;
-@property (strong, nonatomic) id item;
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NDDecoderItem *item;
 
 @end

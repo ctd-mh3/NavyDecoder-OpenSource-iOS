@@ -1,9 +1,16 @@
 # Navy Decoder (iOS)
 
-Navy Decoder for iOS (and supporting Navy Decoder Databaase Loader app) was developed 
-to provide easy access to some United States Navy administrative information/codes.  
-The primary target audience is Navy Reservists looking at unit RUADs, other manning 
-documents, or reviewing billets on CMS-ID/RFMT.
+Navy Decoder for iOS was developed to provide easy access to some United States Navy
+administrative information/codes. The primary target audience is Navy Reservists looking
+at unit RUADs, other manning documents, or reviewing billets on CMS-ID/RFMT.
+
+## Getting Started
+
+Open `NavyDecoder.xcworkspace` in Xcode to build and run the app.
+
+Data is bundled as `DecoderData.json` inside the app target. To update the data, regenerate
+the JSON from the Android project's SQL source files using the `convertSqlScriptsToJson.pl`
+script and replace `NavyDecoder/NavyDecoder/DecoderData.json`.
 
 ## Current items decoded:
 * Enlisted Rating Codes

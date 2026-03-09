@@ -2,55 +2,50 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Projects
+## Project
 
-This repository contains two Xcode projects:
+Single Xcode project: open **`NavyDecoder.xcworkspace`** in Xcode. Build and run via Xcode (Cmd+R). Tests are in the `NavyDecoderTests` target (Cmd+U). The source is at `NavyDecoder/NavyDecoder.xcodeproj`.
 
-- **`NavyDecoder/NavyDecoder.xcodeproj`** — The main iOS app (Objective-C, UIKit)
-- **`NavyDecoderDatabaseLoader/NavyDecoderDatabaseLoader.xcodeproj`** — A macOS command-line tool that generates the SQLite database from JSON
+## Data Update Workflow
 
-Open **`NavyDecoder.xcworkspace`** in Xcode to work with the iOS app. Build and run via Xcode (Cmd+R). Tests are in the `NavyDecoderTests` target (Cmd+U).
+The app bundles `NavyDecoder/NavyDecoder/DecoderData.json` directly. To update the data:
 
-## Database Update Workflow
+1. Edit the SQL source files in the Android sibling project (`NavyDecoderPlus-OpenSource/database/`)
+2. Run `convertSqlScriptsToJson.pl` from that directory to regenerate `DecoderData.json`
+3. Copy the result to `NavyDecoder/NavyDecoder/DecoderData.json`
 
-The app ships with a read-only SQLite database bundled in the app bundle. To update the data:
+JSON record format: `{ "categoryTitle": "...", "codeKey": "...", "codeValue": "...", "codeSource": "..." }`
 
-1. Edit `NavyDecoderDatabaseLoader/NavyDecoderDatabaseLoader/DecoderData.json`
-2. Build and run the `NavyDecoderDatabaseLoader` macOS command-line tool in Xcode
-3. Copy the generated `DecoderData.sqlite` to `NavyDecoder/NavyDecoder/DecoderData.sqlite`
-
-The JSON format is: `{ "categoryTitle": "...", "codeKey": "...", "codeValue": "...", "codeSource": "..." }`
+RFAS categories appear as placeholder rows (`RFAS-Enlisted`, `RFAS-Officer`) — their codes are handled by the hardcoded `Rfas.m` model, not from the JSON.
 
 ## Architecture
 
-### Core Data Model
+### Data Layer
 
-Three entities in `NavyDecoder.xcdatamodeld`:
-- **`Category`** — `categoryTitle` string; one-to-many relationship to `Item`
-- **`Item`** — `codeKey` string; belongs to one `Category`; has one `Details`
-- **`Details`** — `codeValue` and `codeSource` strings; belongs to one `Item`
+**`NDDataStore`** (singleton) — loads and parses `DecoderData.json` once at startup (warmed on a background queue in `AppDelegate`). Provides:
+- `categoryTitles` — sorted list of unique category names
+- `itemsForCategoryTitle:` — items for a category, sorted by `codeKey`
+- `searchAllItemsForText:` — cross-category search on `codeKey` and `codeValue`
 
-The persistent store is opened read-only directly from the app bundle (no copy to Documents directory).
+**`NDDecoderItem`** — plain model object with `categoryTitle`, `codeKey`, `codeValue`, `codeSource`. Replaces the old Core Data entities (`Category`, `Item`, `Details`).
 
 ### Navigation Flow
 
-The app uses a `UISplitViewController` (`OverallSplitViewController`) as the root, supporting both iPhone (navigation stack) and iPad (split view) layouts:
+The app root is a `UISplitViewController` supporting both iPhone (navigation stack) and iPad (split view):
 
-1. **`CategoryViewController`** — Lists all `Category` objects from Core Data. Selecting a row segues to either `ItemViewController` (segue `showItem`) or `RfasViewController` (segue `showRFAS`) — RFAS categories are detected by checking if the cell's title contains the string `"RFAS"`.
-2. **`ItemViewController`** — Lists `Item` objects for the selected category with a `UISearchController` that filters by `codeKey` or `codeValue`. Segues to `DetailTableViewController` on selection.
-3. **`DetailTableViewController`** — Displays `codeKey`, `codeValue`, and `codeSource` for a single item. Section 3 provides email sharing and App Store review actions.
-4. **`RfasViewController`** — Special three-component `UIPickerView` UI for RFAS codes (officer or enlisted). Results rendered in a `WKWebView`/`UIWebView` with dark mode support. Supports email sharing of decoded result.
+1. **`CategoryViewController`** — lists `NDDataStore.categoryTitles`. Has a global search bar (`navigationItem.searchController`) that searches all items across all categories via `searchAllItemsForText:`. Tapping a category segues to `ItemViewController` (`showItem`) or `RfasViewController` (`showRFAS`) — RFAS detection checks if the category title contains `"RFAS"`.
+2. **`ItemViewController`** — lists items for the selected category. Inline `UISearchController` filters `codeKey`/`codeValue` within the category. Segues to `DetailTableViewController` (`showDetails` or `showDetailsAccessoryButton`).
+3. **`DetailTableViewController`** — displays a single `NDDecoderItem`. Section 3 rows trigger share sheet, correction email, and App Store link.
+4. **`RfasViewController`** — three-component `UIPickerView` for RFAS codes (officer or enlisted, set via `isEnlisted`). Result rendered in a `WKWebView` with dark mode support. Supports email sharing.
 
-`NavyDecoderMasterViewController` is a shared base class for table view controllers that manages the rotating background image and App Store review prompts.
+**`NavyDecoderMasterViewController`** — shared base class for all three table view controllers. Manages the rotating background image (`setBackgroundForSize:`), transparent cell/header backgrounds, mail compose delegate, and the open-source notice header view.
 
 ### Key Utilities
 
-- **`NDCViewUtilities`** (singleton) — Manages background images. Cycles through 8 images named `{0-7}_2048x2048_background.png`, center-cropped to the current screen size. The background index increments on each app termination (stored in `NSUserDefaults`).
-- **`ViewConstants`** / `NDPTextSize` — iPad-specific text size constant used across all view controllers.
-- **`UIImage+ProportionalFill`** — Category providing center-crop image scaling.
-- **`Rfas`** — Model class encapsulating all RFAS code lookup logic (first, second/third, and fourth character meanings, for both officer and enlisted variants).
-- **`ReviewManager`** (Swift, `@objc`) — Handles App Store review prompts. Triggered from `DetailTableViewController.viewDidAppear:` via `[ReviewManager requestReviewIfAppropriateIn:scene]`. Increments a `UserDefaults` counter on each detail-screen visit and calls `SKStoreReviewController.requestReview(in:)` after 5 visits, at most once per app build version.
+- **`NDCViewUtilities`** (singleton) — manages background images. Cycles through 8 images named `{0-7}_2048x2048_background.png`, center-cropped via `UIImage+ProportionalFill`. Index increments in `NSUserDefaults` on each app termination (`settingsBackgroundImageKey`).
+- **`Rfas`** — encapsulates all RFAS code lookup logic for both officer and enlisted variants.
+- **`ReviewManager`** (Swift, `@objc`) — increments a visit counter in `UserDefaults` each time `DetailTableViewController` appears; calls `SKStoreReviewController.requestReview(in:)` after 5 visits, at most once per build version.
 
 ## Mixed-Language Notes
 
-The project uses Objective-C with a single Swift file (`ReviewManager.swift`). The build settings already have `SWIFT_VERSION = 5.0` and `SWIFT_OBJC_BRIDGING_HEADER` configured. To call Swift from ObjC, import the auto-generated header: `#import "NavyDecoder-Swift.h"`. The bridging header (`NavyDecoder-Bridging-Header.h`) is currently empty — add ObjC headers there only if a Swift file needs to reference ObjC types directly.
+Objective-C project with one Swift file (`ReviewManager.swift`). `SWIFT_VERSION = 5.0` and `SWIFT_OBJC_BRIDGING_HEADER` are already configured. To call Swift from ObjC: `#import "NavyDecoder-Swift.h"`. The bridging header (`NavyDecoder-Bridging-Header.h`) is empty — add ObjC headers there only if a Swift file needs to reference ObjC types directly.

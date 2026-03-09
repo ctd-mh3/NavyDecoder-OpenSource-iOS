@@ -23,12 +23,6 @@
 #import <UIKit/UIKit.h>
 #import "NavyDecoderMasterViewController.h"
 
-#import <CoreData/CoreData.h>
-
 @interface CategoryViewController : NavyDecoderMasterViewController
-
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSFetchedResultsController *searchFetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

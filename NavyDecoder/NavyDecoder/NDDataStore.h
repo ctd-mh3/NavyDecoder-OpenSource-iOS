@@ -1,5 +1,5 @@
 //
-// NavyDecoderAppDelegate.h
+// NDDataStore.h
 // NavyDecoder-iOS
 //
 // This file is part of Navy Decoder-iOS.
@@ -20,10 +20,16 @@
 // Copyright (c) 2014-2025 Crash Test Dummy Limited, LLC
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-@interface NavyDecoderAppDelegate : UIResponder <UIApplicationDelegate>
+@class NDDecoderItem;
 
-@property (strong, nonatomic) UIWindow *window;
+@interface NDDataStore : NSObject
+
++ (instancetype)sharedStore;
+
+- (NSArray<NSString *> *)categoryTitles;
+- (NSArray<NDDecoderItem *> *)itemsForCategoryTitle:(NSString *)title;
+- (NSArray<NDDecoderItem *> *)searchAllItemsForText:(NSString *)text;
 
 @end

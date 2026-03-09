@@ -25,15 +25,14 @@
 #import "ItemViewController.h"
 #import "RfasViewController.h"
 #import "DetailTableViewController.h"
-#import "Category.h"
-#import "Item.h"
+#import "NDDataStore.h"
+#import "NDDecoderItem.h"
 #import "ViewConstants.h"
 
 @interface CategoryViewController () <UISearchResultsUpdating>
 
 @property (nonatomic, strong) UISearchController *searchController;
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+@property (nonatomic, strong) NSArray<NDDecoderItem *> *searchResults;
 
 @end
 
@@ -54,6 +53,7 @@
     self.navigationItem.hidesSearchBarWhenScrolling = YES;
     self.definesPresentationContext = YES;
 
+    self.searchResults = @[];
     self.tableView.tableHeaderView = [self makeNoticeHeaderView];
 }
 
@@ -69,18 +69,14 @@
     NSString *searchString = searchController.searchBar.text;
 
     if (searchString.length > 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:
-            @"codeKey CONTAINS[c] %@ OR itemDetails.codeValue CONTAINS[c] %@",
-            searchString, searchString];
-        [NSFetchedResultsController deleteCacheWithName:@"GlobalSearch"];
-        [self.searchFetchedResultsController.fetchRequest setPredicate:predicate];
-        NSError *error = nil;
-        [self.searchFetchedResultsController performFetch:&error];
+        self.searchResults = [[NDDataStore sharedStore] searchAllItemsForText:searchString];
+    } else {
+        self.searchResults = @[];
     }
 
     [self.tableView reloadData];
 
-    BOOL hasResults = self.searchFetchedResultsController.fetchedObjects.count > 0;
+    BOOL hasResults = self.searchResults.count > 0;
     BOOL isSearching = searchString.length > 0;
     if (isSearching && !hasResults) {
         UILabel *label = [[UILabel alloc] init];
@@ -107,11 +103,15 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([self isSearchActive]) {
-        return [[self.searchFetchedResultsController sections] count];
+        return (NSInteger)self.searchResults.count;
     }
 
-    NSInteger count = [[self.fetchedResultsController sections] count];
+    NSInteger count = (NSInteger)[[NDDataStore sharedStore] categoryTitles].count;
     if (count == 0) {
         UILabel *label = [[UILabel alloc] init];
         label.text = @"No categories available.";
@@ -125,35 +125,30 @@
     return count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([self isSearchActive]) {
-        id<NSFetchedResultsSectionInfo> sectionInfo = [self.searchFetchedResultsController sections][section];
-        return [sectionInfo numberOfObjects];
-    }
-    id<NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+
     if ([self isSearchActive]) {
         static NSString *searchCellId = @"GlobalSearchCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:searchCellId];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:searchCellId];
         }
-        Item *item = [self.searchFetchedResultsController objectAtIndexPath:indexPath];
-        UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-            ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+        NDDecoderItem *item = self.searchResults[indexPath.row];
         cell.textLabel.text = item.codeKey;
         cell.textLabel.font = [UIFont preferredFontForTextStyle:textStyle];
         cell.textLabel.adjustsFontForContentSizeCategory = YES;
-        cell.detailTextLabel.text = item.categorySource.categoryTitle;
+        cell.detailTextLabel.text = item.categoryTitle;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         return cell;
     }
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryCell" forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
+    NSString *title = [[NDDataStore sharedStore] categoryTitles][indexPath.row];
+    cell.textLabel.text = title;
+    cell.textLabel.font = [UIFont preferredFontForTextStyle:textStyle];
+    cell.textLabel.adjustsFontForContentSizeCategory = YES;
     return cell;
 }
 
@@ -172,10 +167,10 @@
         return;
     }
 
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    NSString *categoryString = cell.textLabel.text;
+    NSString *title = [[NDDataStore sharedStore] categoryTitles][indexPath.row];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
-    if ([categoryString rangeOfString:@"RFAS"].location == NSNotFound) {
+    if ([title rangeOfString:@"RFAS"].location == NSNotFound) {
         [self performSegueWithIdentifier:kSegueShowItem sender:cell];
     } else {
         [self performSegueWithIdentifier:kSegueShowRFAS sender:cell];
@@ -185,15 +180,13 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:kSegueShowGlobalSearchDetail]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)sender];
-        Item *item = [self.searchFetchedResultsController objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-        [[segue destinationViewController] setItem:item];
+        NDDecoderItem *item = self.searchResults[indexPath.row];
+        [(DetailTableViewController *)segue.destinationViewController setItem:item];
 
     } else if ([[segue identifier] isEqualToString:kSegueShowItem]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Category *category = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setManagedObjectContext:self.managedObjectContext];
-        [[segue destinationViewController] setCategory:category];
+        NSString *title = [[NDDataStore sharedStore] categoryTitles][indexPath.row];
+        [[segue destinationViewController] setCategoryTitle:title];
 
     } else if ([[segue identifier] isEqualToString:kSegueShowRFAS]) {
         UITableViewCell *cell = (UITableViewCell *)sender;
@@ -202,82 +195,6 @@
         RfasViewController *controller = (RfasViewController *)segue.destinationViewController;
         controller.isEnlisted = isEnlisted;
     }
-}
-
-#pragma mark - Fetched Results Controllers
-
-- (NSFetchedResultsController *)fetchedResultsController {
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Category" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setFetchBatchSize:20];
-
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"categoryTitle" ascending:YES];
-    [fetchRequest setSortDescriptors:@[sortDescriptor]];
-
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc]
-        initWithFetchRequest:fetchRequest
-        managedObjectContext:self.managedObjectContext
-          sectionNameKeyPath:nil
-                   cacheName:@"Master"];
-    self.fetchedResultsController = aFetchedResultsController;
-
-    NSError *error = nil;
-    if (![self.fetchedResultsController performFetch:&error]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Data Retrieval Error"
-                                                                       message:@"Please try again."
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-
-    return _fetchedResultsController;
-}
-
-- (NSFetchedResultsController *)searchFetchedResultsController {
-    if (_searchFetchedResultsController != nil) {
-        return _searchFetchedResultsController;
-    }
-
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    [fetchRequest setFetchBatchSize:20];
-
-    NSArray *sortDescriptors = @[
-        [[NSSortDescriptor alloc] initWithKey:@"categorySource.categoryTitle" ascending:YES],
-        [[NSSortDescriptor alloc] initWithKey:@"codeKey" ascending:YES],
-    ];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-
-    // Return no results until the user types something
-    [fetchRequest setPredicate:[NSPredicate predicateWithValue:NO]];
-
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc]
-        initWithFetchRequest:fetchRequest
-        managedObjectContext:self.managedObjectContext
-          sectionNameKeyPath:nil
-                   cacheName:@"GlobalSearch"];
-    self.searchFetchedResultsController = aFetchedResultsController;
-
-    NSError *error = nil;
-    [self.searchFetchedResultsController performFetch:&error];
-
-    return _searchFetchedResultsController;
-}
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Category *category = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = category.categoryTitle;
-
-    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
-    cell.textLabel.font = [UIFont preferredFontForTextStyle:textStyle];
-    cell.textLabel.adjustsFontForContentSizeCategory = YES;
 }
 
 @end

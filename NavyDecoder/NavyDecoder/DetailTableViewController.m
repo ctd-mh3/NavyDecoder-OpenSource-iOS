@@ -21,9 +21,6 @@
 //
 
 #import "DetailTableViewController.h"
-#import "Category.h"
-#import "Item.h"
-#import "Details.h"
 #import "UIViewController+ReviewRequest.h"
 #import "ViewConstants.h"
 
@@ -38,30 +35,23 @@
 
 @implementation DetailTableViewController
 
-
-
-
-- (void)setItem:(id)newItem {
+- (void)setItem:(NDDecoderItem *)newItem {
     _item = newItem;
-    [self configureView];    
+    [self configureView];
 }
 
 - (void)configureView {
-    Item *item = (Item *)self.item;
+    NDDecoderItem *item = self.item;
     if (!item) return;
 
-    self.codeKeyString = item.codeKey;
-
-    Category *category = item.categorySource;
-    self.categoryTitle = category.categoryTitle;
-
-    Details *details = item.itemDetails;
-    self.codeValueString = details.codeValue;
-    self.codeSourceString = details.codeSource;
+    self.codeKeyString    = item.codeKey;
+    self.categoryTitle    = item.categoryTitle;
+    self.codeValueString  = item.codeValue;
+    self.codeSourceString = item.codeSource;
 
     self.title = [NSString stringWithFormat:@"Decoded %@", self.categoryTitle];
-    self.codeKeyLabel.text = self.codeKeyString;
-    self.codeValueLabel.text = self.codeValueString;
+    self.codeKeyLabel.text    = self.codeKeyString;
+    self.codeValueLabel.text  = self.codeValueString;
     self.codeSourceLabel.text = self.codeSourceString;
 
     UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
@@ -75,7 +65,6 @@
     self.codeSourceLabel.adjustsFontForContentSizeCategory = YES;
 }
 
-// https://schiffr.de/2016/12/auto-growing-uitableviewcells-with-static-cells/
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewAutomaticDimension;
 }
@@ -115,7 +104,6 @@
     NSString *urlString = kAppStoreURL;
 
     if (indexPath.section == 3) {
-
         switch (indexPath.row) {
             case 0:
                 [self shareDecodeDetailsFromCell:[tableView cellForRowAtIndexPath:indexPath]];
@@ -149,16 +137,7 @@
                                     alertControllerWithTitle:@"Error"
                                     message:@"Your device appears not to support email."
                                     preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okButton = [UIAlertAction
-                                   actionWithTitle:@"OK"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action) {
-                                       //No action except to close alert
-                                   }];
-        
-        [alert addAction:okButton];
-        
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
@@ -171,11 +150,8 @@
     [text appendFormat:@"\tSource: %@\n", self.codeSourceString];
 
     UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[text] applicationActivities:nil];
-
-    // iPad requires a source for the popover
     activityVC.popoverPresentationController.sourceView = cell;
     activityVC.popoverPresentationController.sourceRect = cell.bounds;
-
     [self presentViewController:activityVC animated:YES completion:nil];
 }
 

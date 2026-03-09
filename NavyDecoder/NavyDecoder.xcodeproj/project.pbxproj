@@ -15,23 +15,20 @@
 		4C1B00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1B00002D760001009088C8 /* UIViewController+ReviewRequest.m */; };
 		4C1C00012D760001009088C8 /* AppInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C1C00002D760001009088C8 /* AppInfoViewController.m */; };
 		4C50CDD716593B6600480CFC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C50CDD616593B6600480CFC /* MessageUI.framework */; };
-		4C5C2D751642F2BF00397A60 /* Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D711642F2BF00397A60 /* Category.m */; };
 		4C5C2D761642F2BF00397A60 /* CategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D731642F2BF00397A60 /* CategoryViewController.m */; };
-		4C5C2D771642F2BF00397A60 /* DecoderData.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D741642F2BF00397A60 /* DecoderData.sqlite */; };
-		4C5C2D7E1642F2CF00397A60 /* Details.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D791642F2CF00397A60 /* Details.m */; };
 		4C5C2D801642F2CF00397A60 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D7D1642F2CF00397A60 /* DetailTableViewController.m */; };
-		4C5C2D861642F2E600397A60 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D821642F2E600397A60 /* Item.m */; };
 		4C5C2D871642F2E600397A60 /* ItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D841642F2E600397A60 /* ItemViewController.m */; };
 		4C5C2D8D1642F30200397A60 /* NavyDecoderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D8A1642F30200397A60 /* NavyDecoderAppDelegate.m */; };
 		4C5C2D921642F35300397A60 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D8F1642F35300397A60 /* Default-568h@2x.png */; };
 		4C5C2D931642F35300397A60 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D901642F35300397A60 /* Default.png */; };
 		4C5C2D941642F35300397A60 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D911642F35300397A60 /* Default@2x.png */; };
 		4C5C2D9D1642F42B00397A60 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D9A1642F42B00397A60 /* MainStoryboard_iPhone.storyboard */; };
-		4C5C2DA11642F4B100397A60 /* NavyDecoder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C618574163C527C002997C6 /* NavyDecoder.xcdatamodeld */; };
+		4CDD01022D800000009088C8 /* NDDecoderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01012D800000009088C8 /* NDDecoderItem.m */; };
+		4CDD01052D800000009088C8 /* NDDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01042D800000009088C8 /* NDDataStore.m */; };
+		4CDD01072D800000009088C8 /* DecoderData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4CDD01062D800000009088C8 /* DecoderData.json */; };
 		4C618555163C527A002997C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C618554163C5279002997C6 /* UIKit.framework */; };
 		4C618557163C527A002997C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C618556163C527A002997C6 /* Foundation.framework */; };
 		4C618559163C527A002997C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C618558163C527A002997C6 /* CoreGraphics.framework */; };
-		4C61855B163C527A002997C6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C61855A163C527A002997C6 /* CoreData.framework */; };
 		4C618561163C527A002997C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C61855F163C527A002997C6 /* InfoPlist.strings */; };
 		4C618563163C527A002997C6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C618562163C527A002997C6 /* main.m */; };
 		4C618585163C527D002997C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C618554163C5279002997C6 /* UIKit.framework */; };
@@ -79,19 +76,17 @@
 		4C1C00002D760001009088C8 /* AppInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppInfoViewController.m; sourceTree = "<group>"; };
 		4C1C00FF2D760001009088C8 /* AppInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppInfoViewController.h; sourceTree = "<group>"; };
 		4C50CDD616593B6600480CFC /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		4C5C2D701642F2A400397A60 /* Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Category.h; path = NavyDecoder/Category.h; sourceTree = SOURCE_ROOT; };
-		4C5C2D711642F2BF00397A60 /* Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Category.m; path = NavyDecoder/Category.m; sourceTree = SOURCE_ROOT; };
 		4C5C2D721642F2BF00397A60 /* CategoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CategoryViewController.h; path = NavyDecoder/CategoryViewController.h; sourceTree = SOURCE_ROOT; };
 		4C5C2D731642F2BF00397A60 /* CategoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CategoryViewController.m; path = NavyDecoder/CategoryViewController.m; sourceTree = SOURCE_ROOT; };
-		4C5C2D741642F2BF00397A60 /* DecoderData.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = DecoderData.sqlite; path = NavyDecoder/DecoderData.sqlite; sourceTree = SOURCE_ROOT; };
-		4C5C2D781642F2CF00397A60 /* Details.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Details.h; path = NavyDecoder/Details.h; sourceTree = SOURCE_ROOT; };
-		4C5C2D791642F2CF00397A60 /* Details.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Details.m; path = NavyDecoder/Details.m; sourceTree = SOURCE_ROOT; };
 		4C5C2D7C1642F2CF00397A60 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailTableViewController.h; path = NavyDecoder/DetailTableViewController.h; sourceTree = SOURCE_ROOT; };
 		4C5C2D7D1642F2CF00397A60 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailTableViewController.m; path = NavyDecoder/DetailTableViewController.m; sourceTree = SOURCE_ROOT; };
-		4C5C2D811642F2E600397A60 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = NavyDecoder/Item.h; sourceTree = SOURCE_ROOT; };
-		4C5C2D821642F2E600397A60 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = NavyDecoder/Item.m; sourceTree = SOURCE_ROOT; };
 		4C5C2D831642F2E600397A60 /* ItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemViewController.h; path = NavyDecoder/ItemViewController.h; sourceTree = SOURCE_ROOT; };
 		4C5C2D841642F2E600397A60 /* ItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemViewController.m; path = NavyDecoder/ItemViewController.m; sourceTree = SOURCE_ROOT; };
+		4CDD01002D800000009088C8 /* NDDecoderItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NDDecoderItem.h; sourceTree = "<group>"; };
+		4CDD01012D800000009088C8 /* NDDecoderItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDDecoderItem.m; sourceTree = "<group>"; };
+		4CDD01032D800000009088C8 /* NDDataStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NDDataStore.h; sourceTree = "<group>"; };
+		4CDD01042D800000009088C8 /* NDDataStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDDataStore.m; sourceTree = "<group>"; };
+		4CDD01062D800000009088C8 /* DecoderData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DecoderData.json; sourceTree = "<group>"; };
 		4C5C2D891642F30200397A60 /* NavyDecoderAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavyDecoderAppDelegate.h; path = NavyDecoder/NavyDecoderAppDelegate.h; sourceTree = SOURCE_ROOT; };
 		4C5C2D8A1642F30200397A60 /* NavyDecoderAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavyDecoderAppDelegate.m; path = NavyDecoder/NavyDecoderAppDelegate.m; sourceTree = SOURCE_ROOT; };
 		4C5C2D8F1642F35300397A60 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "NavyDecoder/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -163,7 +158,6 @@
 				4C618555163C527A002997C6 /* UIKit.framework in Frameworks */,
 				4C618557163C527A002997C6 /* Foundation.framework in Frameworks */,
 				4C618559163C527A002997C6 /* CoreGraphics.framework in Frameworks */,
-				4C61855B163C527A002997C6 /* CoreData.framework in Frameworks */,
 				4C045BC91C1FA03600AE511C /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,8 +279,7 @@
 		4C818C08190287A2008B62FA /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				4C618574163C527C002997C6 /* NavyDecoder.xcdatamodeld */,
-				4C5C2D741642F2BF00397A60 /* DecoderData.sqlite */,
+				4CDD01062D800000009088C8 /* DecoderData.json */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -342,12 +335,10 @@
 			isa = PBXGroup;
 			children = (
 				4C818C08190287A2008B62FA /* Database */,
-				4C5C2D701642F2A400397A60 /* Category.h */,
-				4C5C2D711642F2BF00397A60 /* Category.m */,
-				4C5C2D781642F2CF00397A60 /* Details.h */,
-				4C5C2D791642F2CF00397A60 /* Details.m */,
-				4C5C2D811642F2E600397A60 /* Item.h */,
-				4C5C2D821642F2E600397A60 /* Item.m */,
+				4CDD01002D800000009088C8 /* NDDecoderItem.h */,
+				4CDD01012D800000009088C8 /* NDDecoderItem.m */,
+				4CDD01032D800000009088C8 /* NDDataStore.h */,
+				4CDD01042D800000009088C8 /* NDDataStore.m */,
 				4CF85CDD165F86920058FF6E /* Rfas.h */,
 				4CF85CDE165F86920058FF6E /* Rfas.m */,
 			);
@@ -482,7 +473,7 @@
 				4CBCF76417FC54E00049B6CE /* NavyDecoderLargeAppIcon1024x1024.png in Resources */,
 				4CEBC0E119978F90008CD611 /* 2_2048x2048_background.png in Resources */,
 				4C115E3B2007AE800004614A /* MainStoryboard_LaunchScreen.storyboard in Resources */,
-				4C5C2D771642F2BF00397A60 /* DecoderData.sqlite in Resources */,
+				4CDD01072D800000009088C8 /* DecoderData.json in Resources */,
 				4CEBC109199794D0008CD611 /* 7_2048x2048_background.png in Resources */,
 				4C5C2D921642F35300397A60 /* Default-568h@2x.png in Resources */,
 				4C5C2D931642F35300397A60 /* Default.png in Resources */,
@@ -570,13 +561,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C5C2DA11642F4B100397A60 /* NavyDecoder.xcdatamodeld in Sources */,
 				4C618563163C527A002997C6 /* main.m in Sources */,
-				4C5C2D751642F2BF00397A60 /* Category.m in Sources */,
 				4C5C2D761642F2BF00397A60 /* CategoryViewController.m in Sources */,
-				4C5C2D7E1642F2CF00397A60 /* Details.m in Sources */,
 				4C5C2D801642F2CF00397A60 /* DetailTableViewController.m in Sources */,
-				4C5C2D861642F2E600397A60 /* Item.m in Sources */,
+				4CDD01022D800000009088C8 /* NDDecoderItem.m in Sources */,
+				4CDD01052D800000009088C8 /* NDDataStore.m in Sources */,
 				4C69168819251A1800D41A53 /* ViewConstants.m in Sources */,
 				4CEBC10F1997951D008CD611 /* NDCViewUtilities.m in Sources */,
 				4C5C2D871642F2E600397A60 /* ItemViewController.m in Sources */,
@@ -889,7 +878,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4C618574163C527C002997C6 /* NavyDecoder.xcdatamodeld */ = {
+		4C618574163C527C002997C6 /* NavyDecoder.xcdatamodeld (unused) */ = {
 			isa = XCVersionGroup;
 			children = (
 				4C618575163C527C002997C6 /* NavyDecoder.xcdatamodel */,

@@ -23,10 +23,6 @@
 		4C5C2D931642F35300397A60 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D901642F35300397A60 /* Default.png */; };
 		4C5C2D941642F35300397A60 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D911642F35300397A60 /* Default@2x.png */; };
 		4C5C2D9D1642F42B00397A60 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C5C2D9A1642F42B00397A60 /* MainStoryboard_iPhone.storyboard */; };
-		4CDD01022D800000009088C8 /* NDDecoderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01012D800000009088C8 /* NDDecoderItem.m */; };
-		4CDD01052D800000009088C8 /* NDDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01042D800000009088C8 /* NDDataStore.m */; };
-		4CDD01072D800000009088C8 /* DecoderData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4CDD01062D800000009088C8 /* DecoderData.json */; };
-		4CEE01022D800001009088C8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE01012D800001009088C8 /* SceneDelegate.m */; };
 		4C618555163C527A002997C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C618554163C5279002997C6 /* UIKit.framework */; };
 		4C618557163C527A002997C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C618556163C527A002997C6 /* Foundation.framework */; };
 		4C618559163C527A002997C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C618558163C527A002997C6 /* CoreGraphics.framework */; };
@@ -40,6 +36,9 @@
 		4C69169219257DEC00D41A53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C69169119257DEC00D41A53 /* Images.xcassets */; };
 		4CBCF76417FC54E00049B6CE /* NavyDecoderLargeAppIcon1024x1024.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CBCF76017FC54E00049B6CE /* NavyDecoderLargeAppIcon1024x1024.png */; };
 		4CC5EA4B2184A169007306CC /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CC5EA4A2184A168007306CC /* StoreKit.framework */; };
+		4CDD01022D800000009088C8 /* NDDecoderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01012D800000009088C8 /* NDDecoderItem.m */; };
+		4CDD01052D800000009088C8 /* NDDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01042D800000009088C8 /* NDDataStore.m */; };
+		4CDD01072D800000009088C8 /* DecoderData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4CDD01062D800000009088C8 /* DecoderData.json */; };
 		4CDEFD5F18AC5B320093E018 /* NavyDecoderMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDEFD5D18AC5B320093E018 /* NavyDecoderMasterViewController.m */; };
 		4CDEFD6218ACE1060093E018 /* AppInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDEFD6118ACE1060093E018 /* AppInfoTableViewController.m */; };
 		4CEBC0DB19978F90008CD611 /* 0_2048x2048_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBC0B319978F90008CD611 /* 0_2048x2048_background.png */; };
@@ -52,6 +51,7 @@
 		4CEBC109199794D0008CD611 /* 7_2048x2048_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBC101199794D0008CD611 /* 7_2048x2048_background.png */; };
 		4CEBC10F1997951D008CD611 /* NDCViewUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBC10C1997951D008CD611 /* NDCViewUtilities.m */; };
 		4CEBC1101997951D008CD611 /* UIImage+ProportionalFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEBC10E1997951D008CD611 /* UIImage+ProportionalFill.m */; };
+		4CEE01022D800001009088C8 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE01012D800001009088C8 /* SceneDelegate.m */; };
 		4CF01EAE171E2AA70089DB2C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF01EAD171E2AA70089DB2C /* CoreText.framework */; };
 		4CF85CDB165EDFB00058FF6E /* RfasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF85CDA165EDFB00058FF6E /* RfasViewController.m */; };
 		4CF85CDF165F86920058FF6E /* Rfas.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF85CDE165F86920058FF6E /* Rfas.m */; };
@@ -83,13 +83,6 @@
 		4C5C2D7D1642F2CF00397A60 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailTableViewController.m; path = NavyDecoder/DetailTableViewController.m; sourceTree = SOURCE_ROOT; };
 		4C5C2D831642F2E600397A60 /* ItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ItemViewController.h; path = NavyDecoder/ItemViewController.h; sourceTree = SOURCE_ROOT; };
 		4C5C2D841642F2E600397A60 /* ItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ItemViewController.m; path = NavyDecoder/ItemViewController.m; sourceTree = SOURCE_ROOT; };
-		4CDD01002D800000009088C8 /* NDDecoderItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NDDecoderItem.h; sourceTree = "<group>"; };
-		4CDD01012D800000009088C8 /* NDDecoderItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDDecoderItem.m; sourceTree = "<group>"; };
-		4CDD01032D800000009088C8 /* NDDataStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NDDataStore.h; sourceTree = "<group>"; };
-		4CDD01042D800000009088C8 /* NDDataStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDDataStore.m; sourceTree = "<group>"; };
-		4CDD01062D800000009088C8 /* DecoderData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DecoderData.json; sourceTree = "<group>"; };
-		4CEE01002D800001009088C8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		4CEE01012D800001009088C8 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		4C5C2D891642F30200397A60 /* NavyDecoderAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavyDecoderAppDelegate.h; path = NavyDecoder/NavyDecoderAppDelegate.h; sourceTree = SOURCE_ROOT; };
 		4C5C2D8A1642F30200397A60 /* NavyDecoderAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NavyDecoderAppDelegate.m; path = NavyDecoder/NavyDecoderAppDelegate.m; sourceTree = SOURCE_ROOT; };
 		4C5C2D8F1642F35300397A60 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "NavyDecoder/Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
@@ -106,7 +99,6 @@
 		4C61855A163C527A002997C6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		4C618560163C527A002997C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4C618562163C527A002997C6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4C618575163C527C002997C6 /* NavyDecoder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NavyDecoder.xcdatamodel; sourceTree = "<group>"; };
 		4C618582163C527D002997C6 /* NavyDecoderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavyDecoderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C61858C163C527D002997C6 /* NavyDecoderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NavyDecoderTests-Info.plist"; sourceTree = "<group>"; };
 		4C61858E163C527E002997C6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -117,6 +109,11 @@
 		4CC5EA4A2184A168007306CC /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		4CD7CD9E22FBB03C00B0D47F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4CD7CDA022FBB03C00B0D47F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		4CDD01002D800000009088C8 /* NDDecoderItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NDDecoderItem.h; sourceTree = "<group>"; };
+		4CDD01012D800000009088C8 /* NDDecoderItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDDecoderItem.m; sourceTree = "<group>"; };
+		4CDD01032D800000009088C8 /* NDDataStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NDDataStore.h; sourceTree = "<group>"; };
+		4CDD01042D800000009088C8 /* NDDataStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDDataStore.m; sourceTree = "<group>"; };
+		4CDD01062D800000009088C8 /* DecoderData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DecoderData.json; sourceTree = "<group>"; };
 		4CDEFD5D18AC5B320093E018 /* NavyDecoderMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavyDecoderMasterViewController.m; sourceTree = "<group>"; };
 		4CDEFD5E18AC5B320093E018 /* NavyDecoderMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavyDecoderMasterViewController.h; sourceTree = "<group>"; };
 		4CDEFD6018ACE1060093E018 /* AppInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfoTableViewController.h; sourceTree = "<group>"; };
@@ -141,6 +138,8 @@
 		4CEBC10C1997951D008CD611 /* NDCViewUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDCViewUtilities.m; sourceTree = "<group>"; };
 		4CEBC10D1997951D008CD611 /* UIImage+ProportionalFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ProportionalFill.h"; sourceTree = "<group>"; };
 		4CEBC10E1997951D008CD611 /* UIImage+ProportionalFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ProportionalFill.m"; sourceTree = "<group>"; };
+		4CEE01002D800001009088C8 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		4CEE01012D800001009088C8 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		4CF01EAD171E2AA70089DB2C /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		4CF85CD9165EDFB00058FF6E /* RfasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RfasViewController.h; sourceTree = "<group>"; };
 		4CF85CDA165EDFB00058FF6E /* RfasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RfasViewController.m; sourceTree = "<group>"; };
@@ -396,12 +395,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4C618595163C527E002997C6 /* Build configuration list for PBXNativeTarget "NavyDecoder" */;
 			buildPhases = (
+				4C578B6A2F63814300F5F181 /* clang-format */,
 				4C61854C163C5279002997C6 /* Sources */,
 				4C61854D163C5279002997C6 /* Frameworks */,
 				4C61854E163C5279002997C6 /* Resources */,
 				4CC41DFA18ADA1C400D64652 /* TODOs and FIXMEs */,
 				4CC4AE7018ADA21400CC4DB7 /* Source Code Length */,
-				4CC4AE7118ADA23900CC4DB7 /* Objective-Clean Run Script */,
 			);
 			buildRules = (
 			);
@@ -504,6 +503,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4C578B6A2F63814300F5F181 /* clang-format */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "clang-format";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "CLANG_FORMAT=$(xcrun --find clang-format 2>/dev/null)\n\nif [ -z \"$CLANG_FORMAT\" ]; then\n  echo \"warning: clang-format not found via xcrun\"\n  exit 0\nfi\n\nfind \"${SRCROOT}/NavyDecoder\" \"${SRCROOT}/NavyDecoderTests\" \\( -name \"*.m\" -o -name \"*.h\" \\) | while read -r file; do\n  \"$CLANG_FORMAT\" -i --style=file \"$file\"\ndone\n";
+		};
 		4C618580163C527D002997C6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -544,20 +561,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "find \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | xargs -0 wc -l | awk '$1 > 400 && $2 != \"total\" { print $2 \":1: warning: File more than 400 lines, consider refactoring.\" }'\n";
-		};
-		4CC4AE7118ADA23900CC4DB7 /* Objective-Clean Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Objective-Clean Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\n#if [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then\n#\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\"\n#else\n#echo \"warning: You have to install and set up Objective-Clean to use its features!\"\n#fi\n#fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -755,6 +758,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = X69J225DNV;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -790,6 +794,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = X69J225DNV;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -882,19 +887,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		4C618574163C527C002997C6 /* NavyDecoder.xcdatamodeld (unused) */ = {
-			isa = XCVersionGroup;
-			children = (
-				4C618575163C527C002997C6 /* NavyDecoder.xcdatamodel */,
-			);
-			currentVersion = 4C618575163C527C002997C6 /* NavyDecoder.xcdatamodel */;
-			path = NavyDecoder.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 4C618547163C5279002997C6 /* Project object */;
 }

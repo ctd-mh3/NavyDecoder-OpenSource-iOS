@@ -66,7 +66,7 @@
         self.displayedItems = self.allItems;
     } else {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:
-            @"codeKey CONTAINS[c] %@ OR codeValue CONTAINS[c] %@", searchString, searchString];
+                                                  @"codeKey CONTAINS[c] %@ OR codeValue CONTAINS[c] %@", searchString, searchString];
         self.displayedItems = [self.allItems filteredArrayUsingPredicate:predicate];
     }
 
@@ -108,7 +108,8 @@
     cell.textLabel.text = item.codeKey;
 
     UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+                                    ? UIFontTextStyleTitle3
+                                    : UIFontTextStyleBody;
     cell.textLabel.font = [UIFont preferredFontForTextStyle:textStyle];
     cell.textLabel.adjustsFontForContentSizeCategory = YES;
 

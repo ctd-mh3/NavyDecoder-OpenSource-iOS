@@ -27,7 +27,7 @@
 @implementation SceneDelegate
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session
-      options:(UISceneConnectionOptions *)connectionOptions {
+                 options:(UISceneConnectionOptions *)connectionOptions {
     // The storyboard and scene configuration handle window + root VC creation automatically.
 }
 

@@ -44,7 +44,8 @@
     self.backgroundImageView = bg;
 
     UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+                                    ? UIFontTextStyleTitle3
+                                    : UIFontTextStyleBody;
     for (UIView *subview in self.view.subviews) {
         subview.backgroundColor = UIColor.clearColor;
         if ([subview isKindOfClass:[UILabel class]]) {
@@ -75,8 +76,8 @@
 - (void)updateBackground {
     // Only the alpha needs to change when the color scheme toggles; image and frame are already set.
     self.backgroundImageView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-        ? kBackgroundAlphaDark
-        : kBackgroundAlphaLight;
+                                         ? kBackgroundAlphaDark
+                                         : kBackgroundAlphaLight;
 }
 
 - (void)updateBackgroundForSize:(CGSize)size {
@@ -84,8 +85,8 @@
     UIImageView *bg = [viewUtilities getBackgroundImageViewForSize:size];
     self.backgroundImageView.image = bg.image;
     self.backgroundImageView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-        ? kBackgroundAlphaDark
-        : kBackgroundAlphaLight;
+                                         ? kBackgroundAlphaDark
+                                         : kBackgroundAlphaLight;
     self.backgroundImageView.frame = CGRectMake(0, 0, size.width, size.height);
 }
 

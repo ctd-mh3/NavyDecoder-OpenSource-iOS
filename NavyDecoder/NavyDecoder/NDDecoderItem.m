@@ -28,9 +28,9 @@
     self = [super init];
     if (self) {
         _categoryTitle = dict[@"categoryTitle"] ?: @"";
-        _codeKey       = dict[@"codeKey"]       ?: @"";
-        _codeValue     = dict[@"codeValue"]     ?: @"";
-        _codeSource    = dict[@"codeSource"]    ?: @"";
+        _codeKey = dict[@"codeKey"] ?: @"";
+        _codeValue = dict[@"codeValue"] ?: @"";
+        _codeSource = dict[@"codeSource"] ?: @"";
     }
     return self;
 }

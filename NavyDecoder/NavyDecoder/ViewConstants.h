@@ -22,20 +22,20 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString * const kOpenSourceNotice;
+extern NSString *const kOpenSourceNotice;
 
 extern const double kBackgroundAlphaDark;
 extern const double kBackgroundAlphaLight;
 
-extern NSString * const kSegueShowItem;
-extern NSString * const kSegueShowRFAS;
-extern NSString * const kSegueShowDetails;
-extern NSString * const kSegueShowDetailsAccessoryButton;
-extern NSString * const kSegueShowGlobalSearchDetail;
+extern NSString *const kSegueShowItem;
+extern NSString *const kSegueShowRFAS;
+extern NSString *const kSegueShowDetails;
+extern NSString *const kSegueShowDetailsAccessoryButton;
+extern NSString *const kSegueShowGlobalSearchDetail;
 
-extern NSString * const kAppStoreId;
-extern NSString * const kAppStoreURL;
-extern NSString * const kSupportEmail;
+extern NSString *const kAppStoreId;
+extern NSString *const kAppStoreURL;
+extern NSString *const kSupportEmail;
 
 @interface ViewConstants : NSObject
 

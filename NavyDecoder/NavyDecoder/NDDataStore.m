@@ -81,9 +81,10 @@
 }
 
 - (NSArray<NDDecoderItem *> *)searchAllItemsForText:(NSString *)text {
-    if (text.length == 0) return @[];
+    if (text.length == 0)
+        return @[];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
-        @"codeKey CONTAINS[c] %@ OR codeValue CONTAINS[c] %@", text, text];
+                                              @"codeKey CONTAINS[c] %@ OR codeValue CONTAINS[c] %@", text, text];
     return [self.allItems filteredArrayUsingPredicate:predicate];
 }
 

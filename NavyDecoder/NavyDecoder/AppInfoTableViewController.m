@@ -24,7 +24,7 @@
 #import <MessageUI/MessageUI.h>
 #import "ViewConstants.h"
 
-@implementation AppInfoTableViewController 
+@implementation AppInfoTableViewController
 
 
 - (void)viewDidLoad {
@@ -43,14 +43,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         switch (indexPath.row) {
-            case 0:
-                [self openEmail];
-                break;
-            case 1:
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreURL] options:@{} completionHandler:nil];
-                break;
-            default:
-                break;
+        case 0:
+            [self openEmail];
+            break;
+        case 1:
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kAppStoreURL] options:@{} completionHandler:nil];
+            break;
+        default:
+            break;
         }
     }
 }
@@ -68,19 +68,19 @@
         [self presentViewController:mailer animated:YES completion:nil];
     } else {
         UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Error"
-                                    message:@"Your device appears not to support email."
-                                    preferredStyle:UIAlertControllerStyleAlert];
-        
+            alertControllerWithTitle:@"Error"
+                             message:@"Your device appears not to support email."
+                      preferredStyle:UIAlertControllerStyleAlert];
+
         UIAlertAction *okButton = [UIAlertAction
-                                   actionWithTitle:@"OK"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action) {
-                                       //No action except to close alert
-                                   }];
-        
+            actionWithTitle:@"OK"
+                      style:UIAlertActionStyleDefault
+                    handler:^(UIAlertAction *action){
+                        // No action except to close alert
+                    }];
+
         [alert addAction:okButton];
-        
+
         [self presentViewController:alert animated:YES completion:nil];
     }
 }

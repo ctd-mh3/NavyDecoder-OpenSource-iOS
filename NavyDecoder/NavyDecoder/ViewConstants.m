@@ -22,20 +22,20 @@
 
 #import "ViewConstants.h"
 
-NSString * const kOpenSourceNotice = @"This application is open source and fully relies on members of the Navy Reserve to pass updated (non-CUI) data and corrections to the app author (or the project on GitHub).";
+NSString *const kOpenSourceNotice = @"This application is open source and fully relies on members of the Navy Reserve to pass updated (non-CUI) data and corrections to the app author (or the project on GitHub).";
 
-const double kBackgroundAlphaDark  = 0.5;
+const double kBackgroundAlphaDark = 0.5;
 const double kBackgroundAlphaLight = 0.2;
 
-NSString * const kSegueShowItem                     = @"showItem";
-NSString * const kSegueShowRFAS                     = @"showRFAS";
-NSString * const kSegueShowDetails                  = @"showDetails";
-NSString * const kSegueShowDetailsAccessoryButton   = @"showDetailsAccessoryButton";
-NSString * const kSegueShowGlobalSearchDetail       = @"showGlobalSearchDetail";
+NSString *const kSegueShowItem = @"showItem";
+NSString *const kSegueShowRFAS = @"showRFAS";
+NSString *const kSegueShowDetails = @"showDetails";
+NSString *const kSegueShowDetailsAccessoryButton = @"showDetailsAccessoryButton";
+NSString *const kSegueShowGlobalSearchDetail = @"showGlobalSearchDetail";
 
-NSString * const kAppStoreId  = @"588227679";
-NSString * const kAppStoreURL = @"https://apps.apple.com/app/id588227679";
-NSString * const kSupportEmail = @"support@crashtestdummylimited.com";
+NSString *const kAppStoreId = @"588227679";
+NSString *const kAppStoreURL = @"https://apps.apple.com/app/id588227679";
+NSString *const kSupportEmail = @"support@crashtestdummylimited.com";
 
 @implementation ViewConstants
 

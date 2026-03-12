@@ -46,8 +46,8 @@
 }
 
 - (UISceneConfiguration *)application:(UIApplication *)application
-configurationForConnectingSceneSession:(UISceneSession *)session
-                               options:(UISceneConnectionOptions *)options {
+    configurationForConnectingSceneSession:(UISceneSession *)session
+                                   options:(UISceneConnectionOptions *)options {
     return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:session.role];
 }
 

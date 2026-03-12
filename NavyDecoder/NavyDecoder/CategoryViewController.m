@@ -131,7 +131,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+                                    ? UIFontTextStyleTitle3
+                                    : UIFontTextStyleBody;
 
     if ([self isSearchActive]) {
         static NSString *searchCellId = @"GlobalSearchCell";

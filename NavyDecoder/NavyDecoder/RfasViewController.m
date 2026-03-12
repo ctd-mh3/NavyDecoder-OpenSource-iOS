@@ -48,7 +48,6 @@
 @implementation RfasViewController
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.rfas = [[Rfas alloc] init];
@@ -110,8 +109,8 @@
 
 - (void)updateBackground {
     self.backgroundImageView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-        ? kBackgroundAlphaDark
-        : kBackgroundAlphaLight;
+                                         ? kBackgroundAlphaDark
+                                         : kBackgroundAlphaLight;
 }
 
 - (void)updateBackgroundForSize:(CGSize)size {
@@ -119,8 +118,8 @@
     UIImageView *bg = [viewUtilities getBackgroundImageViewForSize:size];
     self.backgroundImageView.image = bg.image;
     self.backgroundImageView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-        ? kBackgroundAlphaDark
-        : kBackgroundAlphaLight;
+                                         ? kBackgroundAlphaDark
+                                         : kBackgroundAlphaLight;
     self.backgroundImageView.frame = CGRectMake(0, 0, size.width, size.height);
 }
 
@@ -156,7 +155,7 @@
 
     UIView *pickerBand = [self makeSectionBand:@"RFAS CODE"];
     UIView *resultBand = [self makeSectionBand:@"DECODED MEANING"];
-    UIView *shareBand  = [self makeSectionBand:@"SHARE"];
+    UIView *shareBand = [self makeSectionBand:@"SHARE"];
     [contentView addSubview:pickerBand];
     [contentView addSubview:resultBand];
     [contentView addSubview:shareBand];
@@ -169,9 +168,12 @@
     self.meaning3Label = [self makeResultLabel];
 
     UIStackView *resultStack = [[UIStackView alloc] initWithArrangedSubviews:@[
-        [self makeResultRow:self.prefix1Label meaning:self.meaning1Label],
-        [self makeResultRow:self.prefix2Label meaning:self.meaning2Label],
-        [self makeResultRow:self.prefix3Label meaning:self.meaning3Label],
+        [self makeResultRow:self.prefix1Label
+                    meaning:self.meaning1Label],
+        [self makeResultRow:self.prefix2Label
+                    meaning:self.meaning2Label],
+        [self makeResultRow:self.prefix3Label
+                    meaning:self.meaning3Label],
     ]];
     resultStack.axis = UILayoutConstraintAxisVertical;
     resultStack.spacing = 8;
@@ -197,7 +199,8 @@
     }
 
     UIFontTextStyle shareTextStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+                                         ? UIFontTextStyleTitle3
+                                         : UIFontTextStyleBody;
     self.shareButton.titleLabel.font = [UIFont preferredFontForTextStyle:shareTextStyle];
     self.shareButton.titleLabel.adjustsFontForContentSizeCategory = YES;
 
@@ -220,41 +223,55 @@
         [contentView.widthAnchor constraintEqualToAnchor:scrollView.widthAnchor],
 
         // Notice label
-        [noticeLabel.topAnchor constraintEqualToAnchor:contentView.topAnchor constant:8],
-        [noticeLabel.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor constant:margin],
-        [noticeLabel.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor constant:-margin],
+        [noticeLabel.topAnchor constraintEqualToAnchor:contentView.topAnchor
+                                              constant:8],
+        [noticeLabel.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor
+                                                  constant:margin],
+        [noticeLabel.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor
+                                                   constant:-margin],
 
         // Picker band
-        [pickerBand.topAnchor constraintEqualToAnchor:noticeLabel.bottomAnchor constant:8],
+        [pickerBand.topAnchor constraintEqualToAnchor:noticeLabel.bottomAnchor
+                                             constant:8],
         [pickerBand.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor],
         [pickerBand.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor],
 
         // Picker — centered via readable content guide
-        [self.rfasPickerView.topAnchor constraintEqualToAnchor:pickerBand.bottomAnchor constant:4],
+        [self.rfasPickerView.topAnchor constraintEqualToAnchor:pickerBand.bottomAnchor
+                                                      constant:4],
         [self.rfasPickerView.centerXAnchor constraintEqualToAnchor:contentView.centerXAnchor],
         [self.rfasPickerView.leadingAnchor constraintGreaterThanOrEqualToAnchor:readable.leadingAnchor],
         [self.rfasPickerView.trailingAnchor constraintLessThanOrEqualToAnchor:readable.trailingAnchor],
 
         // Decoded meaning band
-        [resultBand.topAnchor constraintEqualToAnchor:self.rfasPickerView.bottomAnchor constant:8],
+        [resultBand.topAnchor constraintEqualToAnchor:self.rfasPickerView.bottomAnchor
+                                             constant:8],
         [resultBand.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor],
         [resultBand.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor],
 
         // Result labels stack view
-        [resultStack.topAnchor constraintEqualToAnchor:resultBand.bottomAnchor constant:12],
-        [resultStack.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor constant:margin],
-        [resultStack.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor constant:-margin],
+        [resultStack.topAnchor constraintEqualToAnchor:resultBand.bottomAnchor
+                                              constant:12],
+        [resultStack.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor
+                                                  constant:margin],
+        [resultStack.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor
+                                                   constant:-margin],
 
         // Share band
-        [shareBand.topAnchor constraintEqualToAnchor:resultStack.bottomAnchor constant:12],
+        [shareBand.topAnchor constraintEqualToAnchor:resultStack.bottomAnchor
+                                            constant:12],
         [shareBand.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor],
         [shareBand.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor],
 
         // Share button
-        [self.shareButton.topAnchor constraintEqualToAnchor:shareBand.bottomAnchor constant:12],
-        [self.shareButton.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor constant:margin],
-        [self.shareButton.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor constant:-margin],
-        [self.shareButton.bottomAnchor constraintEqualToAnchor:contentView.bottomAnchor constant:-16],
+        [self.shareButton.topAnchor constraintEqualToAnchor:shareBand.bottomAnchor
+                                                   constant:12],
+        [self.shareButton.leadingAnchor constraintEqualToAnchor:contentView.leadingAnchor
+                                                       constant:margin],
+        [self.shareButton.trailingAnchor constraintEqualToAnchor:contentView.trailingAnchor
+                                                        constant:-margin],
+        [self.shareButton.bottomAnchor constraintEqualToAnchor:contentView.bottomAnchor
+                                                      constant:-16],
     ]];
 }
 
@@ -263,7 +280,8 @@
     band.translatesAutoresizingMaskIntoConstraints = NO;
     band.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor *(UITraitCollection *tc) {
         CGFloat alpha = (tc.userInterfaceStyle == UIUserInterfaceStyleDark)
-            ? kBackgroundAlphaDark : kBackgroundAlphaLight;
+                            ? kBackgroundAlphaDark
+                            : kBackgroundAlphaLight;
         return [[UIColor blackColor] colorWithAlphaComponent:alpha];
     }];
 
@@ -292,10 +310,14 @@
         [topLine.trailingAnchor constraintEqualToAnchor:band.trailingAnchor],
         [topLine.heightAnchor constraintEqualToConstant:0.5],
 
-        [label.topAnchor constraintEqualToAnchor:topLine.bottomAnchor constant:6],
-        [label.leadingAnchor constraintEqualToAnchor:band.leadingAnchor constant:16],
-        [label.trailingAnchor constraintEqualToAnchor:band.trailingAnchor constant:-16],
-        [label.bottomAnchor constraintEqualToAnchor:bottomLine.topAnchor constant:-6],
+        [label.topAnchor constraintEqualToAnchor:topLine.bottomAnchor
+                                        constant:6],
+        [label.leadingAnchor constraintEqualToAnchor:band.leadingAnchor
+                                            constant:16],
+        [label.trailingAnchor constraintEqualToAnchor:band.trailingAnchor
+                                             constant:-16],
+        [label.bottomAnchor constraintEqualToAnchor:bottomLine.topAnchor
+                                           constant:-6],
 
         [bottomLine.leadingAnchor constraintEqualToAnchor:band.leadingAnchor],
         [bottomLine.trailingAnchor constraintEqualToAnchor:band.trailingAnchor],
@@ -335,11 +357,12 @@
 
 - (void)updateResultLabels {
     UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+                                    ? UIFontTextStyleTitle3
+                                    : UIFontTextStyleBody;
     UIFont *bodyFont = [UIFont preferredFontForTextStyle:textStyle];
 
     for (UILabel *label in @[self.prefix1Label, self.prefix2Label, self.prefix3Label,
-                              self.meaning1Label, self.meaning2Label, self.meaning3Label]) {
+                             self.meaning1Label, self.meaning2Label, self.meaning3Label]) {
         label.font = bodyFont;
         label.adjustsFontForContentSizeCategory = YES;
     }
@@ -358,15 +381,15 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     NSInteger count = 0;
     switch (component) {
-        case 0:
-            count = [[self.rfas getFirstCharacterKeys:self.isEnlisted] count];
-            break;
-        case 1:
-            count = [[self.rfas getSecondAndThirdCharactersKeys:self.isEnlisted] count];
-            break;
-        case 2:
-            count = [[self.rfas getFourthCharacterKeys:self.isEnlisted] count];
-            break;
+    case 0:
+        count = [[self.rfas getFirstCharacterKeys:self.isEnlisted] count];
+        break;
+    case 1:
+        count = [[self.rfas getSecondAndThirdCharactersKeys:self.isEnlisted] count];
+        break;
+    case 2:
+        count = [[self.rfas getFourthCharacterKeys:self.isEnlisted] count];
+        break;
     }
     return count;
 }
@@ -375,15 +398,15 @@
             forComponent:(NSInteger)component {
     NSString *title;
     switch (component) {
-        case 0:
-            title = [self.rfas getFirstCharacterKeyForRow:row isEnlisted:self.isEnlisted];
-            break;
-        case 1:
-            title = [self.rfas getSecondAndThirdCharactersKeyForRow:row isEnlisted:self.isEnlisted];
-            break;
-        case 2:
-            title = [self.rfas getFourthCharacterKeyForRow:row isEnlisted:self.isEnlisted];
-            break;
+    case 0:
+        title = [self.rfas getFirstCharacterKeyForRow:row isEnlisted:self.isEnlisted];
+        break;
+    case 1:
+        title = [self.rfas getSecondAndThirdCharactersKeyForRow:row isEnlisted:self.isEnlisted];
+        break;
+    case 2:
+        title = [self.rfas getFourthCharacterKeyForRow:row isEnlisted:self.isEnlisted];
+        break;
     }
     return title;
 }
@@ -391,10 +414,14 @@
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
     CGFloat total = pickerView.bounds.size.width;
     switch (component) {
-        case 0: return total * 0.25;  // 1st char (single letter)
-        case 1: return total * 0.55;  // 2nd+3rd chars (two letters)
-        case 2: return total * 0.20;  // 4th char (single letter)
-        default: return total / 3.0;
+    case 0:
+        return total * 0.25; // 1st char (single letter)
+    case 1:
+        return total * 0.55; // 2nd+3rd chars (two letters)
+    case 2:
+        return total * 0.20; // 4th char (single letter)
+    default:
+        return total / 3.0;
     }
 }
 
@@ -404,18 +431,18 @@
 
 - (void)updateMeaningForRow:(NSInteger)row inComponent:(NSInteger)component {
     switch (component) {
-        case 0:
-            self.firstCharacterMeaningWithoutTitle = [self.rfas getFirstCharacterValueForRow:row
-                                                                                  isEnlisted:self.isEnlisted];
-            break;
-        case 1:
-            self.secondAndThirdCharacterMeaningWithoutTitle = [self.rfas getSecondAndThirdCharactersValueForRow:row
-                                                                                                     isEnlisted:self.isEnlisted];
-            break;
-        case 2:
-            self.fourthCharacterMeaningWithoutTitle = [self.rfas getFourthCharacterValueForRow:row
-                                                                                    isEnlisted:self.isEnlisted];
-            break;
+    case 0:
+        self.firstCharacterMeaningWithoutTitle = [self.rfas getFirstCharacterValueForRow:row
+                                                                              isEnlisted:self.isEnlisted];
+        break;
+    case 1:
+        self.secondAndThirdCharacterMeaningWithoutTitle = [self.rfas getSecondAndThirdCharactersValueForRow:row
+                                                                                                 isEnlisted:self.isEnlisted];
+        break;
+    case 2:
+        self.fourthCharacterMeaningWithoutTitle = [self.rfas getFourthCharacterValueForRow:row
+                                                                                isEnlisted:self.isEnlisted];
+        break;
     }
     [self updateResultLabels];
 }

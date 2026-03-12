@@ -44,8 +44,8 @@
     UIImageView *backgroundView = [viewUtilities getBackgroundImageViewForSize:size];
     backgroundView.isAccessibilityElement = NO;
     backgroundView.alpha = (self.traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark)
-        ? kBackgroundAlphaDark
-        : kBackgroundAlphaLight;
+                               ? kBackgroundAlphaDark
+                               : kBackgroundAlphaLight;
     [self.tableView setBackgroundView:backgroundView];
 }
 
@@ -67,12 +67,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    if (![view isKindOfClass:[UITableViewHeaderFooterView class]]) return;
+    if (![view isKindOfClass:[UITableViewHeaderFooterView class]])
+        return;
     UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
     UIBackgroundConfiguration *config = [UIBackgroundConfiguration clearConfiguration];
     config.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor *(UITraitCollection *tc) {
         CGFloat alpha = (tc.userInterfaceStyle == UIUserInterfaceStyleDark)
-            ? kBackgroundAlphaDark : kBackgroundAlphaLight;
+                            ? kBackgroundAlphaDark
+                            : kBackgroundAlphaLight;
         return [[UIColor blackColor] colorWithAlphaComponent:alpha];
     }];
     headerView.backgroundConfiguration = config;
@@ -106,9 +108,12 @@
     NSLayoutConstraint *bottom = [label.bottomAnchor constraintEqualToAnchor:container.bottomAnchor constant:-8];
     bottom.priority = UILayoutPriorityDefaultHigh;
     [NSLayoutConstraint activateConstraints:@[
-        [label.topAnchor constraintEqualToAnchor:container.topAnchor constant:8],
-        [label.leadingAnchor constraintEqualToAnchor:container.leadingAnchor constant:16],
-        [label.trailingAnchor constraintEqualToAnchor:container.trailingAnchor constant:-16],
+        [label.topAnchor constraintEqualToAnchor:container.topAnchor
+                                        constant:8],
+        [label.leadingAnchor constraintEqualToAnchor:container.leadingAnchor
+                                            constant:16],
+        [label.trailingAnchor constraintEqualToAnchor:container.trailingAnchor
+                                             constant:-16],
         bottom,
     ]];
     return container;
@@ -117,12 +122,15 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     UIView *header = self.tableView.tableHeaderView;
-    if (!header) return;
+    if (!header)
+        return;
     CGFloat width = self.tableView.bounds.size.width;
-    if (width == 0) return;
+    if (width == 0)
+        return;
     CGFloat height = [header systemLayoutSizeFittingSize:CGSizeMake(width, UILayoutFittingCompressedSize.height)
-                          withHorizontalFittingPriority:UILayoutPriorityRequired
-                                verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
+                           withHorizontalFittingPriority:UILayoutPriorityRequired
+                                 verticalFittingPriority:UILayoutPriorityFittingSizeLevel]
+                         .height;
     if (ABS(header.frame.size.height - height) > 0.5) {
         header.frame = CGRectMake(0, 0, width, height);
         self.tableView.tableHeaderView = header;

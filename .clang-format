@@ -1,0 +1,66 @@
+---
+# clang-format configuration for NavyDecoder-OpenSource
+# Matches the existing Objective-C code style in the project.
+#
+# Usage:
+#   clang-format -i NavyDecoder/**/*.{m,h}
+#
+# Xcode build phase (format on build):
+# CLANG_FORMAT=$(xcrun --find clang-format 2>/dev/null)
+#
+# if [ -z "$CLANG_FORMAT" ]; then
+#   echo "warning: clang-format not found via xcrun"
+#   exit 0
+# fi
+#
+# find "${SRCROOT}/NavyDecoder" "${SRCROOT}/NavyDecoderTests" \( -name "*.m" -o -name "*.h" \) | while read -r file; do
+#   "$CLANG_FORMAT" -i --style=file "$file"
+# done
+
+Language: ObjC
+BasedOnStyle: LLVM
+
+# Indentation
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+ObjCBlockIndentWidth: 4
+
+# Column limit: disabled — pay table initializer lines are intentionally
+# wide and must not be reflowed.
+ColumnLimit: 0
+
+# Braces: attach to same line (K&R / "Egyptian" style)
+BreakBeforeBraces: Attach
+
+# Pointer alignment: right (next to the variable name, not the type)
+# e.g. NSString *foo, not NSString* foo
+PointerAlignment: Right
+
+# ObjC-specific spacing
+ObjCSpaceAfterProperty: true
+ObjCSpaceBeforeProtocolList: true
+
+# Spaces
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesInParentheses: false
+SpacesInAngles: Never
+SpacesInContainerLiterals: false
+SpaceAfterCStyleCast: false
+
+# Short constructs — keep empty blocks compact; never collapse if/for bodies
+AllowShortBlocksOnASingleLine: Empty
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+# Blank lines
+MaxEmptyLinesToKeep: 2
+KeepEmptyLinesAtTheStartOfBlocks: false
+
+# Imports: preserve manual grouping — do not sort
+SortIncludes: Never
+
+# Trailing comma in initializer lists — leave as-is

@@ -42,20 +42,22 @@
 
 - (void)configureView {
     NDDecoderItem *item = self.item;
-    if (!item) return;
+    if (!item)
+        return;
 
-    self.codeKeyString    = item.codeKey;
-    self.categoryTitle    = item.categoryTitle;
-    self.codeValueString  = item.codeValue;
+    self.codeKeyString = item.codeKey;
+    self.categoryTitle = item.categoryTitle;
+    self.codeValueString = item.codeValue;
     self.codeSourceString = item.codeSource;
 
     self.title = [NSString stringWithFormat:@"Decoded %@", self.categoryTitle];
-    self.codeKeyLabel.text    = self.codeKeyString;
-    self.codeValueLabel.text  = self.codeValueString;
+    self.codeKeyLabel.text = self.codeKeyString;
+    self.codeValueLabel.text = self.codeValueString;
     self.codeSourceLabel.text = self.codeSourceString;
 
     UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-        ? UIFontTextStyleTitle3 : UIFontTextStyleBody;
+                                    ? UIFontTextStyleTitle3
+                                    : UIFontTextStyleBody;
     UIFont *contentFont = [UIFont preferredFontForTextStyle:textStyle];
     self.codeKeyLabel.font = contentFont;
     self.codeKeyLabel.adjustsFontForContentSizeCategory = YES;
@@ -105,17 +107,17 @@
 
     if (indexPath.section == 3) {
         switch (indexPath.row) {
-            case 0:
-                [self shareDecodeDetailsFromCell:[tableView cellForRowAtIndexPath:indexPath]];
-                break;
-            case 1:
-                [self openCorrectionEmail];
-                break;
-            case 2:
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
-                break;
-            default:
-                break;
+        case 0:
+            [self shareDecodeDetailsFromCell:[tableView cellForRowAtIndexPath:indexPath]];
+            break;
+        case 1:
+            [self openCorrectionEmail];
+            break;
+        case 2:
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString] options:@{} completionHandler:nil];
+            break;
+        default:
+            break;
         }
     }
 }
@@ -134,9 +136,9 @@
         [self presentViewController:mailer animated:YES completion:nil];
     } else {
         UIAlertController *alert = [UIAlertController
-                                    alertControllerWithTitle:@"Error"
-                                    message:@"Your device appears not to support email."
-                                    preferredStyle:UIAlertControllerStyleAlert];
+            alertControllerWithTitle:@"Error"
+                             message:@"Your device appears not to support email."
+                      preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }

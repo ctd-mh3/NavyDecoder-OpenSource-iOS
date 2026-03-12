@@ -30,7 +30,7 @@
 @property (nonatomic, strong) NSString *categoryTitle;
 @property (nonatomic, strong) NSSet *categoryItems;
 
-    @end
+@end
 
 @interface Category (CoreDataGeneratedAccessors)
 

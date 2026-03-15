@@ -25,17 +25,17 @@
 @implementation UIImage (MGProportionalFill)
 
 - (UIImage *)imageToFitSize:(CGSize)fitSize method:(MGImageResizingMethod)resizeMethod {
-    float imageScaleFactor = self.scale;
+    CGFloat imageScaleFactor = self.scale;
 
-    float sourceWidth = [self size].width * imageScaleFactor;
-    float sourceHeight = [self size].height * imageScaleFactor;
-    float targetWidth = fitSize.width;
-    float targetHeight = fitSize.height;
+    CGFloat sourceWidth = [self size].width * imageScaleFactor;
+    CGFloat sourceHeight = [self size].height * imageScaleFactor;
+    CGFloat targetWidth = fitSize.width;
+    CGFloat targetHeight = fitSize.height;
     BOOL cropping = !(resizeMethod == MGImageResizeScale);
 
     // Calculate aspect ratios
-    float sourceRatio = sourceWidth / sourceHeight;
-    float targetRatio = targetWidth / targetHeight;
+    CGFloat sourceRatio = sourceWidth / sourceHeight;
+    CGFloat targetRatio = targetWidth / targetHeight;
 
     // Determine what side of the source image to use for proportional scaling
     BOOL scaleWidth = (sourceRatio <= targetRatio);
@@ -43,7 +43,7 @@
     scaleWidth = (cropping) ? scaleWidth : !scaleWidth;
 
     // Proportionally scale source image
-    float scalingFactor, scaledWidth, scaledHeight;
+    CGFloat scalingFactor, scaledWidth, scaledHeight;
 
     if (scaleWidth) {
         scalingFactor = 1.0 / sourceRatio;
@@ -54,15 +54,15 @@
         scaledWidth = round(targetHeight * scalingFactor);
         scaledHeight = targetHeight;
     }
-    float scaleFactor = scaledHeight / sourceHeight;
+    CGFloat scaleFactor = scaledHeight / sourceHeight;
 
     // Calculate compositing rectangles
     CGRect sourceRect, destRect;
 
     if (cropping) {
         destRect = CGRectMake(0, 0, targetWidth, targetHeight);
-        float destX = 0.0;
-        float destY = 0.0;
+        CGFloat destX = 0.0;
+        CGFloat destY = 0.0;
 
         if (resizeMethod == MGImageResizeCrop) {
             // Crop center

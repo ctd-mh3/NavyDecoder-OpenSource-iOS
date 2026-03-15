@@ -48,6 +48,21 @@ NSInteger const kNumberOfBackgroundImages = 8;
     return sharedInstance;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(clearImageCache)
+                                                     name:UIApplicationDidReceiveMemoryWarningNotification
+                                                   object:nil];
+    }
+    return self;
+}
+
+- (void)clearImageCache {
+    self.cachedBackgroundImage = nil;
+}
+
 #pragma mark Main Methods
 
 - (UIImageView *)getBackgroundImageViewForSize:(CGSize)size {

@@ -64,6 +64,9 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // https://stackoverflow.com/questions/813068/uitableview-change-section-header-color
     [cell setBackgroundColor:[UIColor clearColor]];
+
+    cell.textLabel.adjustsFontForContentSizeCategory = YES;
+    cell.detailTextLabel.adjustsFontForContentSizeCategory = YES;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {

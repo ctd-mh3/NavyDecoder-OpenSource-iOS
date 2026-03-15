@@ -34,7 +34,7 @@
 - (void)sceneDidEnterBackground:(UIScene *)scene {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *current = [defaults objectForKey:settingsBackgroundImageKey];
-    [defaults setObject:@([current intValue] + 1) forKey:settingsBackgroundImageKey];
+    [defaults setObject:@(([current integerValue] + 1) % kNumberOfBackgroundImages) forKey:settingsBackgroundImageKey];
 }
 
 @end

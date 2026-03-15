@@ -34,7 +34,7 @@ NSString *const settingsBackgroundImageKey = @"backgroundImageKey";
 
 @implementation NDCViewUtilities
 
-static NSInteger const kNumberOfBackgroundImages = 8;
+NSInteger const kNumberOfBackgroundImages = 8;
 
 #pragma mark Singleton Methods
 

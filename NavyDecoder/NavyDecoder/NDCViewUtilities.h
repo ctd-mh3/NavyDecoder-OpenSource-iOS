@@ -23,6 +23,7 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *const settingsBackgroundImageKey;
+extern NSInteger const kNumberOfBackgroundImages;
 
 @interface NDCViewUtilities : NSObject
 

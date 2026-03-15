@@ -89,7 +89,16 @@
 #pragma mark - Mail Compose Delegate
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (result == MFMailComposeResultFailed) {
+            NSString *message = error.localizedDescription ?: @"The email could not be sent. Please try again.";
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Email Failed"
+                                                                           message:message
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }];
 }
 
 #pragma mark - Notice Header

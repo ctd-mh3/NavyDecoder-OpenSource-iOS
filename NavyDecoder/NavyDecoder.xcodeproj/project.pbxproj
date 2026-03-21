@@ -401,6 +401,7 @@
 				4C61854E163C5279002997C6 /* Resources */,
 				4CC41DFA18ADA1C400D64652 /* TODOs and FIXMEs */,
 				4CC4AE7018ADA21400CC4DB7 /* Source Code Length */,
+				53F904DD54E2BC6A920E514A /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -560,7 +561,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "find \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | xargs -0 wc -l | awk '$1 > 400 && $2 != \"total\" { print $2 \":1: warning: File more than 400 lines, consider refactoring.\" }'\n";
+			shellScript = "find \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -not -path \"*/NavyDecoderTests/*\" -print0 | xargs -0 wc -l | awk '$1 > 400 && $2 != \"total\" { print $2 \":1: warning: File more than 400 lines, consider refactoring.\" }'\n";
+		};
+		53F904DD54E2BC6A920E514A /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SWIFTLINT=/opt/homebrew/bin/swiftlint\n\nif [ ! -f \"$SWIFTLINT\" ]; then\n  echo \"warning: SwiftLint not installed. Run: brew install swiftlint\"\n  exit 0\nfi\n\n\"$SWIFTLINT\" lint --config \"${SRCROOT}/.swiftlint.yml\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

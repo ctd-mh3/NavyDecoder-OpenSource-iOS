@@ -24,6 +24,8 @@
 #import <MessageUI/MessageUI.h>
 #import "ViewConstants.h"
 
+static const NSInteger kAppSupportSectionIndex = 1;
+
 @implementation AppInfoTableViewController
 
 
@@ -41,7 +43,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
+    if (indexPath.section == kAppSupportSectionIndex) {
         switch (indexPath.row) {
         case 0:
             [self openEmail];

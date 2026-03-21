@@ -34,7 +34,11 @@
         (void)[NDDataStore sharedStore];
     });
 
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{settingsBackgroundImageKey: @1}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{
+        settingsBackgroundImageKey: @1,
+        @"reviewDetailViewCount": @0,
+        @"reviewLastVersionPrompted": @"",
+    }];
 
     // Transparent navigation bar (modern API)
     UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];

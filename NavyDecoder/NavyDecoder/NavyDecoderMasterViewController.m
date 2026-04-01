@@ -29,14 +29,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
-                       withTarget:self
-                           action:@selector(traitDidChange)];
+    if (@available(iOS 17, *)) {
+        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
+                           withTarget:self
+                               action:@selector(traitDidChange)];
+    }
 }
 
 - (void)traitDidChange {
     [self setBackgroundForSize:self.tableView.bounds.size];
     [self.tableView reloadData];
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if (@available(iOS 17, *)) {
+        return;
+    }
+    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
+        [self traitDidChange];
+    }
 }
 
 - (void)setBackgroundForSize:(CGSize)size {
@@ -92,16 +104,17 @@
 #pragma mark - Mail Compose Delegate
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
-    [self dismissViewControllerAnimated:YES completion:^{
-        if (result == MFMailComposeResultFailed) {
-            NSString *message = error.localizedDescription ?: @"The email could not be sent. Please try again.";
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Email Failed"
-                                                                           message:message
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-    }];
+    [self dismissViewControllerAnimated:YES
+                             completion:^{
+                                 if (result == MFMailComposeResultFailed) {
+                                     NSString *message = error.localizedDescription ?: @"The email could not be sent. Please try again.";
+                                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Email Failed"
+                                                                                                    message:message
+                                                                                             preferredStyle:UIAlertControllerStyleAlert];
+                                     [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+                                     [self presentViewController:alert animated:YES completion:nil];
+                                 }
+                             }];
 }
 
 #pragma mark - Notice Header

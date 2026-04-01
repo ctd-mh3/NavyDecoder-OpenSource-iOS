@@ -55,9 +55,21 @@
         }
     }
 
-    [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
-                       withTarget:self
-                           action:@selector(updateBackground)];
+    if (@available(iOS 17, *)) {
+        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
+                           withTarget:self
+                               action:@selector(updateBackground)];
+    }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if (@available(iOS 17, *)) {
+        return;
+    }
+    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
+        [self updateBackground];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

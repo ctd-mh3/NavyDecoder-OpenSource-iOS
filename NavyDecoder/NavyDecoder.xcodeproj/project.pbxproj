@@ -789,7 +789,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 46;
+				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = X69J225DNV;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -806,7 +806,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.42;
+				MARKETING_VERSION = 1.43;
 				PRODUCT_BUNDLE_IDENTIFIER = com.crashtestdummylimited.NavyDecoder;
 				PRODUCT_NAME = NavyDecoder;
 				PROVISIONING_PROFILE = "";
@@ -825,7 +825,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 46;
+				CURRENT_PROJECT_VERSION = 47;
 				DEVELOPMENT_TEAM = X69J225DNV;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -842,7 +842,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.42;
+				MARKETING_VERSION = 1.43;
 				PRODUCT_BUNDLE_IDENTIFIER = com.crashtestdummylimited.NavyDecoder;
 				PRODUCT_NAME = NavyDecoder;
 				PROVISIONING_PROFILE = "";
@@ -860,7 +860,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X69J225DNV;
-				PROVISIONING_PROFILE = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -871,6 +870,7 @@
 				INFOPLIST_FILE = "NavyDecoderTests/NavyDecoderTests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crashtestdummylimited.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NavyDecoderTests;
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -883,7 +883,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = X69J225DNV;
-				PROVISIONING_PROFILE = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -894,6 +893,7 @@
 				INFOPLIST_FILE = "NavyDecoderTests/NavyDecoderTests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crashtestdummylimited.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NavyDecoderTests;
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};

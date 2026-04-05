@@ -39,6 +39,8 @@
 		4CDD01022D800000009088C8 /* NDDecoderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01012D800000009088C8 /* NDDecoderItem.m */; };
 		4CDD01052D800000009088C8 /* NDDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01042D800000009088C8 /* NDDataStore.m */; };
 		4CDD01072D800000009088C8 /* DecoderData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4CDD01062D800000009088C8 /* DecoderData.json */; };
+		4CDD010A2D800001009088C8 /* NavyDecoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D9F1642F49600397A60 /* NavyDecoderTests.m */; };
+		4CDD010C2D800001009088C8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDD010B2D800001009088C8 /* XCTest.framework */; };
 		4CDEFD5F18AC5B320093E018 /* NavyDecoderMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDEFD5D18AC5B320093E018 /* NavyDecoderMasterViewController.m */; };
 		4CDEFD6218ACE1060093E018 /* AppInfoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDEFD6118ACE1060093E018 /* AppInfoTableViewController.m */; };
 		4CEBC0DB19978F90008CD611 /* 0_2048x2048_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CEBC0B319978F90008CD611 /* 0_2048x2048_background.png */; };
@@ -114,6 +116,7 @@
 		4CDD01032D800000009088C8 /* NDDataStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NDDataStore.h; sourceTree = "<group>"; };
 		4CDD01042D800000009088C8 /* NDDataStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDDataStore.m; sourceTree = "<group>"; };
 		4CDD01062D800000009088C8 /* DecoderData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DecoderData.json; sourceTree = "<group>"; };
+		4CDD010B2D800001009088C8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		4CDEFD5D18AC5B320093E018 /* NavyDecoderMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavyDecoderMasterViewController.m; sourceTree = "<group>"; };
 		4CDEFD5E18AC5B320093E018 /* NavyDecoderMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavyDecoderMasterViewController.h; sourceTree = "<group>"; };
 		4CDEFD6018ACE1060093E018 /* AppInfoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInfoTableViewController.h; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 				4C618585163C527D002997C6 /* UIKit.framework in Frameworks */,
 				4C618586163C527D002997C6 /* Foundation.framework in Frameworks */,
 				4C618587163C527D002997C6 /* CoreData.framework in Frameworks */,
+				4CDD010C2D800001009088C8 /* XCTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,6 +205,7 @@
 				4C61858A163C527D002997C6 /* NavyDecoderTests */,
 				4C618553163C5279002997C6 /* Frameworks */,
 				4C618551163C5279002997C6 /* Products */,
+				4CDC43F92F81F73D009AC918 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -298,6 +303,14 @@
 			children = (
 			);
 			path = "13-Inch-iPad";
+			sourceTree = "<group>";
+		};
+		4CDC43F92F81F73D009AC918 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				4CDD010B2D800001009088C8 /* XCTest.framework */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		4CDEFD2C18AC5AE80093E018 /* Background */ = {
@@ -533,7 +546,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+			shellScript = "";
 		};
 		4CC41DFA18ADA1C400D64652 /* TODOs and FIXMEs */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -613,6 +626,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4CDD010A2D800001009088C8 /* NavyDecoderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,6 +857,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NavyDecoder.app/NavyDecoder";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X69J225DNV;
+				PROVISIONING_PROFILE = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -853,6 +871,7 @@
 				INFOPLIST_FILE = "NavyDecoderTests/NavyDecoderTests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crashtestdummylimited.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NavyDecoderTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -861,6 +880,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NavyDecoder.app/NavyDecoder";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X69J225DNV;
+				PROVISIONING_PROFILE = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -871,6 +894,7 @@
 				INFOPLIST_FILE = "NavyDecoderTests/NavyDecoderTests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.crashtestdummylimited.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NavyDecoderTests;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;

@@ -20,8 +20,8 @@
 // Copyright (c) 2014-2025 Crash Test Dummy Limited, LLC
 //
 
-// #import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface NavyDecoderTests // : SenTestCase
+@interface NavyDecoderTests : XCTestCase
 
 @end

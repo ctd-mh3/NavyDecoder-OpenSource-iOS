@@ -69,29 +69,37 @@
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
     NSString *searchString = searchController.searchBar.text;
 
-    if (searchString.length > 0) {
-        self.searchResults = [[NDDataStore sharedStore] searchAllItemsForText:searchString];
-    } else {
+    if (searchString.length == 0) {
         self.searchResults = @[];
-    }
-
-    [self.tableView reloadData];
-
-    BOOL hasResults = self.searchResults.count > 0;
-    BOOL isSearching = searchString.length > 0;
-    if (isSearching && !hasResults) {
-        if (!self.noResultsLabel) {
-            self.noResultsLabel = [[UILabel alloc] init];
-            self.noResultsLabel.textAlignment = NSTextAlignmentCenter;
-            self.noResultsLabel.textColor = [UIColor secondaryLabelColor];
-            self.noResultsLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-            self.noResultsLabel.numberOfLines = 0;
+        [self.tableView reloadData];
+        if (self.tableView.backgroundView == self.noResultsLabel) {
+            [self setBackgroundForSize:self.tableView.bounds.size];
         }
-        self.noResultsLabel.text = [NSString stringWithFormat:@"No results for \"%@\"", searchString];
-        self.tableView.backgroundView = self.noResultsLabel;
-    } else if (self.tableView.backgroundView == self.noResultsLabel) {
-        [self setBackgroundForSize:self.tableView.bounds.size];
+        return;
     }
+
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        NSArray *results = [[NDDataStore sharedStore] searchAllItemsForText:searchString];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Discard results if the user has typed something different since we dispatched.
+            if (![self.searchController.searchBar.text isEqualToString:searchString]) return;
+            self.searchResults = results;
+            [self.tableView reloadData];
+            if (results.count == 0) {
+                if (!self.noResultsLabel) {
+                    self.noResultsLabel = [[UILabel alloc] init];
+                    self.noResultsLabel.textAlignment = NSTextAlignmentCenter;
+                    self.noResultsLabel.textColor = [UIColor secondaryLabelColor];
+                    self.noResultsLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                    self.noResultsLabel.numberOfLines = 0;
+                }
+                self.noResultsLabel.text = [NSString stringWithFormat:@"No results for \"%@\"", searchString];
+                self.tableView.backgroundView = self.noResultsLabel;
+            } else if (self.tableView.backgroundView == self.noResultsLabel) {
+                [self setBackgroundForSize:self.tableView.bounds.size];
+            }
+        });
+    });
 }
 
 #pragma mark - Table View

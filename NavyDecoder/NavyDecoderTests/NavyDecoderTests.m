@@ -23,6 +23,7 @@
 #import "NavyDecoderTests.h"
 #import "NDDataStore.h"
 #import "NDDecoderItem.h"
+#import "ViewConstants.h"
 
 @implementation NavyDecoderTests
 
@@ -171,16 +172,44 @@
     XCTAssertEqualObjects(item.codeValue, @"National Security Studies");
 }
 
-// RFAS categories are placeholder rows whose codes are handled by Rfas.m,
-// not decoded from the JSON.  Just confirm they appear in categoryTitles.
+// ---------------------------------------------------------------------------
+// RFAS routing — constants must stay in sync with DecoderData.json
+// ---------------------------------------------------------------------------
+
+// Pins the literal values of the routing constants. If someone changes a
+// constant string, this test fails before the routing silently breaks.
+- (void)testRFASConstants_HaveExpectedValues {
+    XCTAssertEqualObjects(kRFASEnlistedCategoryTitle, @"RFAS-Enlisted");
+    XCTAssertEqualObjects(kRFASOfficerCategoryTitle,  @"RFAS-Officer");
+}
+
+// Verifies DecoderData.json contains a category whose title exactly matches
+// each routing constant. If the JSON renames an RFAS category this test fails.
 - (void)testCategoryTitles_ContainsRFASEnlisted {
     NSArray<NSString *> *titles = [[NDDataStore sharedStore] categoryTitles];
-    XCTAssertTrue([titles containsObject:@"RFAS-Enlisted"], @"RFAS-Enlisted missing from categoryTitles.");
+    XCTAssertTrue([titles containsObject:kRFASEnlistedCategoryTitle],
+                  @"'%@' missing from categoryTitles — update JSON or kRFASEnlistedCategoryTitle.", kRFASEnlistedCategoryTitle);
 }
 
 - (void)testCategoryTitles_ContainsRFASOfficer {
     NSArray<NSString *> *titles = [[NDDataStore sharedStore] categoryTitles];
-    XCTAssertTrue([titles containsObject:@"RFAS-Officer"], @"RFAS-Officer missing from categoryTitles.");
+    XCTAssertTrue([titles containsObject:kRFASOfficerCategoryTitle],
+                  @"'%@' missing from categoryTitles — update JSON or kRFASOfficerCategoryTitle.", kRFASOfficerCategoryTitle);
+}
+
+// Guards against a new RFAS category being added to the JSON without a
+// corresponding routing case in CategoryViewController. Uses a substring
+// search so it catches titles like "RFAS-Warrant" that don't match any
+// constant but would silently fall through to the wrong view controller.
+- (void)testCategoryTitles_ExactlyTwoRFASCategories {
+    NSArray<NSString *> *titles = [[NDDataStore sharedStore] categoryTitles];
+    NSPredicate *rfasPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] 'RFAS'"];
+    NSArray<NSString *> *rfasTitles = [titles filteredArrayUsingPredicate:rfasPredicate];
+    XCTAssertEqual(rfasTitles.count, 2u,
+                   @"Expected exactly 2 RFAS categories ('%@', '%@'); found %lu: %@. "
+                   @"Add routing in CategoryViewController for any new RFAS category.",
+                   kRFASEnlistedCategoryTitle, kRFASOfficerCategoryTitle,
+                   (unsigned long)rfasTitles.count, rfasTitles);
 }
 
 // ---------------------------------------------------------------------------

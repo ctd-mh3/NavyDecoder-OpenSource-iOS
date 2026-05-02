@@ -33,6 +33,9 @@ extern NSString *const kSegueShowDetails;
 extern NSString *const kSegueShowDetailsAccessoryButton;
 extern NSString *const kSegueShowGlobalSearchDetail;
 
+extern NSString *const kRFASEnlistedCategoryTitle;
+extern NSString *const kRFASOfficerCategoryTitle;
+
 extern NSString *const kAppStoreId;
 extern NSString *const kAppStoreURL;
 extern NSString *const kSupportEmail;

@@ -56,6 +56,20 @@
 
     self.searchResults = @[];
     self.tableView.tableHeaderView = [self makeNoticeHeaderView];
+    [self updateEmptyState];
+}
+
+#pragma mark - Empty State
+
+- (void)updateEmptyState {
+    if ([[NDDataStore sharedStore] categoryTitles].count == 0) {
+        UILabel *label = [[UILabel alloc] init];
+        label.text = @"No categories available.";
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor secondaryLabelColor];
+        label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        self.tableView.backgroundView = label;
+    }
 }
 
 #pragma mark - Search State
@@ -125,19 +139,7 @@
     if ([self isSearchActive]) {
         return (NSInteger)self.searchResults.count;
     }
-
-    NSInteger count = (NSInteger)[[NDDataStore sharedStore] categoryTitles].count;
-    if (count == 0) {
-        UILabel *label = [[UILabel alloc] init];
-        label.text = @"No categories available.";
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor secondaryLabelColor];
-        label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-        self.tableView.backgroundView = label;
-    } else if ([self.tableView.backgroundView isKindOfClass:[UILabel class]]) {
-        self.tableView.backgroundView = nil;
-    }
-    return count;
+    return (NSInteger)[[NDDataStore sharedStore] categoryTitles].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

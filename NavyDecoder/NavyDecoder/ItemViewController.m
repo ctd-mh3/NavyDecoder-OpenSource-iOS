@@ -32,6 +32,7 @@
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) NSArray<NDDecoderItem *> *allItems;
 @property (nonatomic, strong) NSArray<NDDecoderItem *> *displayedItems;
+@property (nonatomic, strong) UILabel *noResultsLabel;
 
 @end
 
@@ -75,14 +76,16 @@
     BOOL hasResults = self.displayedItems.count > 0;
     BOOL isSearching = searchString.length > 0;
     if (isSearching && !hasResults) {
-        UILabel *label = [[UILabel alloc] init];
-        label.text = [NSString stringWithFormat:@"No results for \"%@\"", searchString];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.textColor = [UIColor secondaryLabelColor];
-        label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-        label.numberOfLines = 0;
-        self.tableView.backgroundView = label;
-    } else if ([self.tableView.backgroundView isKindOfClass:[UILabel class]]) {
+        if (!self.noResultsLabel) {
+            self.noResultsLabel = [[UILabel alloc] init];
+            self.noResultsLabel.textAlignment = NSTextAlignmentCenter;
+            self.noResultsLabel.textColor = [UIColor secondaryLabelColor];
+            self.noResultsLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+            self.noResultsLabel.numberOfLines = 0;
+        }
+        self.noResultsLabel.text = [NSString stringWithFormat:@"No results for \"%@\"", searchString];
+        self.tableView.backgroundView = self.noResultsLabel;
+    } else if (self.tableView.backgroundView == self.noResultsLabel) {
         [self setBackgroundForSize:self.tableView.bounds.size];
     }
 }

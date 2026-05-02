@@ -188,11 +188,9 @@
     NSString *title = [[NDDataStore sharedStore] categoryTitles][indexPath.row];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
-    if ([title rangeOfString:@"RFAS"].location == NSNotFound) {
-        [self performSegueWithIdentifier:kSegueShowItem sender:cell];
-    } else {
-        [self performSegueWithIdentifier:kSegueShowRFAS sender:cell];
-    }
+    BOOL isRFAS = [title isEqualToString:kRFASEnlistedCategoryTitle]
+               || [title isEqualToString:kRFASOfficerCategoryTitle];
+    [self performSegueWithIdentifier:isRFAS ? kSegueShowRFAS : kSegueShowItem sender:cell];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -210,7 +208,7 @@
     } else if ([[segue identifier] isEqualToString:kSegueShowRFAS]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSString *categoryTitle = [[NDDataStore sharedStore] categoryTitles][indexPath.row];
-        BOOL isEnlisted = ([categoryTitle rangeOfString:@"Enl"].location != NSNotFound);
+        BOOL isEnlisted = [categoryTitle isEqualToString:kRFASEnlistedCategoryTitle];
         RfasViewController *controller = (RfasViewController *)segue.destinationViewController;
         controller.isEnlisted = isEnlisted;
     }

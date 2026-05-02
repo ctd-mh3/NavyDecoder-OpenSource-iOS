@@ -65,29 +65,38 @@
 
     if (searchString.length == 0) {
         self.displayedItems = self.allItems;
-    } else {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                  @"codeKey CONTAINS[c] %@ OR codeValue CONTAINS[c] %@", searchString, searchString];
-        self.displayedItems = [self.allItems filteredArrayUsingPredicate:predicate];
-    }
-
-    [self.tableView reloadData];
-
-    BOOL hasResults = self.displayedItems.count > 0;
-    BOOL isSearching = searchString.length > 0;
-    if (isSearching && !hasResults) {
-        if (!self.noResultsLabel) {
-            self.noResultsLabel = [[UILabel alloc] init];
-            self.noResultsLabel.textAlignment = NSTextAlignmentCenter;
-            self.noResultsLabel.textColor = [UIColor secondaryLabelColor];
-            self.noResultsLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-            self.noResultsLabel.numberOfLines = 0;
+        [self.tableView reloadData];
+        if (self.tableView.backgroundView == self.noResultsLabel) {
+            [self setBackgroundForSize:self.tableView.bounds.size];
         }
-        self.noResultsLabel.text = [NSString stringWithFormat:@"No results for \"%@\"", searchString];
-        self.tableView.backgroundView = self.noResultsLabel;
-    } else if (self.tableView.backgroundView == self.noResultsLabel) {
-        [self setBackgroundForSize:self.tableView.bounds.size];
+        return;
     }
+
+    NSArray *allItems = self.allItems;
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                      @"codeKey CONTAINS[c] %@ OR codeValue CONTAINS[c] %@", searchString, searchString];
+        NSArray *results = [allItems filteredArrayUsingPredicate:predicate];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Discard results if the user has typed something different since we dispatched.
+            if (![self.searchController.searchBar.text isEqualToString:searchString]) return;
+            self.displayedItems = results;
+            [self.tableView reloadData];
+            if (results.count == 0) {
+                if (!self.noResultsLabel) {
+                    self.noResultsLabel = [[UILabel alloc] init];
+                    self.noResultsLabel.textAlignment = NSTextAlignmentCenter;
+                    self.noResultsLabel.textColor = [UIColor secondaryLabelColor];
+                    self.noResultsLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+                    self.noResultsLabel.numberOfLines = 0;
+                }
+                self.noResultsLabel.text = [NSString stringWithFormat:@"No results for \"%@\"", searchString];
+                self.tableView.backgroundView = self.noResultsLabel;
+            } else if (self.tableView.backgroundView == self.noResultsLabel) {
+                [self setBackgroundForSize:self.tableView.bounds.size];
+            }
+        });
+    });
 }
 
 #pragma mark - Table View

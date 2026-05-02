@@ -34,7 +34,7 @@
 @implementation NDDataStore
 
 + (instancetype)sharedStore {
-    static NDDataStore *instance;
+    static NDDataStore *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[NDDataStore alloc] init];

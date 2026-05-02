@@ -185,6 +185,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:kSegueShowGlobalSearchDetail]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)sender];
+        if (!indexPath) return;
         NDDecoderItem *item = self.searchResults[indexPath.row];
         [(DetailTableViewController *)segue.destinationViewController setItem:item];
 
@@ -194,9 +195,9 @@
         [[segue destinationViewController] setCategoryTitle:title];
 
     } else if ([[segue identifier] isEqualToString:kSegueShowRFAS]) {
-        UITableViewCell *cell = (UITableViewCell *)sender;
-        NSString *categoryString = cell.textLabel.text;
-        BOOL isEnlisted = ([categoryString rangeOfString:@"Enl"].location != NSNotFound);
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSString *categoryTitle = [[NDDataStore sharedStore] categoryTitles][indexPath.row];
+        BOOL isEnlisted = ([categoryTitle rangeOfString:@"Enl"].location != NSNotFound);
         RfasViewController *controller = (RfasViewController *)segue.destinationViewController;
         controller.isEnlisted = isEnlisted;
     }

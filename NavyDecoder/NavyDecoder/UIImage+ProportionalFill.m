@@ -99,14 +99,13 @@
     }
 
     // Create appropriately modified image.
-    UIImage *image = nil;
     CGImageRef sourceImg = CGImageCreateWithImageInRect([self CGImage], sourceRect);
-    UIGraphicsBeginImageContextWithOptions(destRect.size, NO, 0.f);
-    image = [UIImage imageWithCGImage:sourceImg scale:0.0 orientation:self.imageOrientation];
+    UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:destRect.size];
+    UIImage *image = [renderer imageWithActions:^(UIGraphicsImageRendererContext *ctx) {
+        UIImage *cropped = [UIImage imageWithCGImage:sourceImg scale:self.scale orientation:self.imageOrientation];
+        [cropped drawInRect:destRect];
+    }];
     CGImageRelease(sourceImg);
-    [image drawInRect:destRect];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
 
     return image;
 }

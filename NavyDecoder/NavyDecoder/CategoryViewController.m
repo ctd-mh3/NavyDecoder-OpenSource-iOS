@@ -96,7 +96,8 @@
         NSArray *results = [[NDDataStore sharedStore] searchAllItemsForText:searchString];
         dispatch_async(dispatch_get_main_queue(), ^{
             // Discard results if the user has typed something different since we dispatched.
-            if (![self.searchController.searchBar.text isEqualToString:searchString]) return;
+            if (![self.searchController.searchBar.text isEqualToString:searchString])
+                return;
             self.searchResults = results;
             [self.tableView reloadData];
             if (results.count == 0) {
@@ -188,15 +189,15 @@
     NSString *title = [[NDDataStore sharedStore] categoryTitles][indexPath.row];
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
-    BOOL isRFAS = [title isEqualToString:kRFASEnlistedCategoryTitle]
-               || [title isEqualToString:kRFASOfficerCategoryTitle];
+    BOOL isRFAS = [title isEqualToString:kRFASEnlistedCategoryTitle] || [title isEqualToString:kRFASOfficerCategoryTitle];
     [self performSegueWithIdentifier:isRFAS ? kSegueShowRFAS : kSegueShowItem sender:cell];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:kSegueShowGlobalSearchDetail]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:(UITableViewCell *)sender];
-        if (!indexPath) return;
+        if (!indexPath)
+            return;
         NDDecoderItem *item = self.searchResults[indexPath.row];
         [(DetailTableViewController *)segue.destinationViewController setItem:item];
 

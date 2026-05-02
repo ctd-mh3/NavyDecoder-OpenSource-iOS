@@ -34,7 +34,7 @@ NSString *const kSegueShowDetailsAccessoryButton = @"showDetailsAccessoryButton"
 NSString *const kSegueShowGlobalSearchDetail = @"showGlobalSearchDetail";
 
 NSString *const kRFASEnlistedCategoryTitle = @"RFAS-Enlisted";
-NSString *const kRFASOfficerCategoryTitle  = @"RFAS-Officer";
+NSString *const kRFASOfficerCategoryTitle = @"RFAS-Officer";
 
 NSString *const kAppStoreId = @"588227679";
 NSString *const kAppStoreURL = @"https://apps.apple.com/app/id588227679";

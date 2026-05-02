@@ -180,7 +180,7 @@
 // constant string, this test fails before the routing silently breaks.
 - (void)testRFASConstants_HaveExpectedValues {
     XCTAssertEqualObjects(kRFASEnlistedCategoryTitle, @"RFAS-Enlisted");
-    XCTAssertEqualObjects(kRFASOfficerCategoryTitle,  @"RFAS-Officer");
+    XCTAssertEqualObjects(kRFASOfficerCategoryTitle, @"RFAS-Officer");
 }
 
 // Verifies DecoderData.json contains a category whose title exactly matches

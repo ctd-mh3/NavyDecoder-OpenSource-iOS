@@ -75,11 +75,12 @@
     NSArray *allItems = self.allItems;
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                      @"codeKey CONTAINS[c] %@ OR codeValue CONTAINS[c] %@", searchString, searchString];
+                                                  @"codeKey CONTAINS[c] %@ OR codeValue CONTAINS[c] %@", searchString, searchString];
         NSArray *results = [allItems filteredArrayUsingPredicate:predicate];
         dispatch_async(dispatch_get_main_queue(), ^{
             // Discard results if the user has typed something different since we dispatched.
-            if (![self.searchController.searchBar.text isEqualToString:searchString]) return;
+            if (![self.searchController.searchBar.text isEqualToString:searchString])
+                return;
             self.displayedItems = results;
             [self.tableView reloadData];
             if (results.count == 0) {

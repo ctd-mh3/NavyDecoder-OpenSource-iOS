@@ -54,6 +54,9 @@
     self.navigationItem.hidesSearchBarWhenScrolling = YES;
     self.definesPresentationContext = YES;
 
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 44.0;
+
     self.searchResults = @[];
     self.tableView.tableHeaderView = [self makeNoticeHeaderView];
     [self updateEmptyState];
@@ -159,6 +162,7 @@
         cell.textLabel.font = [UIFont preferredFontForTextStyle:textStyle];
         cell.textLabel.adjustsFontForContentSizeCategory = YES;
         cell.detailTextLabel.text = item.categoryTitle;
+        cell.detailTextLabel.adjustsFontForContentSizeCategory = YES;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         return cell;
     }

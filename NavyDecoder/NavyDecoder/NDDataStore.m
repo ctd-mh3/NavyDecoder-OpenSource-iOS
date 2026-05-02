@@ -45,8 +45,14 @@
 
 - (void)loadData {
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"DecoderData" withExtension:@"json"];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    NSArray *records = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    NSAssert(url != nil, @"DecoderData.json missing from bundle");
+
+    NSError *error = nil;
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    NSAssert(data != nil, @"Failed to read DecoderData.json: %@", error);
+
+    NSArray *records = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    NSAssert(records != nil, @"Failed to parse DecoderData.json: %@", error);
 
     NSMutableDictionary *grouped = [NSMutableDictionary dictionary];
     NSMutableArray *all = [NSMutableArray arrayWithCapacity:records.count];

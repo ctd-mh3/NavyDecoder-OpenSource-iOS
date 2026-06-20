@@ -57,6 +57,7 @@
 		4CF01EAE171E2AA70089DB2C /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF01EAD171E2AA70089DB2C /* CoreText.framework */; };
 		4CF85CDB165EDFB00058FF6E /* RfasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF85CDA165EDFB00058FF6E /* RfasViewController.m */; };
 		4CF85CDF165F86920058FF6E /* Rfas.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CF85CDE165F86920058FF6E /* Rfas.m */; };
+		C53860A68080B8405E49AD88 /* NDCAppUpdateChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD261BC4E2E31628719CB09 /* NDCAppUpdateChecker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +149,8 @@
 		4CF85CDA165EDFB00058FF6E /* RfasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RfasViewController.m; sourceTree = "<group>"; };
 		4CF85CDD165F86920058FF6E /* Rfas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rfas.h; sourceTree = "<group>"; };
 		4CF85CDE165F86920058FF6E /* Rfas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rfas.m; sourceTree = "<group>"; };
+		D446A27669788D2A9F506402 /* NDCAppUpdateChecker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NDCAppUpdateChecker.h; sourceTree = "<group>"; };
+		EAD261BC4E2E31628719CB09 /* NDCAppUpdateChecker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NDCAppUpdateChecker.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -244,6 +247,8 @@
 				4CFA12B7164336CA00FA770A /* Model */,
 				4C5C2D891642F30200397A60 /* NavyDecoderAppDelegate.h */,
 				4C5C2D8A1642F30200397A60 /* NavyDecoderAppDelegate.m */,
+				D446A27669788D2A9F506402 /* NDCAppUpdateChecker.h */,
+				EAD261BC4E2E31628719CB09 /* NDCAppUpdateChecker.m */,
 				4C69169119257DEC00D41A53 /* Images.xcassets */,
 				4C61855D163C527A002997C6 /* Supporting Files */,
 			);
@@ -619,6 +624,7 @@
 				4C1B00012D760001009088C8 /* UIViewController+ReviewRequest.m in Sources */,
 				4C1C00012D760001009088C8 /* AppInfoViewController.m in Sources */,
 				4CEE01022D800001009088C8 /* SceneDelegate.m in Sources */,
+				C53860A68080B8405E49AD88 /* NDCAppUpdateChecker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

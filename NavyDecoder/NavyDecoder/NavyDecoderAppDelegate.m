@@ -35,7 +35,7 @@
     });
 
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{
-        settingsBackgroundImageKey: @1,
+        kSettingsBackgroundImageKey: @1,
         @"reviewDetailViewCount": @0,
         @"reviewLastVersionPrompted": @"",
     }];

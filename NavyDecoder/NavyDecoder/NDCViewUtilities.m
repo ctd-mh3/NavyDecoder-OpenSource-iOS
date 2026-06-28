@@ -24,7 +24,7 @@
 #import "NavyDecoderAppDelegate.h"
 #import "UIImage+ProportionalFill.h"
 
-NSString *const settingsBackgroundImageKey = @"backgroundImageKey";
+NSString *const kSettingsBackgroundImageKey = @"backgroundImageKey";
 
 @interface NDCViewUtilities ()
 @property (nonatomic, strong) UIImage *cachedBackgroundImage;
@@ -67,7 +67,7 @@ NSInteger const kNumberOfBackgroundImages = 8;
 
 - (UIImageView *)getBackgroundImageViewForSize:(CGSize)size {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSInteger backgroundImageNumber = [[defaults objectForKey:settingsBackgroundImageKey] integerValue] % kNumberOfBackgroundImages;
+    NSInteger backgroundImageNumber = [[defaults objectForKey:kSettingsBackgroundImageKey] integerValue] % kNumberOfBackgroundImages;
 
     if (!self.cachedBackgroundImage ||
         !CGSizeEqualToSize(self.cachedSize, size) ||

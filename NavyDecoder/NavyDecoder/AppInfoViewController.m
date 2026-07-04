@@ -55,11 +55,61 @@
         }
     }
 
+    [self wrapContentLabelInScrollView];
+
     if (@available(iOS 17, *)) {
         [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
                            withTarget:self
                                action:@selector(updateBackground)];
     }
+}
+
+// The storyboard's content label is only pinned by leading/trailing/top —
+// there's no bottom constraint or scroll view, so at large accessibility
+// text sizes (or for genuinely long content like the Open Source license
+// text) it just grows past the bottom of the screen with no way to read
+// the rest. This is shared by both the "About/Legal" and "Open Source"
+// scenes since they both use this same class.
+- (void)wrapContentLabelInScrollView {
+    UILabel *contentLabel = nil;
+    for (UIView *subview in self.view.subviews) {
+        if ([subview isKindOfClass:[UILabel class]]) {
+            contentLabel = (UILabel *)subview;
+            break;
+        }
+    }
+    if (!contentLabel) {
+        return;
+    }
+
+    CGFloat sideInset = contentLabel.frame.origin.x > 0 ? contentLabel.frame.origin.x : 20.0;
+
+    [contentLabel removeFromSuperview];
+    contentLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    contentLabel.preferredMaxLayoutWidth = 0;
+
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:scrollView];
+    [scrollView addSubview:contentLabel];
+
+    [NSLayoutConstraint activateConstraints:@[
+        [scrollView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [scrollView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [scrollView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+        [scrollView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
+
+        [contentLabel.topAnchor constraintEqualToAnchor:scrollView.contentLayoutGuide.topAnchor
+                                               constant:sideInset],
+        [contentLabel.leadingAnchor constraintEqualToAnchor:scrollView.contentLayoutGuide.leadingAnchor
+                                                   constant:sideInset],
+        [contentLabel.trailingAnchor constraintEqualToAnchor:scrollView.contentLayoutGuide.trailingAnchor
+                                                    constant:-sideInset],
+        [contentLabel.bottomAnchor constraintEqualToAnchor:scrollView.contentLayoutGuide.bottomAnchor
+                                                  constant:-sideInset],
+        [contentLabel.widthAnchor constraintEqualToAnchor:scrollView.frameLayoutGuide.widthAnchor
+                                                 constant:-(sideInset * 2)],
+    ]];
 }
 
 - (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {

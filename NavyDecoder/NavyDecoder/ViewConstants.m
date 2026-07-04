@@ -27,6 +27,8 @@ NSString *const kOpenSourceNotice = @"This application is open source and fully 
 const double kBackgroundAlphaDark = 0.5;
 const double kBackgroundAlphaLight = 0.2;
 
+const CGFloat kDefaultEstimatedRowHeight = 44.0;
+
 NSString *const kSegueShowItem = @"showItem";
 NSString *const kSegueShowRFAS = @"showRFAS";
 NSString *const kSegueShowDetails = @"showDetails";

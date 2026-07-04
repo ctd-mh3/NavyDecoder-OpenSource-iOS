@@ -27,6 +27,11 @@ extern NSString *const kOpenSourceNotice;
 extern const double kBackgroundAlphaDark;
 extern const double kBackgroundAlphaLight;
 
+// Default self-sizing row height estimate, applied to every screen's table
+// view in NavyDecoderMasterViewController's own viewDidLoad — subclasses
+// should not need to set rowHeight/estimatedRowHeight themselves.
+extern const CGFloat kDefaultEstimatedRowHeight;
+
 extern NSString *const kSegueShowItem;
 extern NSString *const kSegueShowRFAS;
 extern NSString *const kSegueShowDetails;

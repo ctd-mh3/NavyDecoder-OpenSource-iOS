@@ -29,6 +29,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = kDefaultEstimatedRowHeight;
+    self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedSectionHeaderHeight = 32.0;
     if (@available(iOS 17, *)) {
         [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
                            withTarget:self
@@ -81,18 +85,55 @@
     cell.detailTextLabel.adjustsFontForContentSizeCategory = YES;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-    if (![view isKindOfClass:[UITableViewHeaderFooterView class]])
-        return;
-    UITableViewHeaderFooterView *headerView = (UITableViewHeaderFooterView *)view;
-    UIBackgroundConfiguration *config = [UIBackgroundConfiguration clearConfiguration];
-    config.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor *(UITraitCollection *tc) {
+// The stock plain-style UITableViewHeaderFooterView.textLabel doesn't scale
+// reliably with Dynamic Type, and its default internal padding is far more
+// generous than this app's headers need. A fully custom header view gives
+// control over both: a small bold baseline scaled via UIFontMetrics (so it
+// still reads as a header, not body text, at every size) and tight,
+// explicit padding.
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    NSString *title = [self tableView:tableView titleForHeaderInSection:section];
+    if (title.length == 0) {
+        return nil;
+    }
+
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor colorWithDynamicProvider:^UIColor *(UITraitCollection *tc) {
         CGFloat alpha = (tc.userInterfaceStyle == UIUserInterfaceStyleDark)
                             ? kBackgroundAlphaDark
                             : kBackgroundAlphaLight;
         return [[UIColor blackColor] colorWithAlphaComponent:alpha];
     }];
-    headerView.backgroundConfiguration = config;
+
+    UILabel *label = [[UILabel alloc] init];
+    label.translatesAutoresizingMaskIntoConstraints = NO;
+    label.text = title;
+    UIFont *baseFont = [UIFont boldSystemFontOfSize:14];
+    label.font = [[UIFontMetrics defaultMetrics] scaledFontForFont:baseFont];
+    label.adjustsFontForContentSizeCategory = YES;
+    label.textColor = [UIColor labelColor];
+
+    [headerView addSubview:label];
+    [NSLayoutConstraint activateConstraints:@[
+        [label.leadingAnchor constraintEqualToAnchor:headerView.leadingAnchor
+                                            constant:16],
+        [label.trailingAnchor constraintEqualToAnchor:headerView.trailingAnchor
+                                             constant:-16],
+        [label.topAnchor constraintEqualToAnchor:headerView.topAnchor
+                                        constant:6],
+        [label.bottomAnchor constraintEqualToAnchor:headerView.bottomAnchor
+                                           constant:-6],
+    ]];
+
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    NSString *title = [self tableView:tableView titleForHeaderInSection:section];
+    if (title.length > 0) {
+        return UITableViewAutomaticDimension;
+    }
+    return [super tableView:tableView heightForHeaderInSection:section];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size
@@ -130,8 +171,7 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = UIColor.clearColor;
     [container addSubview:label];
-    NSLayoutConstraint *bottom = [label.bottomAnchor constraintEqualToAnchor:container.bottomAnchor constant:-8];
-    bottom.priority = UILayoutPriorityDefaultHigh;
+    NSLayoutConstraint *bottom = [label.bottomAnchor constraintEqualToAnchor:container.bottomAnchor constant:-16];
     [NSLayoutConstraint activateConstraints:@[
         [label.topAnchor constraintEqualToAnchor:container.topAnchor
                                         constant:8],
@@ -152,10 +192,15 @@
     CGFloat width = self.tableView.bounds.size.width;
     if (width == 0)
         return;
-    CGFloat height = [header systemLayoutSizeFittingSize:CGSizeMake(width, UILayoutFittingCompressedSize.height)
-                           withHorizontalFittingPriority:UILayoutPriorityRequired
-                                 verticalFittingPriority:UILayoutPriorityFittingSizeLevel]
-                         .height;
+    // Small headroom buffer: systemLayoutSizeFittingSize: with
+    // UILayoutFittingCompressedSize can come out a hair short of what a
+    // multi-line centered label actually needs at extreme accessibility
+    // sizes.
+    CGFloat height = ceil([header systemLayoutSizeFittingSize:CGSizeMake(width, UILayoutFittingCompressedSize.height)
+                                withHorizontalFittingPriority:UILayoutPriorityRequired
+                                      verticalFittingPriority:UILayoutPriorityFittingSizeLevel]
+                              .height) +
+                     4.0;
     if (ABS(header.frame.size.height - height) > 0.5) {
         header.frame = CGRectMake(0, 0, width, height);
         self.tableView.tableHeaderView = header;

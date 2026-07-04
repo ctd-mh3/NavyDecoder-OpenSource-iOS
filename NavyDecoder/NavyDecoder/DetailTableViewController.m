@@ -30,6 +30,7 @@
 @property (strong, nonatomic) NSString *codeKeyString;
 @property (strong, nonatomic) NSString *codeValueString;
 @property (strong, nonatomic) NSString *codeSourceString;
+@property (nonatomic, assign) BOOL hasAppliedShareSectionFonts;
 
 @end
 
@@ -75,10 +76,35 @@
     return UITableViewAutomaticDimension;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
-    if (indexPath.section == 3) {
-        UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self configureView];
+    self.tableView.tableHeaderView = [self makeNoticeHeaderView];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if (self.hasAppliedShareSectionFonts || !self.tableView.window || CGRectGetWidth(self.tableView.bounds) <= 0) {
+        return;
+    }
+    self.hasAppliedShareSectionFonts = YES;
+    [self applyShareSectionFonts];
+}
+
+// The SHARE/FEEDBACK row labels are plain custom UILabels (not outlet-bound),
+// and — like AppInfoTableViewController's row labels — their storyboard
+// fontDescription/adjustsFontForContentSizeCategory attributes don't reliably
+// take effect on their own within a static table view cell. Setting the font
+// in code is the reliable way, and it has to happen once the table has a
+// real width/window (self-sizing rows measure against whatever font is in
+// place at that point) with a deferred reloadData afterward so the row
+// heights that get queried reflect the font just set.
+- (void)applyShareSectionFonts {
+    NSInteger shareSection = 3;
+    UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    NSInteger rows = [self.tableView numberOfRowsInSection:shareSection];
+    for (NSInteger row = 0; row < rows; row++) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:shareSection]];
         for (UIView *subview in cell.contentView.subviews) {
             if ([subview isKindOfClass:[UILabel class]]) {
                 UILabel *label = (UILabel *)subview;
@@ -87,12 +113,9 @@
             }
         }
     }
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self configureView];
-    self.tableView.tableHeaderView = [self makeNoticeHeaderView];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated {

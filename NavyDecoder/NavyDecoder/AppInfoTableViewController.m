@@ -26,6 +26,10 @@
 
 static const NSInteger kAppSupportSectionIndex = 1;
 
+@interface AppInfoTableViewController ()
+@property (nonatomic, assign) BOOL hasAppliedRowLabelFonts;
+@end
+
 @implementation AppInfoTableViewController
 
 
@@ -34,13 +38,45 @@ static const NSInteger kAppSupportSectionIndex = 1;
     self.tableView.tableHeaderView = [self makeNoticeHeaderView];
 }
 
-#pragma mark - App Specific Controller Functionality
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [super tableView:tableView willDisplayCell:cell forRowAtIndexPath:indexPath];
-    cell.textLabel.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    cell.textLabel.adjustsFontForContentSizeCategory = YES;
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    if (self.hasAppliedRowLabelFonts || !self.tableView.window || CGRectGetWidth(self.tableView.bounds) <= 0) {
+        return;
+    }
+    self.hasAppliedRowLabelFonts = YES;
+    [self applyRowLabelFonts];
 }
+
+// UITableViewCell.textLabel on IBUITableViewCellStyleDefault cells doesn't
+// reliably pick up a storyboard-configured fontDescription/Dynamic Type
+// binding — it falls back to a small fixed system font instead. Setting the
+// font in code is the reliable way to make it respect Dynamic Type. This has
+// to run once the table has a real width and a window (viewDidLoad is too
+// early — self-sizing rows measure against whatever font is in place when
+// the table first gets a valid layout, not whatever is set later), and
+// forces a reloadData afterward so the row heights that get queried reflect
+// the font just set.
+- (void)applyRowLabelFonts {
+    UIFont *font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    NSInteger sections = [self numberOfSectionsInTableView:self.tableView];
+    for (NSInteger section = 0; section < sections; section++) {
+        NSInteger rows = [self.tableView numberOfRowsInSection:section];
+        for (NSInteger row = 0; row < rows; row++) {
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
+            cell.textLabel.font = font;
+            cell.textLabel.adjustsFontForContentSizeCategory = YES;
+        }
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
+
+#pragma mark - App Specific Controller Functionality
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == kAppSupportSectionIndex) {

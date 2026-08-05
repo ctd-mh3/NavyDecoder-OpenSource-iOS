@@ -22,6 +22,16 @@
 
 #import "Rfas.h"
 
+// Which position in the RFAS code getArrayForCharacterGroup:isEnlisted: should return the
+// lookup matrix for. A real enum (rather than a raw int) means the compiler's -Wswitch will
+// flag the switch in getArrayForCharacterGroup:isEnlisted: if a case is ever added here
+// without a matching arm, instead of silently falling through a `default:`.
+typedef NS_ENUM(NSInteger, RfasCharacterGroup) {
+    RfasCharacterGroupFirst = 1,
+    RfasCharacterGroupSecondAndThird = 2,
+    RfasCharacterGroupFourth = 3,
+};
+
 @interface Rfas ()
 
 @property (strong, nonatomic) NSArray *officerFirstCharacterMatrix;
@@ -152,28 +162,26 @@
     return self;
 }
 
-- (NSArray *)getArrayForCharacterGroup:(int)character isEnlisted:(BOOL)isEnlisted {
+- (NSArray *)getArrayForCharacterGroup:(RfasCharacterGroup)characterGroup isEnlisted:(BOOL)isEnlisted {
     NSArray *arrayToReturn;
 
-    switch (character) {
-    case 1:
+    switch (characterGroup) {
+    case RfasCharacterGroupFirst:
         if (isEnlisted) {
             arrayToReturn = self.enlistedFirstCharacterMatrix;
         } else {
             arrayToReturn = self.officerFirstCharacterMatrix;
         }
         break;
-    case 2:
+    case RfasCharacterGroupSecondAndThird:
         if (isEnlisted) {
             arrayToReturn = self.enlistedSecondAndThirdCharactersMatrix;
         } else {
             arrayToReturn = self.officerSecondAndThirdCharactersMatrix;
         }
         break;
-    case 3:
+    case RfasCharacterGroupFourth:
         arrayToReturn = self.fourthCharacterMatrix;
-        break;
-    default:
         break;
     }
 
@@ -181,7 +189,7 @@
 }
 
 - (NSArray *)getFirstCharacterKeys:(BOOL)isEnlisted {
-    NSArray *tempArray = [self getArrayForCharacterGroup:1
+    NSArray *tempArray = [self getArrayForCharacterGroup:RfasCharacterGroupFirst
                                               isEnlisted:isEnlisted];
 
     NSMutableArray *keyArray = [[NSMutableArray alloc] init];
@@ -193,7 +201,7 @@
 }
 
 - (NSArray *)getSecondAndThirdCharactersKeys:(BOOL)isEnlisted {
-    NSArray *tempArray = [self getArrayForCharacterGroup:2
+    NSArray *tempArray = [self getArrayForCharacterGroup:RfasCharacterGroupSecondAndThird
                                               isEnlisted:isEnlisted];
 
     NSMutableArray *keyArray = [[NSMutableArray alloc] init];
@@ -206,7 +214,7 @@
 }
 
 - (NSArray *)getFourthCharacterKeys:(BOOL)isEnlisted {
-    NSArray *tempArray = [self getArrayForCharacterGroup:3
+    NSArray *tempArray = [self getArrayForCharacterGroup:RfasCharacterGroupFourth
                                               isEnlisted:isEnlisted];
 
     NSMutableArray *keyArray = [[NSMutableArray alloc] init];
@@ -219,42 +227,42 @@
 }
 
 - (NSString *)getFirstCharacterKeyForRow:(NSInteger)row isEnlisted:(BOOL)isEnlisted {
-    NSArray *tempArray = [self getArrayForCharacterGroup:1
+    NSArray *tempArray = [self getArrayForCharacterGroup:RfasCharacterGroupFirst
                                               isEnlisted:isEnlisted];
 
     return [[tempArray objectAtIndex:row] objectAtIndex:0];
 }
 
 - (NSString *)getSecondAndThirdCharactersKeyForRow:(NSInteger)row isEnlisted:(BOOL)isEnlisted {
-    NSArray *tempArray = [self getArrayForCharacterGroup:2
+    NSArray *tempArray = [self getArrayForCharacterGroup:RfasCharacterGroupSecondAndThird
                                               isEnlisted:isEnlisted];
 
     return [[tempArray objectAtIndex:row] objectAtIndex:0];
 }
 
 - (NSString *)getFourthCharacterKeyForRow:(NSInteger)row isEnlisted:(BOOL)isEnlisted {
-    NSArray *tempArray = [self getArrayForCharacterGroup:3
+    NSArray *tempArray = [self getArrayForCharacterGroup:RfasCharacterGroupFourth
                                               isEnlisted:isEnlisted];
 
     return [[tempArray objectAtIndex:row] objectAtIndex:0];
 }
 
 - (NSString *)getFirstCharacterValueForRow:(NSInteger)row isEnlisted:(BOOL)isEnlisted {
-    NSArray *tempArray = [self getArrayForCharacterGroup:1
+    NSArray *tempArray = [self getArrayForCharacterGroup:RfasCharacterGroupFirst
                                               isEnlisted:isEnlisted];
 
     return [[tempArray objectAtIndex:row] objectAtIndex:1];
 }
 
 - (NSString *)getSecondAndThirdCharactersValueForRow:(NSInteger)row isEnlisted:(BOOL)isEnlisted {
-    NSArray *tempArray = [self getArrayForCharacterGroup:2
+    NSArray *tempArray = [self getArrayForCharacterGroup:RfasCharacterGroupSecondAndThird
                                               isEnlisted:isEnlisted];
 
     return [[tempArray objectAtIndex:row] objectAtIndex:1];
 }
 
 - (NSString *)getFourthCharacterValueForRow:(NSInteger)row isEnlisted:(BOOL)isEnlisted {
-    NSArray *tempArray = [self getArrayForCharacterGroup:3
+    NSArray *tempArray = [self getArrayForCharacterGroup:RfasCharacterGroupFourth
                                               isEnlisted:isEnlisted];
 
     return [[tempArray objectAtIndex:row] objectAtIndex:1];

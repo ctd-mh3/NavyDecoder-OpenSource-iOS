@@ -146,7 +146,7 @@ typedef NS_ENUM(NSInteger, RfasCharacterGroup) {
                                                                    [NSArray arrayWithObjects:@"CN", @"CTI, CTR, CTT, CWT (Legacy CTN)", nil],
                                                                    [NSArray arrayWithObjects:@"CS", @"ET, ETR, ETV, FC, FT, IT, ITS, MT, OS, QM, STG, STS", nil],
                                                                    [NSArray arrayWithObjects:@"DM", @"AD, AF, AM", nil],
-                                                                   [NSArray arrayWithObjects:@"AE", @"AE, AT, AV", nil],
+                                                                   [NSArray arrayWithObjects:@"ET", @"AE, AT, AV", nil],
                                                                    [NSArray arrayWithObjects:@"FN", @"Any Fireman rating", nil],
                                                                    [NSArray arrayWithObjects:@"GS", @"MA or any rate holding 815A NEC (9545 Legacy NEC)", nil],
                                                                    [NSArray arrayWithObjects:@"SF", @"BM, DC, EM, EN, ET, ETV, ETR, FC, GM, GSE, GSM, HT, IC, MN, MM, MMA, MMW, MR, OS, QM, STG, STS, TM", nil],

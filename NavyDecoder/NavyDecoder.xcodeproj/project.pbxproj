@@ -39,6 +39,7 @@
 		4CDD01022D800000009088C8 /* NDDecoderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01012D800000009088C8 /* NDDecoderItem.m */; };
 		4CDD01052D800000009088C8 /* NDDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD01042D800000009088C8 /* NDDataStore.m */; };
 		4CDD01072D800000009088C8 /* DecoderData.json in Resources */ = {isa = PBXBuildFile; fileRef = 4CDD01062D800000009088C8 /* DecoderData.json */; };
+		82DE09BC7F7FFD3D48ACFAEF /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = FBE246E8829F00236167E352 /* PrivacyInfo.xcprivacy */; };
 		4CDD010A2D800001009088C8 /* NavyDecoderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C5C2D9F1642F49600397A60 /* NavyDecoderTests.m */; };
 		4CDD010C2D800001009088C8 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDD010B2D800001009088C8 /* XCTest.framework */; };
 		4CDEFD5F18AC5B320093E018 /* NavyDecoderMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDEFD5D18AC5B320093E018 /* NavyDecoderMasterViewController.m */; };
@@ -117,6 +118,7 @@
 		4CDD01032D800000009088C8 /* NDDataStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NDDataStore.h; sourceTree = "<group>"; };
 		4CDD01042D800000009088C8 /* NDDataStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NDDataStore.m; sourceTree = "<group>"; };
 		4CDD01062D800000009088C8 /* DecoderData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = DecoderData.json; sourceTree = "<group>"; };
+		FBE246E8829F00236167E352 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		4CDD010B2D800001009088C8 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		4CDEFD5D18AC5B320093E018 /* NavyDecoderMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavyDecoderMasterViewController.m; sourceTree = "<group>"; };
 		4CDEFD5E18AC5B320093E018 /* NavyDecoderMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavyDecoderMasterViewController.h; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				4C5C2D911642F35300397A60 /* Default@2x.png */,
 				4C61855F163C527A002997C6 /* InfoPlist.strings */,
 				4C618562163C527A002997C6 /* main.m */,
+				FBE246E8829F00236167E352 /* PrivacyInfo.xcprivacy */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				4CEBC0E119978F90008CD611 /* 2_2048x2048_background.png in Resources */,
 				4C115E3B2007AE800004614A /* MainStoryboard_LaunchScreen.storyboard in Resources */,
 				4CDD01072D800000009088C8 /* DecoderData.json in Resources */,
+				82DE09BC7F7FFD3D48ACFAEF /* PrivacyInfo.xcprivacy in Resources */,
 				4CEBC109199794D0008CD611 /* 7_2048x2048_background.png in Resources */,
 				4C5C2D921642F35300397A60 /* Default-568h@2x.png in Resources */,
 				4C5C2D931642F35300397A60 /* Default.png in Resources */,

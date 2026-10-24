@@ -461,7 +461,7 @@
 				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = NavyDecoder;
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 2640;
+				LastUpgradeCheck = 2710;
 				ORGANIZATIONNAME = "Crash Test Dummy Limited";
 				TargetAttributes = {
 					4C61854F163C5279002997C6 = {
@@ -812,7 +812,7 @@
 				INFOPLIST_FILE = "NavyDecoder/NavyDecoder-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Navy Decoder";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -847,7 +847,7 @@
 				INFOPLIST_FILE = "NavyDecoder/NavyDecoder-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Navy Decoder";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

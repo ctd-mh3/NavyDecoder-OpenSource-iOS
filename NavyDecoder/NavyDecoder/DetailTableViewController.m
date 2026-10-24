@@ -56,7 +56,7 @@
     self.codeValueLabel.text = self.codeValueString;
     self.codeSourceLabel.text = self.codeSourceString;
 
-    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    UIFontTextStyle textStyle = (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular)
                                     ? UIFontTextStyleTitle3
                                     : UIFontTextStyleBody;
     UIFont *contentFont = [UIFont preferredFontForTextStyle:textStyle];
@@ -80,6 +80,23 @@
     [super viewDidLoad];
     [self configureView];
     self.tableView.tableHeaderView = [self makeNoticeHeaderView];
+    // The content font depends on the horizontal size class, which can change
+    // when the window resizes (iPhone Duo fold/unfold, Split View, Stage Manager).
+    if (@available(iOS 17, *)) {
+        [self registerForTraitChanges:@[UITraitHorizontalSizeClass.class]
+                           withTarget:self
+                               action:@selector(configureView)];
+    }
+}
+
+- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
+    [super traitCollectionDidChange:previousTraitCollection];
+    if (@available(iOS 17, *)) {
+        return;
+    }
+    if (self.traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass) {
+        [self configureView];
+    }
 }
 
 - (void)viewDidLayoutSubviews {

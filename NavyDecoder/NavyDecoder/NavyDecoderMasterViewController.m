@@ -34,7 +34,7 @@
     self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight = 32.0;
     if (@available(iOS 17, *)) {
-        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
+        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class, UITraitHorizontalSizeClass.class]
                            withTarget:self
                                action:@selector(traitDidChange)];
     }
@@ -50,7 +50,8 @@
     if (@available(iOS 17, *)) {
         return;
     }
-    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
+    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection] ||
+        self.traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass) {
         [self traitDidChange];
     }
 }
@@ -69,9 +70,7 @@
     [super viewWillAppear:animated];
 
     // Must get background on first view of the app as viewWillTransitionToSize is not called on this point
-    UIScreen *screen = self.view.window.windowScene.screen;
-    CGRect screenRect = screen ? screen.bounds : self.view.bounds;
-    [self setBackgroundForSize:screenRect.size];
+    [self setBackgroundForSize:self.tableView.bounds.size];
 }
 
 

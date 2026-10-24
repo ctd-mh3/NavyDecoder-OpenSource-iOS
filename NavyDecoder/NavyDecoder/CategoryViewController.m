@@ -135,7 +135,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    UIFontTextStyle textStyle = (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular)
                                     ? UIFontTextStyleTitle3
                                     : UIFontTextStyleBody;
 

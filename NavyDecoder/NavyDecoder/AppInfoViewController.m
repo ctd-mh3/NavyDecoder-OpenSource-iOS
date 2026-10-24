@@ -43,24 +43,42 @@
     [self.view insertSubview:bg atIndex:0];
     self.backgroundImageView = bg;
 
-    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-                                    ? UIFontTextStyleTitle3
-                                    : UIFontTextStyleBody;
     for (UIView *subview in self.view.subviews) {
         subview.backgroundColor = UIColor.clearColor;
-        if ([subview isKindOfClass:[UILabel class]]) {
-            UILabel *label = (UILabel *)subview;
-            label.font = [UIFont preferredFontForTextStyle:textStyle];
-            label.adjustsFontForContentSizeCategory = YES;
-        }
     }
 
     [self wrapContentLabelInScrollView];
+    [self updateLabelFonts];
 
     if (@available(iOS 17, *)) {
         [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
                            withTarget:self
                                action:@selector(updateBackground)];
+        // The label font depends on the horizontal size class, which can change
+        // when the window resizes (iPhone Duo fold/unfold, Split View, Stage Manager).
+        [self registerForTraitChanges:@[UITraitHorizontalSizeClass.class]
+                           withTarget:self
+                               action:@selector(updateLabelFonts)];
+    }
+}
+
+// Labels are either direct subviews or, once wrapped, inside the scroll view.
+- (void)updateLabelFonts {
+    UIFontTextStyle textStyle = (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular)
+                                    ? UIFontTextStyleTitle3
+                                    : UIFontTextStyleBody;
+    NSMutableArray<UIView *> *views = [self.view.subviews mutableCopy];
+    for (UIView *subview in self.view.subviews) {
+        if ([subview isKindOfClass:[UIScrollView class]]) {
+            [views addObjectsFromArray:subview.subviews];
+        }
+    }
+    for (UIView *view in views) {
+        if ([view isKindOfClass:[UILabel class]]) {
+            UILabel *label = (UILabel *)view;
+            label.font = [UIFont preferredFontForTextStyle:textStyle];
+            label.adjustsFontForContentSizeCategory = YES;
+        }
     }
 }
 

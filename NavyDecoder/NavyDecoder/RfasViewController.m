@@ -61,7 +61,7 @@
         [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
                            withTarget:self
                                action:@selector(updateBackground)];
-        [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class]
+        [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class, UITraitHorizontalSizeClass.class]
                            withTarget:self
                                action:@selector(updateResultLabels)];
     }
@@ -75,16 +75,15 @@
     if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
         [self updateBackground];
     }
-    if (self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory) {
+    if (self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory ||
+        self.traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass) {
         [self updateResultLabels];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    UIScreen *screen = self.view.window.windowScene.screen;
-    CGRect screenRect = screen ? screen.bounds : self.view.bounds;
-    [self updateBackgroundForSize:screenRect.size];
+    [self updateBackgroundForSize:self.view.bounds.size];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -213,10 +212,7 @@
         }
     }
 
-    UIFontTextStyle shareTextStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-                                         ? UIFontTextStyleTitle3
-                                         : UIFontTextStyleBody;
-    self.shareButton.titleLabel.font = [UIFont preferredFontForTextStyle:shareTextStyle];
+    // The share button font is set in updateResultLabels, which also runs when the size class changes.
     self.shareButton.titleLabel.adjustsFontForContentSizeCategory = YES;
 
     UILayoutGuide *safe = self.view.safeAreaLayoutGuide;
@@ -371,7 +367,7 @@
 #pragma mark - Result Labels
 
 - (void)updateResultLabels {
-    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    UIFontTextStyle textStyle = (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular)
                                     ? UIFontTextStyleTitle3
                                     : UIFontTextStyleBody;
     UIFont *bodyFont = [UIFont preferredFontForTextStyle:textStyle];
@@ -381,6 +377,7 @@
         label.font = bodyFont;
         label.adjustsFontForContentSizeCategory = YES;
     }
+    self.shareButton.titleLabel.font = bodyFont;
 
     self.meaning1Label.text = self.firstCharacterMeaningWithoutTitle ?: @"";
     self.meaning2Label.text = self.secondAndThirdCharacterMeaningWithoutTitle ?: @"";

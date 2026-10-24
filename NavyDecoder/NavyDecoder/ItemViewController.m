@@ -120,7 +120,7 @@
     NDDecoderItem *item = self.displayedItems[indexPath.row];
     cell.textLabel.text = item.codeKey;
 
-    UIFontTextStyle textStyle = ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    UIFontTextStyle textStyle = (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular)
                                     ? UIFontTextStyleTitle3
                                     : UIFontTextStyleBody;
     cell.textLabel.font = [UIFont preferredFontForTextStyle:textStyle];

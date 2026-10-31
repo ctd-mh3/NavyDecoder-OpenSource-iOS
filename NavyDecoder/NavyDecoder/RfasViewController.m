@@ -57,28 +57,12 @@
     [self setupBackground];
     [self setupLayout];
 
-    if (@available(iOS 17, *)) {
-        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
-                           withTarget:self
-                               action:@selector(updateBackground)];
-        [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class, UITraitHorizontalSizeClass.class]
-                           withTarget:self
-                               action:@selector(updateResultLabels)];
-    }
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    if (@available(iOS 17, *)) {
-        return;
-    }
-    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-        [self updateBackground];
-    }
-    if (self.traitCollection.preferredContentSizeCategory != previousTraitCollection.preferredContentSizeCategory ||
-        self.traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass) {
-        [self updateResultLabels];
-    }
+    [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
+                       withTarget:self
+                           action:@selector(updateBackground)];
+    [self registerForTraitChanges:@[UITraitPreferredContentSizeCategory.class, UITraitHorizontalSizeClass.class]
+                       withTarget:self
+                           action:@selector(updateResultLabels)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

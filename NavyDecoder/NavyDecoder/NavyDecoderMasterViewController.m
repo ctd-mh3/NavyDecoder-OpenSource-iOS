@@ -33,27 +33,14 @@
     self.tableView.estimatedRowHeight = kDefaultEstimatedRowHeight;
     self.tableView.sectionHeaderHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedSectionHeaderHeight = 32.0;
-    if (@available(iOS 17, *)) {
-        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class, UITraitHorizontalSizeClass.class]
-                           withTarget:self
-                               action:@selector(traitDidChange)];
-    }
+    [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class, UITraitHorizontalSizeClass.class]
+                       withTarget:self
+                           action:@selector(traitDidChange)];
 }
 
 - (void)traitDidChange {
     [self setBackgroundForSize:self.tableView.bounds.size];
     [self.tableView reloadData];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    if (@available(iOS 17, *)) {
-        return;
-    }
-    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection] ||
-        self.traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass) {
-        [self traitDidChange];
-    }
 }
 
 - (void)setBackgroundForSize:(CGSize)size {

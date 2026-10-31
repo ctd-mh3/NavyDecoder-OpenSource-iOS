@@ -82,21 +82,9 @@
     self.tableView.tableHeaderView = [self makeNoticeHeaderView];
     // The content font depends on the horizontal size class, which can change
     // when the window resizes (iPhone Duo fold/unfold, Split View, Stage Manager).
-    if (@available(iOS 17, *)) {
-        [self registerForTraitChanges:@[UITraitHorizontalSizeClass.class]
-                           withTarget:self
-                               action:@selector(configureView)];
-    }
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    if (@available(iOS 17, *)) {
-        return;
-    }
-    if (self.traitCollection.horizontalSizeClass != previousTraitCollection.horizontalSizeClass) {
-        [self configureView];
-    }
+    [self registerForTraitChanges:@[UITraitHorizontalSizeClass.class]
+                       withTarget:self
+                           action:@selector(configureView)];
 }
 
 - (void)viewDidLayoutSubviews {

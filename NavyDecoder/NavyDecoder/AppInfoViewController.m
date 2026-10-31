@@ -50,16 +50,14 @@
     [self wrapContentLabelInScrollView];
     [self updateLabelFonts];
 
-    if (@available(iOS 17, *)) {
-        [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
-                           withTarget:self
-                               action:@selector(updateBackground)];
-        // The label font depends on the horizontal size class, which can change
-        // when the window resizes (iPhone Duo fold/unfold, Split View, Stage Manager).
-        [self registerForTraitChanges:@[UITraitHorizontalSizeClass.class]
-                           withTarget:self
-                               action:@selector(updateLabelFonts)];
-    }
+    [self registerForTraitChanges:@[UITraitUserInterfaceStyle.class]
+                       withTarget:self
+                           action:@selector(updateBackground)];
+    // The label font depends on the horizontal size class, which can change
+    // when the window resizes (iPhone Duo fold/unfold, Split View, Stage Manager).
+    [self registerForTraitChanges:@[UITraitHorizontalSizeClass.class]
+                       withTarget:self
+                           action:@selector(updateLabelFonts)];
 }
 
 // Labels are either direct subviews or, once wrapped, inside the scroll view.
@@ -128,16 +126,6 @@
         [contentLabel.widthAnchor constraintEqualToAnchor:scrollView.frameLayoutGuide.widthAnchor
                                                  constant:-(sideInset * 2)],
     ]];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection {
-    [super traitCollectionDidChange:previousTraitCollection];
-    if (@available(iOS 17, *)) {
-        return;
-    }
-    if ([self.traitCollection hasDifferentColorAppearanceComparedToTraitCollection:previousTraitCollection]) {
-        [self updateBackground];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
